@@ -108,28 +108,45 @@ figcaption {
 }
 
 .scroll-container1 {
-    width: 100%;
-    height: 400px;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 10px;
-    margin: 20px auto;
+    display: flex;
+    flex-direction: row; /* Arrange items in a horizontal row */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical overflow */
+    scroll-snap-type: x mandatory; /* Enable scroll snapping */
+    -webkit-overflow-scrolling: touch; /* Improve scrolling on touch devices */
+    justify-content: flex-start; /* Align items to the start */
+    align-items: center; /* Center align items vertically */
+    gap: 90px; /* Add space between images */
+    padding: 15px; /* Add padding */
+    margin: 10px auto; /* Center the container horizontally with auto margins */
     background-color: #fff;
+    width: 90%; /* Adjust the width to reduce whitespace */
 }
 
 .scroll-container1 .movie {
-    display: inline-block;
-    width: 100%;
-    margin-right: 10px;
+    flex: 0 0 calc(90% - 15px); /* Ensure each movie takes 85% of the container width minus margins */
+    position: relative;
+    margin: 35px; /* Add padding around each image */
+    scroll-snap-align: center; /* Align items to the center for scroll snapping */
 }
 
 .scroll-container1 .movie img {
     width: 100%;
-    height: auto;
+    height: 90vh; /* Set a fixed height for uniform image sizes */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+    display: block; /* Ensure the image is treated as a block-level element */
+    margin: 0 auto; /* Center the image within its container */
 }
 
 .scroll-container1 .movie-title {
-    margin-top: 5px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
     font-size: 1.1em;
-    color: #333;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin: 5px;
 }

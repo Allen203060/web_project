@@ -19,36 +19,67 @@ if (scrollContentContainer) {
     }
 
     document.querySelector('.scroll-container .scroll-btn.left').addEventListener('click', () => {
-        customScrollContentBy(scrollContentContainer, -350, 550); // Adjust the duration for speed
+        customScrollContentBy(scrollContentContainer, -350, 500); // Adjust the duration for faster speed
     });
 
     document.querySelector('.scroll-container .scroll-btn.right').addEventListener('click', () => {
-        customScrollContentBy(scrollContentContainer, 350, 550); // Adjust the duration for speed
+        customScrollContentBy(scrollContentContainer, 350, 500); // Adjust the duration for faster speed
     });
 }
 
 if (scrollContainer1) {
-    function customScrollContainerBy(element, amount, duration) {
-        const start = element.scrollLeft;
-        const startTime = performance.now();
+    let currentImageIndex = 0;
+    const movies = document.querySelectorAll('.scroll-container1 .movie');
 
-        function scrollStep(timestamp) {
-            const progress = timestamp - startTime;
-            const percent = Math.min(progress / duration, 1);
-            element.scrollLeft = start + amount * percent;
-            if (percent < 1) {
-                requestAnimationFrame(scrollStep);
+    function showImage(index) {
+        movies.forEach((movie, i) => {
+            movie.classList.remove('active');
+            if (i === index) {
+                movie.classList.add('active');
             }
-        }
-
-        requestAnimationFrame(scrollStep);
+        });
     }
 
-    document.querySelector('.scroll-container1 .scroll-btn.left').addEventListener('click', () => {
-        customScrollContainerBy(scrollContainer1, -window.innerWidth, 550); // Adjust the duration for speed
-    });
+    function nextImage() {
+        currentImageIndex = (currentImageIndex + 1) % movies.length;
+        showImage(currentImageIndex);
+    }
 
-    document.querySelector('.scroll-container1 .scroll-btn.right').addEventListener('click', () => {
-        customScrollContainerBy(scrollContainer1, window.innerWidth, 550); // Adjust the duration for speed
-    });
+    function previousImage() {
+        currentImageIndex = (currentImageIndex - 1 + movies.length) % movies.length;
+        showImage(currentImageIndex);
+    }
+
+    document.querySelector('.scroll-container1 .scroll-btn.left').addEventListener('click', previousImage);
+    document.querySelector('.scroll-container1 .scroll-btn.right').addEventListener('click', nextImage);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.scroll-container1');
+    const movies = container.querySelectorAll('.movie');
+    let currentIndex = 0;
+
+    function showMovie(index) {
+        container.scrollTo({
+            left: container.clientWidth * index,
+            behavior: 'smooth'
+        });
+    }
+
+    function nextMovie() {
+        currentIndex = (currentIndex + 1) % movies.length;
+        showMovie(currentIndex);
+    }
+
+    function prevMovie() {
+        currentIndex = (currentIndex - 1 + movies.length) % movies.length;
+        showMovie(currentIndex);
+    }
+
+    // Add event listeners for next and previous buttons if they exist
+    document.querySelector('.scroll-btn.right').addEventListener('click', nextMovie);
+    document.querySelector('.scroll-btn.left').addEventListener('click', prevMovie);
+
+    // Remove auto-scroll interval
+    // setInterval(nextMovie, 5000); // Change 5000 to the desired interval in milliseconds
+});
