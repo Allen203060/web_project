@@ -119,8 +119,13 @@ figcaption {
     gap: 90px; /* Add space between images */
     padding: 15px; /* Add padding */
     margin: 10px auto; /* Center the container horizontally with auto margins */
-    background-color: #fff;
+    background-color: #444; /* Change background color to match grey shades */
     width: 90%; /* Adjust the width to reduce whitespace */
+    scrollbar-width: none; /* For Firefox */
+}
+
+.scroll-container1::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
 }
 
 .scroll-container1 .movie {
@@ -149,4 +154,29 @@ figcaption {
     background: rgba(0, 0, 0, 0.5);
     text-align: center;
     margin: 5px;
+}
+
+.scroll-container1 .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.scroll-container1 .scroll-btn.left {
+    left: 10px;
+}
+
+.scroll-container1 .scroll-btn.right {
+    right: 10px;
+}
+
+.scroll-container1 .scroll-btn i {
+    font-size: 1.5em;
 }
