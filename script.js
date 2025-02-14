@@ -60,6 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentIndex = 0;
 
     function showMovie(index) {
+        movies.forEach((movie, i) => {
+            if (i === index) {
+                movie.style.display = 'block';
+                movie.style.margin = '0 auto'; // Center align the image
+            } else {
+                movie.style.display = 'none';
+            }
+        });
         container.scrollTo({
             left: container.clientWidth * index,
             behavior: 'smooth'
@@ -80,6 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.scroll-btn.right').addEventListener('click', nextMovie);
     document.querySelector('.scroll-btn.left').addEventListener('click', prevMovie);
 
-    // Remove auto-scroll interval
-    // setInterval(nextMovie, 5000); // Change 5000 to the desired interval in milliseconds
+    // Initially show the first movie
+    showMovie(currentIndex);
 });
