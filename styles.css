@@ -116,7 +116,7 @@ figcaption {
     -webkit-overflow-scrolling: touch; /* Improve scrolling on touch devices */
     justify-content: flex-start; /* Align items to the start */
     align-items: center; /* Center align items vertically */
-    gap: 85px; /* Add space between images */
+    gap: 95px; /* Add space between images */
     padding: 15px; /* Add padding */
     margin: 10px auto; /* Center the container horizontally with auto margins */
     background-color: #444; /* Change background color to match grey shades */
@@ -181,8 +181,10 @@ figcaption {
     font-size: 1.5em;
 }
 
-.scroll-container1 .movie img:first-child{
-    /*margin:0 0 0 25px;*/
-    -ms-flex-item-align: center;
-} 
+.scroll-container1 .movie.one img {
+    margin-left: 5vh;
+    align-items: center;
+    justify-content: center;
+    padding-right:5vh;
+}
 
