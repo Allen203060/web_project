@@ -52,6 +52,9 @@ if (scrollContainer1) {
 
     document.querySelector('.scroll-container1 .scroll-btn.left').addEventListener('click', previousImage);
     document.querySelector('.scroll-container1 .scroll-btn.right').addEventListener('click', nextImage);
+
+    // Auto transition
+    setInterval(nextImage, 5000); // Change image every 5 seconds
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -85,9 +88,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add event listeners for next and previous buttons if they exist
-    document.querySelector('.scroll-btn.right').addEventListener('click', nextMovie);
-    document.querySelector('.scroll-btn.left').addEventListener('click', prevMovie);
+    document.querySelector('.scroll-container1 .scroll-btn.right').addEventListener('click', nextMovie);
+    document.querySelector('.scroll-container1 .scroll-btn.left').addEventListener('click', prevMovie);
 
     // Initially show the first movie
     showMovie(currentIndex);
+
+    // Auto transition
+    setInterval(nextMovie, 5000); // Change movie every 5 seconds
 });
