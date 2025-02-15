@@ -29,9 +29,10 @@
                 </ul>
             </nav>
             <div class="search-bar">
-                <input type="text" placeholder="Search...">
-                <button type="submit"><i class="fas fa-search"></i></button>
+                <input type="text" id="searchInput" placeholder="Search..." oninput="search()">
             </div>
+            <ul id="itemList"></ul> 
+            <ul class="result-box" id="searchResults"></ul>
             <div class="user-options">
                 <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
                 <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
@@ -131,5 +132,6 @@
         <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
     </div>
     <script src="script.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>

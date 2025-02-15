@@ -292,3 +292,88 @@ figcaption {
     padding-right: 7vh;
 }
 
+#searchResults {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 20px);
+    z-index: 1000;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#searchResults ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#searchResults li {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+}
+
+#searchResults li:hover {
+    background-color: #ddd;
+}
+
+#searchResults li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#searchResults li:hover {
+    background-color: #f0f0f0;
+}
+
+.result-box {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 20px);
+    z-index: 1000;
+}
+
+.result-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.result-box li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.result-box li:hover {
+    background-color: #f0f0f0;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#itemList {
+    list-style: none;
+    padding: 0;
+}
+
+#itemList li {
+    padding: 5px;
+    font-size: 18px;
+}
+
+
