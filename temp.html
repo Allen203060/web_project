@@ -68,9 +68,184 @@
             height: 150px;
             margin-right: 10px;
         }
+        header {
+            background-color: #222;
+            padding: 20px;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo img {
+            max-height: 80px; /* Increase logo size */
+        }
+        
+        .logo img:hover {
+            transform: none; /* Remove hover effect */
+        }
+        
+        .menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .menu ul li {
+            position: relative;
+        }
+        
+        .menu ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            display: block;
+        }
+        
+        .menu ul li ul.dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #444;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .menu ul li:hover ul.dropdown {
+            display: block;
+        }
+        
+        .menu ul li ul.dropdown li {
+            width: 200px;
+        }
+        
+        .menu ul li ul.dropdown li a {
+            padding: 10px;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 300px; /* Increase width of search bar */
+        }
+        
+        .search-bar input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 100%; /* Ensure input takes full width of search bar */
+        }
+        
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #555;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .user-options {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .user-options a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 300px; /* Increase width of search bar */
+            margin-bottom: 20px;
+        }
+        
+        .search-bar input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            width: 100%; /* Ensure input takes full width of search bar */
+            font-size: 16px;
+        }
+        
+        .search-bar button {
+            padding: 10px;
+            border: none;
+            background-color: #555;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        #searchResults {
+            position: absolute;
+            background-color: white;
+            border: 1px solid #ccc;
+            max-height: 200px;
+            overflow-y: auto;
+            width: 100%; /* Match the width of the search bar */
+            z-index: 1000;
+            display: none; /* Initially hidden */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        #searchResults li {
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            background-color: #f6f6f6;
+        }
+        
+        #searchResults li:hover {
+            background-color: #ddd;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="l1.png" alt="Logo">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Celebrities</a></li>
+                    <li><a href="#">More</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Awards</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search...">
+            </div>
+            <div id="searchResults" class="search-results" style="display: none;"></div> <!-- Search results section -->
+            <div class="user-options">
+            <ul id="itemList"></ul> 
+            <div class="user-options">
+                <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
+                <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
+            </div>
+        </div>
+    </header>
     <div class="container">
         <div class="header">
             <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain" alt="Movie Poster" class="poster">
@@ -111,5 +286,7 @@
             <p>Options: Add to Watchlist | 20 videos | 99+ photos</p>
         </div>
     </div>
+    <script src="script.js"></script>
+    <script src="search.js"></script>
 </body>
 </html>
