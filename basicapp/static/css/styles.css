@@ -1,0 +1,379 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    color: #fff;
+}
+
+h1 {
+    background-color: #444;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+    margin: 0;
+}
+
+header {
+    background-color: #222;
+    padding: 20px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    max-height: 80px; /* Increase logo size */
+}
+
+.logo img:hover {
+    transform: none; /* Remove hover effect */
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.menu ul li {
+    position: relative;
+}
+
+.menu ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+}
+
+.menu ul li ul.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li:hover ul.dropdown {
+    display: block;
+}
+
+.menu ul li ul.dropdown li {
+    width: 200px;
+}
+
+.menu ul li ul.dropdown li a {
+    padding: 10px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 300px; /* Increase width of search bar */
+}
+
+.search-bar input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    width: 100%; /* Ensure input takes full width of search bar */
+}
+
+.search-bar button {
+    padding: 10px;
+    border: none;
+    background-color: #555;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.user-options {
+    display: flex;
+    gap: 20px;
+}
+
+.user-options a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.scroll-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    overflow: hidden;
+}
+
+.scroll-content {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scrollbar-width: none; /* For Firefox */
+}
+
+.scroll-content::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+.scroll-container section {
+    flex: 0 0 auto;
+    width: 200px;
+    margin: 1em;
+    background-color: #d3d3d3;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+figure {
+    margin: 0;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    transition: transform 0.2s ease;
+}
+
+img:hover {
+    transform: scale(1.1);
+}
+
+figcaption {
+    margin-top: 0.5em;
+    color: #000;
+    font-size: 0.9em;
+    line-height: 1.4em;
+}
+
+.scroll-container1 figcaption {
+    font-size: 1.2em; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    background: none; /* Remove background */
+}
+
+.scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.scroll-btn.left {
+    left: 10px;
+}
+
+.scroll-btn.right {
+    right: 10px;
+}
+
+.scroll-btn i {
+    font-size: 1.5em;
+}
+
+.movie {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.movie img {
+    width: 100%;
+    height: auto;
+}
+
+.movie-title {
+    margin-top: 5px;
+    font-size: 1.1em;
+    color: #6b6a6a;
+}
+
+.scroll-container1 {
+    position: relative;
+    display: flex;
+    flex-direction: row; /* Arrange items in a horizontal row */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    overflow-y: hidden; /* Prevent vertical overflow */
+    scroll-snap-type: x mandatory; /* Enable scroll snapping */
+    -webkit-overflow-scrolling: touch; /* Improve scrolling on touch devices */
+    justify-content: flex-start; /* Align items to the start */
+    align-items: center; /* Center align items vertically */
+    gap: 95px; /* Add space between images */
+    padding: 15px; /* Add padding */
+    margin: 10px auto; /* Center the container horizontally with auto margins */
+    background-color: #444; /* Change background color to match grey shades */
+    width: 90%; /* Adjust the width to reduce whitespace */
+    scrollbar-width: none; /* For Firefox */
+}
+
+.scroll-container1::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+.scroll-container1 .movie {
+    flex: 0 0 calc(90% - 15px); /* Ensure each movie takes 85% of the container width minus margins */
+    position: relative;
+    margin: 35px; /* Add padding around each image */
+    scroll-snap-align: center; /* Align items to the center for scroll snapping */
+    text-align: center; /* Center align text within the movie container */
+}
+
+.scroll-container1 .movie img {
+    width: 100%;
+    height: 90vh; /* Set a fixed height for uniform image sizes */
+    object-fit: fill; /* Ensure the image covers the container without distortion */
+    display: block;
+    margin: 0 auto; /* Center align the image */
+}
+
+.scroll-container1 .movie-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.1em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin: 5px;
+}
+
+.scroll-container1 .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: #fff;
+    padding: 0.5em;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.scroll-container1 .scroll-btn.left {
+    left: 50px; /* Adjust the left position to center horizontally */
+}
+
+.scroll-container1 .scroll-btn.right {
+    right: 50px; /* Adjust the right position to center horizontally */
+}
+
+.scroll-container1 .scroll-btn i {
+    font-size: 1.5em;
+}
+
+.scroll-container1 .movie img {
+    margin-left: 5vh;
+    align-items: center;
+    justify-content: center;
+    padding-right: 7vh;
+}
+
+#searchResults {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 20px);
+    z-index: 1000;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#searchResults ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#searchResults li {
+    cursor: pointer;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6;
+}
+
+#searchResults li:hover {
+    background-color: #ddd;
+}
+
+#searchResults li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#searchResults li:hover {
+    background-color: #f0f0f0;
+}
+
+.result-box {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    width: calc(100% - 20px);
+    z-index: 1000;
+}
+
+.result-box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.result-box li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.result-box li:hover {
+    background-color: #f0f0f0;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#itemList {
+    list-style: none;
+    padding: 0;
+}
+
+#itemList li {
+    padding: 5px;
+    font-size: 18px;
+}
+
+

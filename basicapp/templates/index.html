@@ -1,9 +1,138 @@
-<html>
-    <head>
-        My flask app
-    </head>
-    <head>
-
-    </head>
-    <body>This is my flask app with lazy loading</body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVNerd Home Page</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="l1.png" alt="Logo">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Movies</a></li>
+                    <li><a href="#">TV Shows</a></li>
+                    <li><a href="#">Celebrities</a></li>
+                    <li><a href="#">More</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Awards</a></li>
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="search()">
+            </div>
+            <ul id="itemList"></ul> 
+            <ul class="result-box" id="searchResults"></ul>
+            <div class="user-options">
+                <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
+                <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
+            </div>
+        </div>
+    </header>
+    <h1>Latest Movies</h1><br>
+    <div class="scroll-container1">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="movie one">
+            <img src="https://cdn.kinocheck.com/i/w=1200/dgyqcoda86.jpg" alt="Captain America: Brave New World">
+            <div class="movie-title">Captain America: Brave New World</div>
+        </div>
+        <div class="movie">
+            <img src="https://th.bing.com/th/id/OIP.rrmbJq6isvQg5aI5dg4ZgQHaEK?rs=1&pid=ImgDetMain" alt="Presence">
+            <div class="movie-title">Presence</div>
+        </div>
+        <div class="movie">
+            <img src="https://th.bing.com/th/id/OIP.PiDROO-dhQgm49RnPyYN9gHaD4?rs=1&pid=ImgDetMain" alt="The Gorge">
+            <div class="movie-title">The Gorge</div>
+        </div>
+        <div class="movie">
+            <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2024/11/bridget-jones-mad-about-the-boy-movie-poster-with-renee-zelweger.jpg" alt="Bridget Jones: Mad About the Boy">
+            <div class="movie-title">Bridget Jones: Mad About the Boy</div>
+        </div>
+        <div class="movie">
+            <img src="https://th.bing.com/th/id/OIP.Q_of37Jm5nzihqhcj_OAVAHaEa?rs=1&pid=ImgDetMain" alt="Conclave">
+            <div class="movie-title">Conclave</div>
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <h1>Top 10 on IMDB this week</h1>
+    <div class="scroll-container">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="scroll-content">
+            <section>
+                <figure>
+                    <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain" alt="Severance">
+                    <figcaption>1. Severance <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://th.bing.com/th/id/OIP.12ZxTcxU6kiNoWKx1iuwOwHaK9?rs=1&pid=ImgDetMain" alt="Inception">
+                    <figcaption>2. Inception <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://th.bing.com/th/id/OIP.tpGXc5hZSfy95MrAmw6ZrgHaKq?rs=1&pid=ImgDetMain" alt="Interstellar">
+                    <figcaption>3. Interstellar <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg" alt="The Dark Knight">
+                    <figcaption>4. The Dark Knight <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://th.bing.com/th/id/OIP.znqq0W_WQ3Kz1NTKXWjDKgHaK8?rs=1&pid=ImgDetMain" alt="Avatar">
+                    <figcaption>5. Avatar <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://artworks.thetvdb.com/banners/movies/169/posters/5f274c00c85c1.jpg" alt="The Matrix">
+                    <figcaption>6. The Matrix <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://m.media-amazon.com/images/M/MV5BY2NhNDczZTEtNmE5Yy00MjUxLTllOTYtZjQ2ZTA2MDgyM2U3XkEyXkFqcGdeQXVyMTAxODQ2NDU1._V1_FMjpg_UX1000_.jpg" alt="The Godfather">
+                    <figcaption>7. The Godfather <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://images.flickdirect.com/movies/pulp-fiction/pulp-fiction-box-art.jpg" alt="Pulp Fiction">
+                    <figcaption>8. Pulp Fiction <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://th.bing.com/th/id/OIP.d_BZ6gOSBmClndzU575rOwHaLH?rs=1&pid=ImgDetMain" alt="Fight Club">
+                    <figcaption>9. Fight Club <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://image.tmdb.org/t/p/original/8aBHdTp6MZ7RRE45maIYrEPo6IJ.jpg" alt="Forrest Gump">
+                    <figcaption>10. Forrest Gump <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <script src="search.js"></script>
+</body>
 </html>
