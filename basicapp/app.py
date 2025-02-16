@@ -21,6 +21,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    email = db.Column(db.String(200), nullable=False)
 
 # Initialize the database (if it doesn't exist)
 with app.app_context():
@@ -28,7 +29,7 @@ with app.app_context():
 
 # Dummy session to simulate user logged-in state (for simplicity)
 logged_in = False
-user_token = None
+user_name = None
 
 # External API URL for dashboard data
 EXTERNAL_API_URL = "https://api.example.com/data"
@@ -40,8 +41,10 @@ def home():
 # Login Route (No token required)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    global logged_in, user_token
+    print("hello")
+    global logged_in, user_name
     if request.method == 'POST':
+        print("world")
         username = request.form['username']
         password = request.form['password']
 
@@ -50,7 +53,7 @@ def login():
 
         if user and user.password == hashlib.sha256(password.encode()).hexdigest():
             logged_in = True
-            user_token = "sample_token_12345"  # In practice, generate a real token
+            user_name = username  # In practice, generate a real token
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid credentials. Please try again.', 'danger')
@@ -63,6 +66,7 @@ def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        email = request.form['email']
 
         # Check if the username already exists
         existing_user = User.query.filter_by(username=username).first()
@@ -74,7 +78,7 @@ def signup():
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
         # Create a new user in the database
-        new_user = User(username=username, password=hashed_password)
+        new_user = User(username=username, password=hashed_password, email= email)
         db.session.add(new_user)
         db.session.commit()
 
@@ -96,7 +100,7 @@ def dashboard():
     }
 
     response = requests.get(url, headers=headers)
-
+    
     data = (response.text)
     # try:
     #     response = requests.get()
@@ -104,17 +108,40 @@ def dashboard():
     # except requests.exceptions.RequestException as e:
     #     data = {"error": "Failed to fetch data"}
 
-    return render_template('index.html', data=data)
+    return render_template('index.html', data=data, user_name=user_name)
 
-# Profile Route (Requires valid token)
-@app.route('/profile')
-def profile():
-    if not logged_in or not user_token:
-        return redirect(url_for('login'))
+# Dashboard Route (Requires valid token)
+@app.route('/movies')
+def movies():
     
-    # Example dynamic content
-    user_data = {"username": "john_doe", "email": "john@example.com"}
-    return render_template('profile.html', user=user_data)
+    # if(id == None):
+    #     return redirect(url_for('dashboard'))
+
+    url = "https://api.themoviedb.org/3/movie/1167303"
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+    
+    data = (response.text)
+    # try:
+    #     response = requests.get()
+    #     data = response.json() if response.status_code == 200 else {}
+    # except requests.exceptions.RequestException as e:
+    #     data = {"error": "Failed to fetch data"}
+
+    return render_template('movies.html',)
+
+@app.route('/logout')
+def logout():
+    global logged_in, user_name
+    logged_in = False
+    user_name = None
+    return redirect(url_for('dashboard'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

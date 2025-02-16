@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TVNerd Home Page</title>
-    <link rel="stylesheet"  href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('profile-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+    <style>
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: white;
+            color: #000;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
+
 <body>
     <header>
         <div class="header-container">
@@ -31,11 +57,28 @@
             <div class="search-bar">
                 <input type="text" id="searchInput" placeholder="Search..." oninput="search()">
             </div>
-            <ul id="itemList"></ul> 
+            <ul id="itemList"></ul>
             <ul class="result-box" id="searchResults"></ul>
             <div class="user-options">
                 <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
-                <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
+                {% if user_name %}
+                <p>
+                <div class="profile-container">
+                    <button onclick="toggleMenu()">
+                        <img height="24" width="24"
+                            src="https://i.pinimg.com/originals/01/ca/da/01cada77a0a7d326d85b7969fe26a728.jpg"
+                            alt="Profile Icon">
+                    </button>
+                    <div id="profile-menu" class="profile-menu">
+                        <p>Hello, {{ user_name }}</p>
+                        <a style="color: #000;" href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+                </p>
+                {% else %}
+                <a href="{{ url_for('login') }}">Sign In</a>
+                {% endif %}
+                </a>
             </div>
         </div>
     </header>
@@ -55,7 +98,8 @@
             <div class="movie-title">The Gorge</div>
         </div>
         <div class="movie">
-            <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2024/11/bridget-jones-mad-about-the-boy-movie-poster-with-renee-zelweger.jpg" alt="Bridget Jones: Mad About the Boy">
+            <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2024/11/bridget-jones-mad-about-the-boy-movie-poster-with-renee-zelweger.jpg"
+                alt="Bridget Jones: Mad About the Boy">
             <div class="movie-title">Bridget Jones: Mad About the Boy</div>
         </div>
         <div class="movie">
@@ -70,55 +114,64 @@
         <div class="scroll-content">
             <section>
                 <figure>
-                    <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain" alt="Severance">
+                    <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain"
+                        alt="Severance">
                     <figcaption>1. Severance <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://th.bing.com/th/id/OIP.12ZxTcxU6kiNoWKx1iuwOwHaK9?rs=1&pid=ImgDetMain" alt="Inception">
+                    <img src="https://th.bing.com/th/id/OIP.12ZxTcxU6kiNoWKx1iuwOwHaK9?rs=1&pid=ImgDetMain"
+                        alt="Inception">
                     <figcaption>2. Inception <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://th.bing.com/th/id/OIP.tpGXc5hZSfy95MrAmw6ZrgHaKq?rs=1&pid=ImgDetMain" alt="Interstellar">
+                    <img src="https://th.bing.com/th/id/OIP.tpGXc5hZSfy95MrAmw6ZrgHaKq?rs=1&pid=ImgDetMain"
+                        alt="Interstellar">
                     <figcaption>3. Interstellar <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg" alt="The Dark Knight">
+                    <img src="https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg"
+                        alt="The Dark Knight">
                     <figcaption>4. The Dark Knight <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://th.bing.com/th/id/OIP.znqq0W_WQ3Kz1NTKXWjDKgHaK8?rs=1&pid=ImgDetMain" alt="Avatar">
+                    <img src="https://th.bing.com/th/id/OIP.znqq0W_WQ3Kz1NTKXWjDKgHaK8?rs=1&pid=ImgDetMain"
+                        alt="Avatar">
                     <figcaption>5. Avatar <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://artworks.thetvdb.com/banners/movies/169/posters/5f274c00c85c1.jpg" alt="The Matrix">
+                    <img src="https://artworks.thetvdb.com/banners/movies/169/posters/5f274c00c85c1.jpg"
+                        alt="The Matrix">
                     <figcaption>6. The Matrix <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://m.media-amazon.com/images/M/MV5BY2NhNDczZTEtNmE5Yy00MjUxLTllOTYtZjQ2ZTA2MDgyM2U3XkEyXkFqcGdeQXVyMTAxODQ2NDU1._V1_FMjpg_UX1000_.jpg" alt="The Godfather">
+                    <img src="https://m.media-amazon.com/images/M/MV5BY2NhNDczZTEtNmE5Yy00MjUxLTllOTYtZjQ2ZTA2MDgyM2U3XkEyXkFqcGdeQXVyMTAxODQ2NDU1._V1_FMjpg_UX1000_.jpg"
+                        alt="The Godfather">
                     <figcaption>7. The Godfather <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://images.flickdirect.com/movies/pulp-fiction/pulp-fiction-box-art.jpg" alt="Pulp Fiction">
+                    <img src="https://images.flickdirect.com/movies/pulp-fiction/pulp-fiction-box-art.jpg"
+                        alt="Pulp Fiction">
                     <figcaption>8. Pulp Fiction <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
             <section>
                 <figure>
-                    <img src="https://th.bing.com/th/id/OIP.d_BZ6gOSBmClndzU575rOwHaLH?rs=1&pid=ImgDetMain" alt="Fight Club">
+                    <img src="https://th.bing.com/th/id/OIP.d_BZ6gOSBmClndzU575rOwHaLH?rs=1&pid=ImgDetMain"
+                        alt="Fight Club">
                     <figcaption>9. Fight Club <br> Watch Options <br> Trailer</figcaption>
                 </figure>
             </section>
@@ -132,7 +185,8 @@
         <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    
+
     <script src="search.js"></script>
 </body>
+
 </html>
