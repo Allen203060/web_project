@@ -248,14 +248,15 @@
     </header>
     <div class="container">
         <div class="header">
-            <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain" alt="Movie Poster" class="poster">
+            <img src="http://image.tmdb.org/t/p/w500/{{data['poster_path']}}" alt="Movie Poster" class="poster">
             <div class="details">
-                <h1 class="title">Severance</h1>
+                <h1 class="title">{{data['title']}}</h1>
                 <p class="info">Creator: Dan Erickson | Stars: Adam Scott, Britt Lower, Zach Cherry</p>
-                <p class="info">Genre: Drama, Mystery, Sci-Fi | IMDb rating: 8.7/10 (261K ratings)</p>
+                <p class="info">Production:  {{data['production_companies']|map(attribute='name')|join(', ')}}</p>
+                <p class="info">Genre: {{data['genres']|map(attribute='name')|join(', ')}} | IMDb rating: 8.7/10 (261K ratings)</p>
                 <p class="info">Next episode: February 21, 2025 | Streaming on: Apple TV+</p>
                 <p class="description">
-                    Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.
+                    {{data['overview']}}
                 </p>
                 <div class="ratings">
                     <span class="rating">1.2K user reviews</span>
@@ -285,6 +286,9 @@
         <div class="footer">
             <p>Options: Add to Watchlist | 20 videos | 99+ photos</p>
         </div>
+        <p>
+            {{data['original_language']}}
+        </p>
     </div>
     <script src="script.js"></script>
     <script src="search.js"></script>

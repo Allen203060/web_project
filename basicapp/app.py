@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import hashlib
 import requests
+import json
+import jsonify
 
 
 app = Flask(__name__)
@@ -113,11 +115,22 @@ def dashboard():
 # Dashboard Route (Requires valid token)
 @app.route('/movies')
 def movies():
+    movie_id = request.args.get('id')  # Get 'id' from query parameters
+    if movie_id == None:
+        return redirect(url_for('dashboard'))
     
-    # if(id == None):
-    #     return redirect(url_for('dashboard'))
+    data = getMoieDetailsByID(movie_id)
+    keywoerd = getKeyWordsByUID(movie_id)
+    # try:
+    #     response = requests.get()
+    #     data = response.json() if response.status_code == 200 else {}
+    # except requests.exceptions.RequestException as e:
+    #     data = {"error": "Failed to fetch data"}
 
-    url = "https://api.themoviedb.org/3/movie/1167303"
+    return render_template('movies.html', data= json.loads(data), )
+
+def getMoieDetailsByID(movie_id):
+    url = "https://api.themoviedb.org/3/movie/" + movie_id
 
     headers = {
         "accept": "application/json",
@@ -125,15 +138,39 @@ def movies():
     }
 
     response = requests.get(url, headers=headers)
-    
-    data = (response.text)
-    # try:
-    #     response = requests.get()
-    #     data = response.json() if response.status_code == 200 else {}
-    # except requests.exceptions.RequestException as e:
-    #     data = {"error": "Failed to fetch data"}
 
-    return render_template('movies.html',)
+    return response.text
+
+def getKeyWordsByUID(movie_id):
+    url = "https://api.themoviedb.org/3/movie/" + movie_id
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    return response.text
+
+
+
+
+@app.route('/api/search')
+def api_search():
+    query = request.args.get('q', '')
+    url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page=1"
+    
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        return (data.get('results', []))
+    return jsonify([])
+
 
 @app.route('/logout')
 def logout():

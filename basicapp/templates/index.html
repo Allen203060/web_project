@@ -12,6 +12,32 @@
             var menu = document.getElementById('profile-menu');
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         }
+        function searchMovies() {
+            let query = document.getElementById('search-input').value;
+            fetch(`/api/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    let dropdown = document.getElementById('search-results');
+                    dropdown.innerHTML = '';
+                    data.forEach(movie => {
+                        let option = document.createElement('div');
+                        option.classList.add('search-item');
+                        option.setAttribute('data-id', movie.id);
+                        option.onclick = function() {
+                            window.location.href = `/movies?id=${movie.id}`;
+                        };
+                        let img = document.createElement('img');
+                        img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+                        img.alt = movie.title;
+                        img.classList.add('thumbnail');
+                        let text = document.createElement('span');
+                        text.textContent = movie.title;
+                        option.appendChild(img);
+                        option.appendChild(text);
+                        dropdown.appendChild(option);
+                    });
+                });
+        }
     </script>
     <style>
         .profile-container {
@@ -29,6 +55,39 @@
             border: 1px solid #ccc;
             padding: 10px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #search-results {
+            border: 1px solid #ccc;
+            display: block;
+            width: 250px;
+            position: absolute;
+            background: white;
+            color: #000 !important;
+            max-height: 200px;
+            overflow-y: auto;
+            top: 56px;
+        }
+
+        #search-results div {
+            padding: 10px;
+            cursor: pointer;
+            color: #000 !important;
+        }
+
+        #search-results div:hover {
+            background: #f0f0f0;
+            color: #000 !important;
+        }
+        #search-results .search-item {
+            display: flex;
+            align-items: center;
+        }
+        .thumbnail {
+            width: 40px;
+            height: 60px;
+            margin-right: 10px;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -55,7 +114,9 @@
                 </ul>
             </nav>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search..." oninput="search()">
+                <!-- <input type="text" id="searchInput" placeholder="Search..." oninput="search()"> -->
+                <input type="text" id="search-input" onkeyup="searchMovies()" placeholder="Search for movies...">
+                <div id="search-results"></div>
             </div>
             <ul id="itemList"></ul>
             <ul class="result-box" id="searchResults"></ul>
