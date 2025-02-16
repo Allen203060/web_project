@@ -298,38 +298,23 @@ figcaption {
     border: 1px solid #ccc;
     max-height: 200px;
     overflow-y: auto;
-    width: calc(100% - 20px);
+    width: 100%; /* Match the width of the search bar */
     z-index: 1000;
-    display: none;
+    display: none; /* Initially hidden */
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-#searchResults ul {
-    list-style-type: none;
-    padding: 0;
-}
-
 #searchResults li {
     cursor: pointer;
-    padding: 5px;
-    border: 1px solid #ccc;
-    margin-top: -1px; /* Prevent double borders */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
     background-color: #f6f6f6;
 }
 
 #searchResults li:hover {
     background-color: #ddd;
-}
-
-#searchResults li {
-    padding: 10px;
-    cursor: pointer;
-}
-
-#searchResults li:hover {
-    background-color: #f0f0f0;
 }
 
 .result-box {
@@ -374,6 +359,26 @@ figcaption {
 #itemList li {
     padding: 5px;
     font-size: 18px;
+}
+
+.search-results {
+    margin-top: 10px; /* Adjust the value as needed */
+}
+
+.result-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.result-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.result-item p {
+    margin: 0;
 }
 
 
