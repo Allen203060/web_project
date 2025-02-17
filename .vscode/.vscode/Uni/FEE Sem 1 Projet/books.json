@@ -1,0 +1,18 @@
+[
+    {
+        "book-title": "Cruel Lies",
+        "author": "Lilian Harris",
+        "price": "790 INR",
+        "image": "Cruel Lies(Lillan).jpg",
+        "summary": "Cruel Lies by Lilian Harris is a gripping tale that delves into the intricate web of deceit and betrayal. The protagonist navigates a world full of dark secrets and unexpected twists, making it a must-read for thriller enthusiasts.",
+        "pdf": "Novels/Cruel Lies (Lilian).pdf"
+    },
+    {
+        "title": "Advanced Engineering Mathematics",
+        "author": "Erwin Kreyszig",
+        "price": "419 INR",
+        "image": "adv.jpg",
+        "summary": "Advanced Engineering Mathematics by Erwin Kreyszig covers essential mathematical concepts for engineering students, including differential equations, linear algebra, and complex analysis, with practical applications.",
+        "pdf": "https://drive.google.com/file/d/0B-YtfYA4_6pSelhqMW1JbmJkSlk/edit?resourcekey=0-DJaXgK4pKnqAbOGyQRUtBQ"
+    }
+]

@@ -1,0 +1,51 @@
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <link rel='stylesheet' href='styles.css'>
+</head>
+
+<body>
+    <h1 id='title'>freeCodeCamp Survey Form</h1>
+    <p id='description'>Thank you for taking the time to help us improve the platform</p>
+    <form id='survey-form'>
+        <label id="name-label" for='name'>Name</label>
+        <input placeholder='Enter your name' type='text' id='name' required>
+        <label id="email-label" for='email'>Email</label>
+        <input placeholder='Enter your Email' id='email' type='email' required>
+        <label id="number-label" for='number'>Age(optional)</label>
+        <input placeholder='Age' id='number' type='number' min='10' max='99'>
+        <label>Which option best describes your current role?</label>
+        <select id='dropdown'>
+            <option>Select current role</option>
+            <option>Student</option>
+            <option>Full Time Job</option>
+            <option>Full Time Learner</option>
+            <option>Prefer not to say</option>
+            <option>Other</option>
+        </select>
+        <label>Would you recommend freeCodeCamp to a friend?</label>
+        <input type='radio' name='rec' value=''>Definately
+        <input type='radio' name='rec' value='1'>Maybe
+        <input type='radio' name='rec' value='2'>Not sure
+        <label>What is your favorite feature of freeCodeCamp?</label>
+        <input>
+        <label>What would you like to see improved? (Check all that apply)</label>
+        <input type='checkbox' value=''>Front-end Projects
+        <input type='checkbox' value='1'>Back-end Projects
+        <input type='checkbox' value='2'>Data Visualization
+        <input type='checkbox' value='3'>Challenges
+        <input type='checkbox' value='4'>Open Source Community
+        <input type='checkbox' value='5'>Gitter help rooms
+        <input type='checkbox' value='6'>Videos
+        <input type='checkbox' value='7'>City Meetups
+        <input type='checkbox' value='8'>Wiki
+        <input type='checkbox' value='9'>Forum
+        <input type='checkbox' value='10'>Additional Courses
+        <label>Any comments or suggestions?</label>
+        <textarea></textarea>
+        <input type='submit' id='submit'>
+    </form>
+</body>
+
+</html>

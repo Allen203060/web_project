@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="icon" type="image/jpg" href="FEElogo.jpg">
+</head>
+<body>
+<!-- Login Modal -->
+<div id="loginModal" class="modal" style="display: block;">
+    <span onclick="closeModal()" class="close" title="Close Modal">&times;</span>
+    <div class="modal-content">
+        <div class="container">
+            <h1>Welcome Back</h1>
+            <p>Log in to continue your journey</p>
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Log In</button>
+                <p class="message" id="message"></p>
+            </form>
+            <p class="switch-page">
+                Don't have an account? <a href="signupfee.html">Sign up</a>
+            </p>
+        </div>
+    </div>
+</div>
+<!-- JavaScript to handle modal close and redirect -->
+<script>
+function closeModal() {
+    // Close the modal
+    document.getElementById('loginModal').style.display = 'none';
+    // Redirect to the home page
+    window.location.href = 'FEE-1.html'; 
+}
+</script>
+<!-- Stylesheet -->
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+}
+body {
+    background-color: #4b2e24;
+    color: #f0e6d2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+.container {
+    background-color: #6a4e42;
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+h1 {
+    font-size: 2em;
+    color: #f0e6d2;
+    margin-bottom: 0.5em;
+}
+p {
+    color: #d7bba9;
+    margin-bottom: 1.5em;
+}
+form label {
+    display: block;
+    text-align: left;
+    color: #e3d1c3;
+    font-weight: bold;
+    margin-top: 1em;
+}
+form input {
+    width: 100%;
+    padding: 0.75em;
+    margin-top: 0.5em;
+    background-color: #8b6e5d;
+    color: #f0e6d2;
+    border: 1px solid #a17a66;
+    border-radius: 4px;
+}
+form input:focus {
+    outline: none;
+    border-color: #f0e6d2;
+}
+button {
+    background-color: #a9714d;
+    color: #fff;
+    padding: 0.75em 1em;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1.5em;
+}
+button:hover {
+    background-color: #9c6345;
+}
+.message {
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #d7bba9;
+}
+.switch-page {
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: #d7bba9;
+}
+.switch-page a {
+    color: #f0e6d2;
+    text-decoration: none;
+}
+.switch-page a:hover {
+    text-decoration: underline;
+}
+/* Modal Styles */
+.modal {
+    display: block; /* Always show modal on load */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(43, 26, 20, 0.8); /* dark brown overlay */
+    padding-top: 50px;
+}
+.modal-content {
+    background-color: #6a4e42;
+    margin: 5% auto;
+    border: 1px solid #a17a66;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+.close {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    font-size: 35px;
+    font-weight: bold;
+    color: #f0e6d2;
+    cursor: pointer;
+}
+.close:hover {
+    color: #d7bba9;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,486 @@
+[
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "skfuzzy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "skfuzzy",
+        "description": "skfuzzy",
+        "detail": "skfuzzy",
+        "documentation": {}
+    },
+    {
+        "label": "matplotlib.pyplot",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "matplotlib.pyplot",
+        "description": "matplotlib.pyplot",
+        "detail": "matplotlib.pyplot",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "jsonify",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "Counter",
+        "importPath": "collections",
+        "description": "collections",
+        "isExtraImport": true,
+        "detail": "collections",
+        "documentation": {}
+    },
+    {
+        "label": "SQLAlchemy",
+        "importPath": "flask_sqlalchemy",
+        "description": "flask_sqlalchemy",
+        "isExtraImport": true,
+        "detail": "flask_sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "hashlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "hashlib",
+        "description": "hashlib",
+        "detail": "hashlib",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "x",
+        "kind": 5,
+        "importPath": "ASC Labs.t",
+        "description": "ASC Labs.t",
+        "peekOfCode": "x = np.arange(0, 11, 1)\nprint(x)\n# define the trapezoidal membership function\ntrap_mf = fuzz.trapmf(x, [2, 5, 8, 10])\n# define the triangular membership function\ntri_mf = fuzz.trimf(x, [2, 5, 8])\n# plot both membership functions\nplt.plot(x, trap_mf, label='Trapezoidal MF', color='b')\nplt.plot(x, tri_mf, label='Triangular MF', color='g')\nplt.title('Membership Functions')",
+        "detail": "ASC Labs.t",
+        "documentation": {}
+    },
+    {
+        "label": "trap_mf",
+        "kind": 5,
+        "importPath": "ASC Labs.t",
+        "description": "ASC Labs.t",
+        "peekOfCode": "trap_mf = fuzz.trapmf(x, [2, 5, 8, 10])\n# define the triangular membership function\ntri_mf = fuzz.trimf(x, [2, 5, 8])\n# plot both membership functions\nplt.plot(x, trap_mf, label='Trapezoidal MF', color='b')\nplt.plot(x, tri_mf, label='Triangular MF', color='g')\nplt.title('Membership Functions')\nplt.xlabel('x')\nplt.ylabel('Membership Degree')\nplt.legend()",
+        "detail": "ASC Labs.t",
+        "documentation": {}
+    },
+    {
+        "label": "tri_mf",
+        "kind": 5,
+        "importPath": "ASC Labs.t",
+        "description": "ASC Labs.t",
+        "peekOfCode": "tri_mf = fuzz.trimf(x, [2, 5, 8])\n# plot both membership functions\nplt.plot(x, trap_mf, label='Trapezoidal MF', color='b')\nplt.plot(x, tri_mf, label='Triangular MF', color='g')\nplt.title('Membership Functions')\nplt.xlabel('x')\nplt.ylabel('Membership Degree')\nplt.legend()\nplt.grid()\nplt.show()",
+        "detail": "ASC Labs.t",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "flaskapp.app",
+        "description": "flaskapp.app",
+        "peekOfCode": "def home():\n    #rendering index.html\n    return render_template(\"index.html\")\n#login page mthds allowed: post, get\n@app.route('/login', methods=[\"POST\", \"GET\"])\ndef login():\n    #request lib handles all the req. of our webpage\n    #if mthd is post send user to his local page\n    if request.method==\"POST\":\n        #form is a dictionary and we are retrieving the user name from key 'nm' declared in html form tag",
+        "detail": "flaskapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "flaskapp.app",
+        "description": "flaskapp.app",
+        "peekOfCode": "def login():\n    #request lib handles all the req. of our webpage\n    #if mthd is post send user to his local page\n    if request.method==\"POST\":\n        #form is a dictionary and we are retrieving the user name from key 'nm' declared in html form tag\n        user = request.form[\"nm\"]# retrieve data from form\n        #after submission of form redirect to user page & passing user as attribute\n        return redirect(url_for(\"user\",usr=user))# redirecting to user page\n    else:\n        #if no submit event is generated send user to login page and ask to login",
+        "detail": "flaskapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "user",
+        "kind": 2,
+        "importPath": "flaskapp.app",
+        "description": "flaskapp.app",
+        "peekOfCode": "def user(usr):\n    #rendering a inline html to show user name\n    return f\"Hello, {usr}!\"#display msg\n#entry point of our webpage\nif __name__==\"__main__\":\n    app.run(debug=True)",
+        "detail": "flaskapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "git_webdev.app",
+        "description": "git_webdev.app",
+        "peekOfCode": "def home():\n    #rendering index.html\n    return render_template(\"index.html\")\n#login page mthds allowed: post, get\n@app.route('/login', methods=[\"POST\", \"GET\"])\ndef login():\n    #request lib handles all the req. of our webpage\n    #if mthd is post send user to his local page\n    if request.method==\"POST\":\n        #form is a dictionary and we are retrieving the user name from key 'nm' declared in html form tag",
+        "detail": "git_webdev.app",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "git_webdev.app",
+        "description": "git_webdev.app",
+        "peekOfCode": "def login():\n    #request lib handles all the req. of our webpage\n    #if mthd is post send user to his local page\n    if request.method==\"POST\":\n        #form is a dictionary and we are retrieving the user name from key 'nm' declared in html form tag\n        user = request.form[\"nm\"]# retrieve data from form\n        #after submission of form redirect to user page & passing user as attribute\n        return redirect(url_for(\"user\",usr=user))# redirecting to user page\n    else:\n        #if no submit event is generated send user to login page and ask to login",
+        "detail": "git_webdev.app",
+        "documentation": {}
+    },
+    {
+        "label": "user",
+        "kind": 2,
+        "importPath": "git_webdev.app",
+        "description": "git_webdev.app",
+        "peekOfCode": "def user(usr):\n    #rendering a inline html to show user name\n    return f\"Hello, {usr}!\"#display msg\n#entry point of our webpage\nif __name__==\"__main__\":\n    app.run(debug=True)",
+        "detail": "git_webdev.app",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "class User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(150), unique=True, nullable=False)\n    password = db.Column(db.String(200), nullable=False)\n    email = db.Column(db.String(200), nullable=False)\n# Initialize the database (if it doesn't exist)\nwith app.app_context():\n    db.create_all()\n# Dummy session to simulate user logged-in state (for simplicity)\nlogged_in = False",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def home():\n    return redirect(url_for('dashboard'))\n# Login Route (No token required)\n@app.route('/login', methods=['GET', 'POST'])\ndef login():\n    print(\"hello\")\n    global logged_in, user_name\n    if request.method == 'POST':\n        print(\"world\")\n        username = request.form['username']",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "login",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def login():\n    print(\"hello\")\n    global logged_in, user_name\n    if request.method == 'POST':\n        print(\"world\")\n        username = request.form['username']\n        password = request.form['password']\n        # Query the database to find the user\n        user = User.query.filter_by(username=username).first()\n        if user and user.password == hashlib.sha256(password.encode()).hexdigest():",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "signup",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def signup():\n    if request.method == 'POST':\n        username = request.form['username']\n        password = request.form['password']\n        email = request.form['email']\n        # Check if the username already exists\n        existing_user = User.query.filter_by(username=username).first()\n        if existing_user:\n            flash('Username already exists. Please choose another.', 'danger')\n            return render_template('signup.html')",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "dashboard",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def dashboard():\n    url = \"https://api.themoviedb.org/3/movie/popular?language=en-US&page=1\"\n    headers = {\n        \"accept\": \"application/json\",\n        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4\"\n    }\n    response = requests.get(url, headers=headers)\n    data = (response.text)\n    # try:\n    #     response = requests.get()",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "movies",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def movies():\n    movie_id = request.args.get('id')  # Get 'id' from query parameters\n    if movie_id == None:\n        return redirect(url_for('dashboard'))\n    data = getMoieDetailsByID(movie_id)\n    keywoerd = getKeyWordsByUID(movie_id)\n    # try:\n    #     response = requests.get()\n    #     data = response.json() if response.status_code == 200 else {}\n    # except requests.exceptions.RequestException as e:",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "getMoieDetailsByID",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def getMoieDetailsByID(movie_id):\n    url = \"https://api.themoviedb.org/3/movie/\" + movie_id\n    headers = {\n        \"accept\": \"application/json\",\n        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4\"\n    }\n    response = requests.get(url, headers=headers)\n    return response.text\ndef getKeyWordsByUID(movie_id):\n    url = \"https://api.themoviedb.org/3/movie/\" + movie_id",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "getKeyWordsByUID",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def getKeyWordsByUID(movie_id):\n    url = \"https://api.themoviedb.org/3/movie/\" + movie_id\n    headers = {\n        \"accept\": \"application/json\",\n        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4\"\n    }\n    response = requests.get(url, headers=headers)\n    return response.text\n@app.route('/api/search')\ndef api_search():",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "api_search",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def api_search():\n    query = request.args.get('q', '')\n    url = f\"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page=1\"\n    headers = {\n        \"accept\": \"application/json\",\n        \"Authorization\": \"Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4\"\n    }\n    response = requests.get(url, headers=headers)\n    if response.status_code == 200:\n        data = response.json()",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "logout",
+        "kind": 2,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "def logout():\n    global logged_in, user_name\n    logged_in = False\n    user_name = None\n    return redirect(url_for('dashboard'))\nif __name__ == '__main__':\n    app.run(debug=True)",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "app = Flask(__name__)\n# Secret key for session management\napp.secret_key = 'your_secret_key'\n# Database configuration\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\n# Initialize SQLAlchemy\ndb = SQLAlchemy(app)\n# Create a User model for the database\nclass User(db.Model):",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "app.secret_key",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "app.secret_key = 'your_secret_key'\n# Database configuration\napp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\n# Initialize SQLAlchemy\ndb = SQLAlchemy(app)\n# Create a User model for the database\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(150), unique=True, nullable=False)",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_DATABASE_URI']",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'\napp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\n# Initialize SQLAlchemy\ndb = SQLAlchemy(app)\n# Create a User model for the database\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(150), unique=True, nullable=False)\n    password = db.Column(db.String(200), nullable=False)\n    email = db.Column(db.String(200), nullable=False)",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS']",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False\n# Initialize SQLAlchemy\ndb = SQLAlchemy(app)\n# Create a User model for the database\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(150), unique=True, nullable=False)\n    password = db.Column(db.String(200), nullable=False)\n    email = db.Column(db.String(200), nullable=False)\n# Initialize the database (if it doesn't exist)",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "db",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "db = SQLAlchemy(app)\n# Create a User model for the database\nclass User(db.Model):\n    id = db.Column(db.Integer, primary_key=True)\n    username = db.Column(db.String(150), unique=True, nullable=False)\n    password = db.Column(db.String(200), nullable=False)\n    email = db.Column(db.String(200), nullable=False)\n# Initialize the database (if it doesn't exist)\nwith app.app_context():\n    db.create_all()",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "logged_in",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "logged_in = False\nuser_name = None\n# External API URL for dashboard data\nEXTERNAL_API_URL = \"https://api.example.com/data\"\n@app.route('/')\ndef home():\n    return redirect(url_for('dashboard'))\n# Login Route (No token required)\n@app.route('/login', methods=['GET', 'POST'])\ndef login():",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "user_name",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "user_name = None\n# External API URL for dashboard data\nEXTERNAL_API_URL = \"https://api.example.com/data\"\n@app.route('/')\ndef home():\n    return redirect(url_for('dashboard'))\n# Login Route (No token required)\n@app.route('/login', methods=['GET', 'POST'])\ndef login():\n    print(\"hello\")",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "EXTERNAL_API_URL",
+        "kind": 5,
+        "importPath": "web_project.basicapp.app",
+        "description": "web_project.basicapp.app",
+        "peekOfCode": "EXTERNAL_API_URL = \"https://api.example.com/data\"\n@app.route('/')\ndef home():\n    return redirect(url_for('dashboard'))\n# Login Route (No token required)\n@app.route('/login', methods=['GET', 'POST'])\ndef login():\n    print(\"hello\")\n    global logged_in, user_name\n    if request.method == 'POST':",
+        "detail": "web_project.basicapp.app",
+        "documentation": {}
+    },
+    {
+        "label": "person",
+        "kind": 6,
+        "importPath": "t",
+        "description": "t",
+        "peekOfCode": "class person:\n    def __init__(a, name, age):\n        a.name = name\n        a.age = age\n    def __str__(a):\n        return f\"{a.name} is {a.age} years old\"\n        print(\"hello my name is \"+ a.name+\" and i am \"+str(a.age)+\"years old\")\np1 = person(\"Anvi\", 21)\np2 = person(\"Daksh shop\", 684)\nprint(p1)",
+        "detail": "t",
+        "documentation": {}
+    },
+    {
+        "label": "p1",
+        "kind": 5,
+        "importPath": "t",
+        "description": "t",
+        "peekOfCode": "p1 = person(\"Anvi\", 21)\np2 = person(\"Daksh shop\", 684)\nprint(p1)",
+        "detail": "t",
+        "documentation": {}
+    },
+    {
+        "label": "p2",
+        "kind": 5,
+        "importPath": "t",
+        "description": "t",
+        "peekOfCode": "p2 = person(\"Daksh shop\", 684)\nprint(p1)",
+        "detail": "t",
+        "documentation": {}
+    }
+]

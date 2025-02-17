@@ -1,0 +1,245 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}.img{
+    width:110px;
+    height:110px;
+}
+header{
+    background-color:rgba(215, 198, 172, 0.7);
+    border:1px solid #ad9673;
+    padding:10px;
+}
+/*Img bg*/
+.top{
+    display:inline;
+}
+/*Main Headings*/
+.title{
+    display:inline-block;
+}
+h1{
+    font-size:250%;
+    margin-bottom:0;
+    font-family:jokerman;
+}
+.title h2{
+    font-size:170%;
+    font-family:papyrus;
+    letter-spacing:1px;
+    margin-top:0;
+}
+/*Nav css*/
+.panel{
+    background-color:rgba(146, 120, 91, 0.7);
+    margin-top:0;
+    margin-bottom:0;
+    border:1px solid #664424;
+    text-align:center;
+}
+.panel li{
+    display:inline-block;
+    border:1px solid #71513a;
+    font-size:25px;
+    font-weight:bolder;
+    letter-spacing:5px;
+}
+.panel a{
+    color:black;
+    margin:5px;
+}
+/*aside css*/
+.pal a{
+    color:black;
+    margin:5px;
+}
+.pal li{
+    display:inline-block;
+    border:1px solid #71513a;
+    font-size:20px;
+    font-weight:bolder;
+    letter-spacing:3px;
+    line-height:3px;
+}
+.pal p{
+    text-align:left;
+    padding:15px;
+    background-color:rgba(215, 198, 172, 0.7);
+    background-position:center;
+}
+.pal{
+    background-color:rgba(146, 120, 91, 0.8);
+    margin-top:1px;
+    border:1px solid #af957d;
+    height:1100px;
+    padding:15px;
+}
+body{
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position: center;
+}
+aside{
+    float:left;
+    width:250px;
+    line-height:80px;
+}
+ /* Container for the search bar */
+.search-box {
+    width: 600px;
+    background: #fff;
+    margin-left: 35%;  
+    margin-top:5px;
+    border-radius: 5px;
+    border: 2px solid #e2ceb1;
+    border-radius: 5px;
+    font-size: 16px;
+    justify-content: center;
+}
+.row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+input {
+    flex: 1;
+    height: 30px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 18px;
+    color: #333;
+}
+button {
+    background: transparent;
+    border: 0;
+    outline: 0;
+}
+::placeholder {
+    color: #555;
+}
+.result-box {
+    max-height: 300px;
+    overflow-y: scroll;
+}
+.result-box ul {
+    border-top: 1px solid #999;
+    padding: 15px 10px;
+}
+.result-box ul li {
+    list-style: none;
+    border-radius: 3px;
+    padding: 15px 10px;
+    cursor: pointer;
+}
+.result-box ul li:hover {
+    background-color: #e9f3ff;
+}
+/* Non-fiction heading*/
+.heading{
+    background-color:rgba(113, 81, 58, 0.7);
+    margin-left:250px;
+    text-shadow:5px 0 #edeae3;
+    color:black;
+}
+@font-face {
+    font-family:'Fonts/mrsmonster';
+    src: url(Fonts/mrsmonster.ttf) format('truetype');
+}
+.custom-font {
+font-family:'Fonts/mrsmonster', sans-serif;
+font-size: 50px;
+letter-spacing:2px;
+}
+.heading h2{
+    margin-left: 3px;
+    letter-spacing: 3px;
+    font-size: 50px;
+}
+/* Img-books */
+.img-books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive columns */
+    gap: 20px; /* Adjust the gap between items */
+    padding: 10px;
+    max-width: 100%; /* Ensure it doesn't exceed the viewport */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    overflow: hidden; /* Prevent overflow */
+}
+.img-books figure {
+    border: 2px double #8d847f;
+    border-radius: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    background-color: rgba(217, 185, 159, 0.5);
+    position: relative;
+    overflow: hidden; /* Prevent overflow within the figure */
+    text-align: center; /* Center align content */
+}
+.img-books img {
+    height: 200px;
+    width: 150px;
+    margin: 0 auto; /* Center align image */
+    margin-top:10px;
+}
+.img-books figcaption {
+    text-align: center;
+    color: #c4b6ab;
+}
+.mrp {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'Fonts/Chubby';
+    src: url('Fonts/Chubby.otf') format('opentype');
+    font-weight:normal;
+    font-style: normal;
+}
+.pal p{
+    font-family: 'Fonts/Chubby', sans-serif;
+    font-size:60px;
+    font-weight:bolder;
+}
+@font-face {
+    font-family:'Fonts/Summer Birthday';
+    src: url('Fonts/Summer Birthday.otf') format('opentype');
+    font-weight:normal;
+    font-style: normal;
+}
+.pal a{
+    font-family:'Fonts/Summer Birthday', sans-serif;
+    font-size:35px;
+    line-height:50px;
+    font-weight:bold;
+    letter-spacing:5px;
+}
+.panel a{
+    font-family:'Fonts/Summer Birthday', sans-serif;
+    font-size:35px;
+    line-height:50px;
+    font-weight:bold;
+    letter-spacing:5px;
+}
+@font-face {
+    font-family:'Fonts/Bettering';
+    src: url('Fonts/Bettering.otf') format('opentype');
+    font-weight:normal;
+    font-style: normal;
+}
+.img-books figcaption{
+    font-family:'Fonts/Bettering', sans-serif;
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
+    padding: 3px;
+    text-shadow:3px 0 black;
+    background-color: #71513a;
+    border-radius:5px;
+}

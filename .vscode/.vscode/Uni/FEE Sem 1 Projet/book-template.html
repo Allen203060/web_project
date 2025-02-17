@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="book-title">Book Details</title>
+    <link rel="stylesheet" href="temp.css">
+    <link rel="stylesheet" href="FEE-1 CSS.css">
+</head>
+<body>
+    <header>
+        <section class="top">
+            <img class="img" src="FEElogo.jpg" alt="Book Store Logo">
+        </section>
+        <section class="title">
+            <h1>Cover Cove</h1>
+            <h2 id="book-heading"></h2>
+        </section>
+    </header>
+    <nav>
+        <ul class="panel">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="aboutfee.html">About</a></li>
+            <li><a href="loginfee.html">Login</a></li>
+            <li><a href="signupfee.html">Signup</a></li>
+        </ul>
+    </nav>
+    <aside>
+        <ul class="pal">
+            <p>Categories:</p>
+            <li><a href="textbooks.html">Textbooks</a></li><br>
+            <li><a href="fictionandfantasy.html">Fiction and Fantasy</a></li><br>
+            <li><a href="rhapsody.html">Rhapsody</a></li><br>
+            <li><a href="romanticmuse.html">Romantic Muse</a></li><br>
+            <li><a href="horrorandcrime.html">Horror and Crime</a></li><br>
+            <li><a href="non-fiction.html">Non-Fiction</a></li><br>
+            <li><a href="weebzone.html">Weeb Zone</a></li><br>
+            <li><a href="potter-headsarena.html">Potter-Heads Arena</a></li><br>
+        </ul>
+    </aside>
+    <main>
+        <section class="figs">
+            <figure>
+                <div class="mrp" id="book-price">MRP - </div>
+                <img src="" alt="Book Image" id="book-image">
+                <figcaption id="book-caption">Book Title - Author</figcaption>
+            </figure>
+        </section>
+        <div class="button-container"> 
+            <button class="btn add-to-cart">Add to Cart</button> 
+            <button class="btn buy-now">Buy Now</button> 
+        </div>
+        <section class="book-summary">
+            <h3>Book Summary</h3>
+            <p id="book-summary">Book summary goes here.</p>
+        </section>
+        <section class="feedb"> 
+            <button class="btn open-popup">Feedback Form</button>
+            <div id="reviewsContainer"></div>
+            <div class="button-container btns"> 
+                <button class="btn prev-review">Previous</button> 
+                <button class="btn next-review">Next</button> 
+            </div>
+        </section>
+        <div class="popup" id="popupForm">
+            <h1>Submit Your Review</h1>
+            <form id="reviewForm"> 
+                <label for="name">Name:</label> 
+                <input type="text" id="name" name="name" required><br> 
+                <label for="email">E-Mail:</label> 
+                <input type="email" id="email" name="email" required><br> 
+                <label for="rating">Rating:</label> 
+                <select id="rating" name="rating" required>
+                    <option value="5">★★★★★</option>
+                    <option value="4">★★★★☆</option>
+                    <option value="3">★★★☆☆</option>
+                    <option value="2">★★☆☆☆</option>
+                    <option value="1">★☆☆☆☆</option>
+                </select><br> 
+                <label for="review">Review:</label> 
+                <textarea id="review" name="review" required></textarea><br> 
+                <button type="submit" class="btn">Submit</button> 
+            </form>
+            <button class="close-btn">Close</button>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const bookTitle = params.get('title');
+        
+            if (bookTitle) {
+                fetchBookDetails(bookTitle);
+            }
+        });
+        
+        async function fetchBookDetails(title) {
+            const response = await fetch('books.json');
+            const books = await response.json();
+            const book = books.find(b => b.title === title);
+        
+            if (book) {
+                document.getElementById('book-title').textContent = book.title;
+                document.getElementById('book-heading').textContent = book.title;
+                document.getElementById('book-price').textContent = `MRP - ${book.price}`;
+                document.getElementById('book-image').src = book.image;
+                document.getElementById('book-caption').textContent = `${book.title} - ${book.author}`;
+                document.getElementById('book-summary').textContent = book.summary;
+            } else {
+                document.getElementById('book-heading').textContent = 'Book Not Found';
+                document.getElementById('book-summary').textContent = 'The book you are looking for does not exist.';
+            }
+        }
+    </script>
+</body>
+</html>

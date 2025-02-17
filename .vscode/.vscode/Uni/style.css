@@ -1,0 +1,30 @@
+body{
+    background-color:#927c67;
+}
+h1{
+    font-style: italic;
+    background-color:#e0d7c7;
+    padding:20px;
+}
+figure{
+    margin-left:0;
+}
+.heading{
+    background-color:#c2bda6;
+}
+figure{
+    background-image:url('Cafe Desserts.jpeg');
+    background-size: 100% 100%;
+    text-align:center;
+    padding:20px;
+}
+figcaption{
+    text-shadow:2px 0 white;
+    font-style:oblique;
+    font-size:25px;
+    background-color:rgba(0,0,0,0.5)
+}
+.img{
+    border:2px solid black;
+    border-radius:10px;
+}

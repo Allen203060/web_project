@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cover Cove- Online Bookstore</title>
+    <link rel="icon" type="image/jpg" href="FEElogo.jpg">
+    <link rel="stylesheet" href="FEE-1 CSS.css">
+</head>
+<body>
+    <header>
+        <section class="top">
+            <img class="img" src="FEElogo.jpg" alt="Book Store Logo">
+        </section>
+        <section class="title">
+            <h1>Cover Cove</h1>
+            <h2>Welcome to our Bookstore!</h2>
+        </section>
+    </header>
+    <nav>
+        <ul class="panel">
+            <li><a href="FEE-1.html">Home</a></li>
+            <li><a href="aboutfee.html">About</a></li>
+            <li><a href="loginfee.html">Login</a></li>
+            <li><a href="signupfee.html">Signup</a></li>
+            <li><a href="feecart.html">Cart</a></li>
+        </ul>
+    </nav>
+    <aside>
+        <ul class="pal">
+            <p>Categories:</p>
+            <li><a href="textbooks.html">Textbooks</a></li><br>
+            <li><a href="fictionandfantasy.html">Fiction and Fantasy</a></li><br>
+            <li><a href="rhapsody.html">Rhapsody</a></li><br>
+            <li><a href="romanticmuse.html">Romantic Muse</a></li><br>
+            <li><a href="horrorandcrime.html">Horror and Crime</a></li><br>
+            <li><a href="non-fiction.html">Non-Fiction</a></li><br>
+            <li><a href="weebzone.html">Weeb Zone</a></li><br>
+            <li><a href="potter-headsarena.html">Potter-Heads Arena</a></li><br>
+        </ul>
+    </aside>
+    <main>
+        <section class="marquee">
+            <marquee behavior="alternate" direction="right" scrollamount="7"> Sale!Sale!Sale!Sale!Sale!</marquee>
+        </section>
+        <h2 class="latest1">Latest Books:</h2>  
+        <!-- Integrated Search Bar -->
+        <section class="search">
+            <div class="search-box">
+                <div class="row">
+                    <input type="text" id="input-box" placeholder="Search anything" autocomplete="off">
+                    <button>Search</button>
+                </div>
+            <div class="result-box"></div>
+        </section>
+        <section class="latest">
+            <a href="https://drive.google.com/file/d/1swzPUZLihXKFNr1xSQGuLVCIzDFytsvY/view?usp=sharing" target="_blank">
+                <figure>
+                    <img src="Asterix and the falling sky.jpeg" alt="Asterix And The Falling Sky">
+                    <figcaption>Asterix And The Falling Sky</figcaption>
+                </figure>
+            </a>
+            <a href="https://drive.google.com/file/d/1J3m9uYbMWHT0QKL_X5DrHC7Dm82rHe1G/view?usp=sharing" target="_blank">
+                <figure>
+                    <img src="Find me in the rain[Pru].jpeg" alt="Find Me in The Rain">
+                    <figcaption>Find Me in The Rain</figcaption>
+                </figure>
+            </a>
+            <a href="https://drive.google.com/file/d/1z1j1mTLxTfLTsUG1amDisNGo6tjfnm9Y/view?usp=sharing" target="_blank">
+                <figure>
+                    <img src="Bury me alexander.jpg" alt="Bury Me">
+                    <figcaption>Bury me</figcaption>
+                </figure>
+            </a>
+            <a href="https://drive.google.com/file/d/1wPJqX4Ci8UQGFG-kl_yOn-uHiDr8puNA/view?usp=sharing" target="_blank">
+                <figure>
+                    <img src="HP1.jpeg" alt="Harry Potter and The Sorcerer's Stone">
+                    <figcaption>Harry Potter and The Sorcerer's Stone</figcaption>
+                </figure>
+            </a>
+            <a href="https://drive.google.com/file/d/1h0YY8iqdn2gsLIZXIWXXOmC-FOWfn2yu/view?usp=sharing" target="_blank">
+                <figure>
+                    <img src="skin curse.jpeg" alt="Skin Curse">
+                    <figcaption>Skin Curse</figcaption>
+                </figure>
+            </a>
+        </section>
+        <footer>
+            <section class="feedback">
+                <form id="reviewForm">
+                    <fieldset class="ver">
+                        <legend>As the moon casts its glow upon Cover Cove, what hidden truths do you uncover within its shadowed halls?</legend>
+                        <label for="aname">Name:</label>
+                        <input type="text" id="aname" name="aname" placeholder="Name"><br>
+                        <label for="mail">E-Mail:</label>
+                        <input type="email" id="mail" name="mail" placeholder="E-Mail"><br>
+                    </fieldset>
+                    <fieldset class="rev"><legend><b>Within the shadowed halls of Cover Cove, where forbidden knowledge lies in wait, what are your impressions?</b></legend>
+                        <label for="rating">Rating:</label>
+                        <select id="rating" name="rating">
+                            <option value="5">★★★★★</option>
+                            <option value="4">★★★★☆</option>
+                            <option value="3">★★★☆☆</option>
+                            <option value="2">★★☆☆☆</option>
+                            <option value="1">★☆☆☆☆</option>
+                        </select><br>
+                        <label for="review">Enter Feedback:</label>
+                        <input type="text" id="review" name="review" placeholder="Your Reviews"><br>
+                    </fieldset>
+                    <button type="submit" class="submit">Submit</button>
+                </form>
+                <h3>Reviews:</h3>
+                <div id="reviews" class="review-container"></div>
+                <div class="pagination">
+                    <button id="prevPage">Previous</button>
+                    <button id="nextPage">Next</button>
+                </div>
+            </section>
+        </footer>
+    </main>
+    <script src="FEE.js"></script>  
+    <script src="searchbar.js"></script>  
+</body>
+</html>     
