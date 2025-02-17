@@ -130,11 +130,11 @@
 <body>
     <header>
         <div class="logo">
-            <img src="l1.png" alt="TV NERD Logo">
+            <img src ="{{ url_for('static', filename='images/l1.png') }}" alt="TV NERD Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
+                <li><a href="/dashboard">Home</a></li>
                 <li><a href="#">Nominees</a></li>
                 <li><a href="#">Winners</a></li>
                 <li><a href="#">News</a></li>

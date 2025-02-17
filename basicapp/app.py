@@ -154,9 +154,9 @@ def getKeyWordsByUID(movie_id):
     return response.text
 
 
-@app.route('/more') 
+@app.route('/awards') 
 def more():
-    return render_template('more.html')
+    return render_template('awards.html')
 
 @app.route('/celeb') 
 def celeb():
