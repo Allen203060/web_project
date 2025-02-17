@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV NERD - Most Popular Celebs</title>
+    <link rel="stylesheet" href="celeb.css" >
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">
+                <span class="yellow">TV NERD</span>
+                <span class="charts">Charts</span>
+            </h1>
+            <h2 class="subtitle">Most Popular Celebs</h2>
+            <p class="description">As determined by TV NERD users</p>
+        </div>
+        <div class="controls">
+            <div class="names-count">50 Names</div>
+            <div class="sort-and-view">
+                <div class="sort">
+                    <span>Sort by</span>
+                    <select class="sort-select">
+                        <option>STARmeter</option>
+                    </select>
+                </div>
+                <div class="view-buttons">
+                    <button class="view-button active" data-view="list">List</button>
+                    <button class="view-button" data-view="grid">Square Grid</button>
+                    <button class="view-button" data-view="detailed-grid">Detailed Grid</button>
+                </div>
+            </div>
+        </div>
+        <div class="celeb-list">
+            <!-- 50 Celebrity Entries will be populated by JavaScript -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const celebrities = [
+                "Margot Robbie", "Cillian Murphy", "Zendaya", "Robert Downey Jr.", "Chris Hemsworth", "Scarlett Johansson", "Tom Holland", "Florence Pugh", "Timothée Chalamet", "Jenna Ortega", 
+                "Leonardo DiCaprio", "Anya Taylor-Joy", "Pedro Pascal", "Joaquin Phoenix", "Austin Butler", "Natalie Portman", "Ryan Reynolds", "Dwayne Johnson", "Keanu Reeves", "Gal Gadot",
+                "Emma Stone", "Henry Cavill", "Brad Pitt", "Angelina Jolie", "Millie Bobby Brown", "Christian Bale", "Tom Hardy", "Emily Blunt", "Benedict Cumberbatch", "Elizabeth Olsen",
+                "Jake Gyllenhaal", "Oscar Isaac", "Viola Davis", "Mads Mikkelsen", "Ana de Armas", "Daniel Radcliffe", "Eddie Redmayne", "Saoirse Ronan", "Matt Damon", "Michael Fassbender",
+                "Hugh Jackman", "Charlize Theron", "Jared Leto", "Kate Winslet", "Adam Driver", "Jessica Chastain", "Halle Berry", "Robert Pattinson", "Tessa Thompson", "Andrew Garfield"
+            ];
+
+            const celebList = document.querySelector(".celeb-list");
+            celebrities.forEach((name, index) => {
+                const imageUrl = "https://placehold.co/80x80/ffffff/000000?text=${encodeURIComponent(name)}"; // Using placehold.co for placeholder images
+                const celebItem = document.createElement("div");
+                celebItem.classList.add("celeb-item");
+                celebItem.innerHTML = `
+                    <div class="celeb-image"><img src="${imageUrl}" alt="${name}"></div>
+                    <div class="celeb-details">
+                        <div class="celeb-rank">${index + 1}</div>
+                        <h3 class="celeb-name">${name}</h3>
+                        <p class="celeb-roles">Actor/Actress</p>
+                        <p class="celeb-project">Popular Project</p>
+                    </div>
+                `;
+                celebList.appendChild(celebItem);
+            });
+
+            document.querySelectorAll(".view-button").forEach(button => {
+                button.addEventListener("click", function () {
+                    document.querySelectorAll(".view-button").forEach(btn => btn.classList.remove("active"));
+                    this.classList.add("active");
+                    celebList.className = "celeb-list " + this.dataset.view + "-view";
+                });
+            });
+
+            if (window.lucide) {
+                lucide.createIcons();
+            } else {
+                console.error("Lucide is not defined. Ensure the script loads correctly.");
+            }
+        });
+    </script>
+</body>
+</html>
