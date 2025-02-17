@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Page</title>
+    <title>Movies</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -211,17 +211,17 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <img src="l1.png" alt="Logo">
+                <img src= "{{ url_for('static', filename='images/l1.png') }}" alt="Logo">
             </div>
             <nav class="menu">
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="/dashboard">Home</a></li>
                     <li><a href="#">Movies</a></li>
-                    <li><a href="#">TV Shows</a></li>
-                    <li><a href="#">Celebrities</a></li>
+                    <li><a href="/tvshows">TV Shows</a></li>
+                    <li><a href="/celebs">Celebrities</a></li>
                     <li><a href="#">More</a>
                         <ul class="dropdown">
-                            <li><a href="#">Awards</a></li>
+                            <li><a href="/awards">Awards</a></li>
                             <li><a href="#">Events</a></li>
                             <li><a href="#">News</a></li>
                         </ul>

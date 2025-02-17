@@ -34,7 +34,7 @@ logged_in = False
 user_name = None
 
 # External API URL for dashboard data
-EXTERNAL_API_URL = "https://api.example.com/data"
+# EXTERNAL_API_URL = "https://api.example.com/data"
 
 @app.route('/')
 def home():
@@ -161,6 +161,9 @@ def more():
 @app.route('/celeb') 
 def celeb():
     return render_template('celeb.html')
+@app.route('/tvshows') 
+def tvshow():
+    return render_template('tvshow.html')
 
 @app.route('/api/search')
 def api_search():
