@@ -2,21 +2,23 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333;
-    color: #fff;
+    background-color: #000000; /* Black background */
+    color: #ffffff;
 }
 
 h1 {
-    background-color: #444;
-    color: #fff;
+    background-color: #222; /* Dark gray for headers */
+    color: #ffcc00; /* Yellow text for headers */
     padding: 1em;
     text-align: center;
     margin: 0;
+    font-size: 2em; /* Larger font size for emphasis */
 }
 
 header {
-    background-color: #222;
+    background-color: #111; /* Slightly lighter black for header */
     padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
 }
 
 .header-container {
@@ -27,10 +29,11 @@ header {
 
 .logo img {
     max-height: 80px; /* Increase logo size */
+    transition: transform 0.3s ease; /* Smooth hover effect */
 }
 
 .logo img:hover {
-    transform: none; /* Remove hover effect */
+    transform: scale(1.1); /* Add subtle hover effect */
 }
 
 .menu ul {
@@ -46,10 +49,16 @@ header {
 }
 
 .menu ul li a {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
     padding: 10px 15px;
     display: block;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.menu ul li a:hover {
+    color: #ffcc00; /* Yellow text on hover */
+    background-color: rgba(255, 204, 0, 0.1); /* Subtle yellow background on hover */
 }
 
 .menu ul li ul.dropdown {
@@ -57,10 +66,11 @@ header {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #444;
+    background-color: #222; /* Dark gray for dropdown */
     list-style: none;
     padding: 0;
     margin: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for dropdown */
 }
 
 .menu ul li:hover ul.dropdown {
@@ -73,6 +83,12 @@ header {
 
 .menu ul li ul.dropdown li a {
     padding: 10px;
+    color: #ffffff;
+}
+
+.menu ul li ul.dropdown li a:hover {
+    background-color: #ffcc00; /* Yellow background on hover */
+    color: #000000; /* Black text on hover */
 }
 
 .search-bar {
@@ -86,15 +102,22 @@ header {
     border: none;
     border-radius: 5px 0 0 5px;
     width: 100%; /* Ensure input takes full width of search bar */
+    background-color: #222; /* Dark gray input background */
+    color: #ffffff;
 }
 
 .search-bar button {
     padding: 10px;
     border: none;
-    background-color: #555;
-    color: #fff;
+    background-color: #ffcc00; /* Yellow button */
+    color: #000000; /* Black text */
     border-radius: 0 5px 5px 0;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #e6b800; /* Darker yellow on hover */
 }
 
 .user-options {
@@ -103,11 +126,16 @@ header {
 }
 
 .user-options a {
-    color: #fff;
+    color: #ffffff;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.user-options a:hover {
+    color: #ffcc00; /* Yellow text on hover */
 }
 
 .scroll-container {
@@ -134,9 +162,14 @@ header {
     flex: 0 0 auto;
     width: 200px;
     margin: 1em;
-    background-color: #d3d3d3;
+    background-color: #222; /* Dark gray for sections */
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+    transition: transform 0.3s ease;
+}
+
+.scroll-container section:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
 }
 
 figure {
@@ -157,7 +190,7 @@ img:hover {
 
 figcaption {
     margin-top: 0.5em;
-    color: #000;
+    color: #ffffff; /* White text for contrast */
     font-size: 0.9em;
     line-height: 1.4em;
 }
@@ -174,11 +207,16 @@ figcaption {
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
-    color: #fff;
+    color: #ffffff;
     padding: 0.5em;
     cursor: pointer;
     border-radius: 50%;
     z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.scroll-btn:hover {
+    background-color: rgba(255, 204, 0, 0.8); /* Yellow on hover */
 }
 
 .scroll-btn.left {
@@ -206,45 +244,45 @@ figcaption {
 .movie-title {
     margin-top: 5px;
     font-size: 1.1em;
-    color: #6b6a6a;
+    color: #ffffff; /* White text for contrast */
 }
 
 .scroll-container1 {
     position: relative;
     display: flex;
-    flex-direction: row; /* Arrange items in a horizontal row */
-    overflow-x: auto; /* Allow horizontal scrolling */
-    overflow-y: hidden; /* Prevent vertical overflow */
-    scroll-snap-type: x mandatory; /* Enable scroll snapping */
-    -webkit-overflow-scrolling: touch; /* Improve scrolling on touch devices */
-    justify-content: flex-start; /* Align items to the start */
-    align-items: center; /* Center align items vertically */
-    gap: 95px; /* Add space between images */
-    padding: 15px; /* Add padding */
-    margin: 10px auto; /* Center the container horizontally with auto margins */
-    background-color: #444; /* Change background color to match grey shades */
-    width: 90%; /* Adjust the width to reduce whitespace */
-    scrollbar-width: none; /* For Firefox */
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 95px;
+    padding: 15px;
+    margin: 10px auto;
+    background-color: #222; /* Dark gray for container */
+    width: 90%;
+    scrollbar-width: none;
 }
 
 .scroll-container1::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
+    display: none;
 }
 
 .scroll-container1 .movie {
-    flex: 0 0 calc(90% - 15px); /* Ensure each movie takes 85% of the container width minus margins */
+    flex: 0 0 calc(90% - 15px);
     position: relative;
-    margin: 35px; /* Add padding around each image */
-    scroll-snap-align: center; /* Align items to the center for scroll snapping */
-    text-align: center; /* Center align text within the movie container */
+    margin: 35px;
+    scroll-snap-align: center;
+    text-align: center;
 }
 
 .scroll-container1 .movie img {
     width: 100%;
-    height: 90vh; /* Set a fixed height for uniform image sizes */
-    object-fit: fill; /* Ensure the image covers the container without distortion */
+    height: 90vh;
+    object-fit: fill;
     display: block;
-    margin: 0 auto; /* Center align the image */
+    margin: 0 auto;
 }
 
 .scroll-container1 .movie-title {
@@ -254,7 +292,7 @@ figcaption {
     width: 100%;
     padding: 10px;
     font-size: 1.1em;
-    color: #fff;
+    color: #ffffff;
     background: rgba(0, 0, 0, 0.5);
     text-align: center;
     margin: 5px;
@@ -266,7 +304,7 @@ figcaption {
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
-    color: #fff;
+    color: #ffffff;
     padding: 0.5em;
     cursor: pointer;
     border-radius: 50%;
@@ -274,106 +312,5 @@ figcaption {
 }
 
 .scroll-container1 .scroll-btn.left {
-    left: 50px; /* Adjust the left position to center horizontally */
+    left: 50px;
 }
-
-.scroll-container1 .scroll-btn.right {
-    right: 50px; /* Adjust the right position to center horizontally */
-}
-
-.scroll-container1 .scroll-btn i {
-    font-size: 1.5em;
-}
-
-.scroll-container1 .movie img {
-    margin-left: 5vh;
-    align-items: center;
-    justify-content: center;
-    padding-right: 7vh;
-}
-
-#searchResults {
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    width: calc(100% - 20px);
-    z-index: 1000;
-    display: none;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-#searchResults ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-#searchResults li {
-    cursor: pointer;
-    padding: 5px;
-    border: 1px solid #ccc;
-    margin-top: -1px; /* Prevent double borders */
-    background-color: #f6f6f6;
-}
-
-#searchResults li:hover {
-    background-color: #ddd;
-}
-
-#searchResults li {
-    padding: 10px;
-    cursor: pointer;
-}
-
-#searchResults li:hover {
-    background-color: #f0f0f0;
-}
-
-.result-box {
-    position: absolute;
-    background-color: white;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    width: calc(100% - 20px);
-    z-index: 1000;
-}
-
-.result-box ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.result-box li {
-    padding: 10px;
-    cursor: pointer;
-}
-
-.result-box li:hover {
-    background-color: #f0f0f0;
-}
-
-.search-bar {
-    margin-bottom: 20px;
-}
-
-#searchInput {
-    padding: 10px;
-    font-size: 16px;
-}
-
-#itemList {
-    list-style: none;
-    padding: 0;
-}
-
-#itemList li {
-    padding: 5px;
-    font-size: 18px;
-}
-
-
