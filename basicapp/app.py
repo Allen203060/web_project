@@ -154,9 +154,13 @@ def getKeyWordsByUID(movie_id):
     return response.text
 
 
-@app.route('/more')
+@app.route('/more') 
 def more():
     return render_template('more.html')
+
+@app.route('/celeb') 
+def celeb():
+    return render_template('celeb.html')
 
 @app.route('/api/search')
 def api_search():
