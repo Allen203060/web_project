@@ -43,10 +43,10 @@ def home():
 # Login Route (No token required)
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    print("hello")
+    
     global logged_in, user_name
     if request.method == 'POST':
-        print("world")
+        
         username = request.form['username']
         password = request.form['password']
 
@@ -154,7 +154,9 @@ def getKeyWordsByUID(movie_id):
     return response.text
 
 
-
+@app.route('/more')
+def more():
+    return render_template('more.html')
 
 @app.route('/api/search')
 def api_search():
