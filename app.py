@@ -136,7 +136,171 @@ def tvshows():
 def getMoieDetailsByID(movie_id):
     url = "https://api.themoviedb.org/3/movie/" + movie_id
 
+    headers = {import logging
+
+# Create a logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+
+# Create a file handler and a stream handler
+file_handler = logging.FileHandler('app.log')
+stream_handler = logging.StreamHandler()
+
+# Create a formatter and add it to the handlers
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+stream_handler.setFormatter(formatter)
+
+# Add the handlers to the logger
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
+# Add logs to the routes
+@app.route('/')
+def home():
+    logger.info('Home page accessed')
+    return redirect(url_for('dashboard'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    logger.info('Login page accessed')
+    global logged_in, user_name
+    if request.method == 'POST':
+        logger.info('Login form submitted')
+        username = request.form['username']
+        password = request.form['password']
+
+        # Query the database to find the user
+        user = User.query.filter_by(username=username).first()
+
+        if user and user.password == hashlib.sha256(password.encode()).hexdigest():
+            logger.info('User logged in successfully')
+            logged_in = True
+            user_name = username  # In practice, generate a real token
+            return redirect(url_for('dashboard'))
+        else:
+            logger.warning('Invalid credentials')
+            flash('Invalid credentials. Please try again.', 'danger')
+    
+    return render_template('login.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    logger.info('Signup page accessed')
+    if request.method == 'POST':
+        logger.info('Signup form submitted')
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+
+        # Check if the username already exists
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user:
+            logger.warning('Username already exists')
+            flash('Username already exists. Please choose another.', 'danger')
+            return render_template('signup.html')
+
+        # Hash the password before storing it
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+        # Create a new user in the database
+        new_user = User(username=username, password=hashed_password, email= email)
+        db.session.add(new_user)
+        db.session.commit()
+
+        logger.info('New user created')
+        flash('Account created successfully! Please log in.', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('signup.html')
+
+@app.route('/dashboard')
+def dashboard():
+    logger.info('Dashboard page accessed')
+    url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+
     headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+    
+    data = (response.text)
+    logger.info('Data fetched from API')
+    return render_template('index.html', data=data, user_name=user_name)
+
+@app.route('/movies')
+def movies():
+    logger.info('Movies page accessed')
+    movie_id = request.args.get('id')  # Get 'id' from query parameters
+    if movie_id == None:
+        logger.warning('No movie ID provided')
+        return redirect(url_for('dashboard'))
+    
+    data = getMoieDetailsByID(movie_id)
+    keywoerd = getKeyWordsByUID(movie_id)
+    logger.info('Movie data fetched')
+    return render_template('movies.html', data= json.loads(data), )
+
+@app.route('/tvshows')
+def tvshows():
+    logger.info('TV shows page accessed')
+    return render_template('Tvshow.html')
+
+def getMoieDetailsByID(movie_id):
+    logger.info('Getting movie details by ID')
+    url = "https://api.themoviedb.org/3/movie/" + movie_id
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    logger.info('Movie data fetched')
+    return response.text
+
+def getKeyWordsByUID(movie_id):
+    logger.info('Getting keywords by movie ID')
+    url = "https://api.themoviedb.org/3/movie/" + movie_id
+
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    logger.info('Keywords fetched')
+    return response.text
+
+@app.route('/api/search')
+def api_search():
+    logger.info('API search accessed')
+    query = request.args.get('q', '')
+    url = f"https://api.themoviedb.org/3/search/movie?query={query}&include_adult=false&language=en-US&page=1"
+    
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        logger.info('Search results fetched')
+        return (data.get('results', []))
+    logger.warning('Failed to fetch search results')
+    return jsonify([])
+
+@app.route('/logout')
+def logout():
+    logger.info('Logout accessed')
+    global logged_in, user_name
+    logged_in = False
+    user_name = None
+    return redirect(url_for('dashboard'))
         "accept": "application/json",
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
     }
