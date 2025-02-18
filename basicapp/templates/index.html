@@ -54,7 +54,7 @@
             color: #000;
             border: 1px solid #ccc;
             padding: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         #search-results {
@@ -89,6 +89,7 @@
             margin-right: 10px;
             object-fit: cover;
         }
+        
     </style>
 </head>
 
@@ -101,12 +102,11 @@
             <nav class="menu">
                 <ul>
                     <li><a href="/dashboard">Home</a></li>
-                    <li><a href="#">Movies</a></li>
                     <li><a href="/tvshows">TV Shows</a></li>
                     <li><a href="/celeb">Celebrities</a></li>
+                    <li><a href="/awards">Awards</a></li>
                     <li><a href="">More</a>
                         <ul class="dropdown">
-                            <li><a href="/awards">Awards</a></li>
                             <li><a href="#">Events</a></li>
                             <li><a href="#">News</a></li>
                         </ul>
@@ -125,14 +125,15 @@
                 {% if user_name %}
                 <p>
                 <div class="profile-container">
-                    <button onclick="toggleMenu()">
-                        <img height="24" width="24"
+                    <button onclick="toggleMenu()" >
+                       <p>Hello, {{user_name}}</p>
+                        <!-- <img height="24" width="24"
                             src="https://i.pinimg.com/originals/01/ca/da/01cada77a0a7d326d85b7969fe26a728.jpg"
-                            alt="Profile Icon">
+                            alt="Profile Icon"> -->
                     </button>
                     <div id="profile-menu" class="profile-menu">
                         <p>Hello, {{ user_name }}</p>
-                        <a style="color: #000;" href="{{ url_for('logout') }}">Logout</a>
+                        <a style="color: #000, background-color: #ffff" href="{{ url_for('logout') }}">Logout</a>
                     </div>
                 </div>
                 </p>

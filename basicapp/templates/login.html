@@ -257,7 +257,7 @@
             <input type="text" id="user" name="username" placeholder="Enter username" required />
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required />
-            <input type="submit" value="Logins" />
+            <input type="submit" value="Login" />
         </form>
         <div class="login-options">
             <div class="login-option" title="Login with TVNerd">
@@ -277,7 +277,7 @@
                 <span>Apple</span>
             </div>
         </div>
-        <button id="create-account"  onclick="window.location.href='{{ url_for('signup') }}'" >Create a New Account</button>
+        <button id="create-account"  onclick="window.location.href= '{{ url_for('signup') }}'" >Create a New Account</button>
         <p>By logging in, you agree to TVNerd's <a href="#">Conditions of Use</a> and <a href="#">Privacy Policy</a>.</p>
         <p>Don't have an account? <a href="./signup.html">Sign up</a></p>
     </div>
