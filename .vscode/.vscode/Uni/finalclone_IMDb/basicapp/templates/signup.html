@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVNerd - Sign Up</title>
+    <!-- favicon -->
+
+    <link rel="shortcut icon" href="./redketchup/android-chrome-192x192.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./redketchup/android-chrome-512x512.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./redketchup/apple-touch-icon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./redketchup/favicon-16x16.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./redketchup/favicon-32x32.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./redketchup/favicon.ico" type="image/x-icon">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap');
+
+        body {
+            background-color: #000000;
+            color: #FFDA63;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #navbar {
+            background-color: #1a1a1a;
+            height: 60px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(255, 218, 99, 0.1);
+        }
+
+        #navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFDA63;
+        }
+
+        #navbar .nav-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        #navbar .nav-links div {
+            margin: 0 15px;
+        }
+
+        #navbar .nav-links a {
+            color: #FFDA63;
+            font-size: 16px;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        #navbar .nav-links a:hover {
+            background-color: #333333;
+        }
+
+        #navbar .search-bar {
+            display: flex;
+            align-items: center;
+            width: 300px;
+        }
+
+        #navbar .search-bar input {
+            width: 100%;
+            height: 30px;
+            padding: 0 10px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            background-color: #333333;
+            color: #FFDA63;
+        }
+
+        #navbar .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        #navbar .hamburger-menu div {
+            width: 25px;
+            height: 3px;
+            background-color: #FFDA63;
+            margin: 4px;
+            transition: 0.4s;
+        }
+
+        @media (max-width: 768px) {
+            #navbar .nav-links {
+                display: none;
+            }
+
+            #navbar .hamburger-menu {
+                display: flex;
+            }
+        }
+
+        #signup-form-div {
+            background-color: #1a1a1a;
+            width: 400px;
+            /* IMDB-like width */
+            height: fit-content;
+            margin: 100px auto;
+            border: 1px solid #333333;
+            padding: 30px;
+            /* Increased padding */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(255, 218, 99, 0.2);
+            text-align: left;
+            /* IMDB-like alignment */
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        #signup-form-div>h1 {
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-size: 28px;
+            color: #FFDA63;
+            text-align: center;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: normal;
+            display: block;
+            margin-bottom: 5px;
+            color: #FFDA63;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 95%;
+            height: 35px;
+            outline: none;
+            padding: 8px 10px;
+            margin: 5px 0 15px 0;
+            background-color: #333333;
+            border: 1px solid #4d4d4d;
+            border-radius: 4px;
+            color: #FFDA63;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #FFDA63;
+        }
+
+        /* Style for the submit button */
+        input[type="submit"] {
+            background-color: #FFDA63;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 12px;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #FFEB3B;
+        }
+
+
+        form+p {
+            font-size: 14px;
+            line-height: 23px;
+            margin-top: 20px;
+            text-align: center;
+            color: #FFDA63;
+        }
+
+        form+p a {
+            text-decoration: none;
+            color: #FFEB3B;
+        }
+
+        .signup-options {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .signup-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+
+        .signup-option img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .signup-option span {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #FFDA63;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .signup-option:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .signup-option:hover span {
+            display: block;
+        }
+
+        #create-account {
+            background-color: #FFDA63;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 12px;
+            margin-top: 15px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        #create-account:hover {
+            background-color: #FFEB3B;
+        }
+
+        /* New styles for the container */
+        .input-container {
+            margin-bottom: 15px;
+        }
+
+        .input-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #FFDA63;
+            font-weight: bold;
+        }
+
+        /* Adjustments for better IMDB-like appearance */
+        #form-bottom-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #FFDA63;
+        }
+
+        #signup-form-div p {
+            text-align: center;
+            margin-top: 10px;
+            color: #FFDA63;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="navbar">
+        <div class="logo">TVNerd</div>
+        <div class="hamburger-menu" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="nav-links">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+            </div>
+            <div><a href="./watchlist.html">Watchlist</a></div>
+            <div><a href="./login.html">Login</a></div>
+            <div><a href="#">EN</a></div>
+        </div>
+    </div>
+    <div id="signup-form-div">
+        <h1>Create Account</h1>
+        <form id="signup" method="POST">
+            <label for="user">User Name</label>
+            <input type="text" id="user" name="username" placeholder="Enter username" required />
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" placeholder="Confirm your password" required />
+            <input type="submit" value="Create your TVNerd account">
+        </form>
+
+        <div class="signup-options">
+            <div class="signup-option" title="Sign up with TVNerd">
+                <img src="l1.png" alt="TVNerd Logo">
+                <span>TVNerd</span>
+            </div>
+            <div class="signup-option" title="Sign up with Amazon">
+                <img src="https://i.pinimg.com/originals/01/ca/da/01cada77a0a7d326d85b7969fe26a728.jpg" alt="Amazon Logo">
+                <span>Amazon</span>
+            </div>
+            <div class="signup-option" title="Sign up with Google">
+                <img src="data:image/png;base64,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... 1azkAyTPJOyyxMutLCSEX/rAxWcZ0HxlIGY9j0fVD79gt7PicaFH5J+gwWP5J1Xts72O/5rN/IgDCQTYSQtB9IqtC3y8tPxuoHZd/21aI90oQifspCUMJUcHDD78zNCuja2WR1j/IE78xuwVzIYiZ+5iNU0v+Uj6R/x32G14GL9KeZz5iM+JvL+gBww3bKbztvWz6/khr4mI7Xmse3R/gbj7InvBfuZH4m8DDJGjIZhwFrw8lxZswrcLLsAwf2p7WR+NHxtlzkc16aQQzL+dT80ye/R0d8bHUcP5LQSDmrd8tP4wW5zdP2Thyu8rRD22+cVzGIehYusCrZbpp59ibjTz9MOFva5DFgKYb26YZ/9ciXtYX+pjIjzOS90XbngGj46EZqnsvQRiYOFmybQV5exfuRW28c2F66m9EFtl01c/VbHNUhNabCfOgzoVjxYw9vm/mfoJP2G7BiYLVssv+rYVVE2lUsYW7eIjusMC0WdP0g/ChlYeNxt2dw2gJeDZf1biswMcOEcKjoBtxFuIVbJ9tOsqaJvnjXoZWgTQ/k6AuNk6VcyeK6jmfwflzeS1kFS7PWDsv/p1LYsoaNobjUqrTmlVGiWFvEDHc71XsM//WOkXUOzTCExgmcd9r2hIMAnkh6p2fbb3PeRdv/ctgKmT0JRrPUCrPoR+nJz9GZ/t2SIUz4X0A50htCrj18+8lsGkXiDhW/SDoE9YzDd8qo9hodm28imDidOTHCBUOd9VMPApfkeSsJ3BdG3vVSgGHIPBUIec6csQ6tEMpp3/Eds7CfMjyi2SCMPTcetHU8WNP6gDpxYACmng6EJu79SnezCSfmckg0kthFs7QOVDsDHu+EtrYPPP1EKYmlSDQbSLWRm3/dF65Ox/DgpXo4UBTNQv64ix6Wc2QtTg80a3yuf2WPVTzVY+vBlLD+3nJ+LGOB3YVpv50D+psgdSANv9e4ZGwyzVRtuoIDBWrTSmCGy2xN9GOixIR7BuBy/h6IDEguGtc1kgWoVU7EAhRFXt87rFdS49hNAJ0qkZwAJNs8LzGZQhhaTQKD+6gLZdwfnIZHv9tJ8mC61yozPI4J2FtA8l2aZKLS+MU6EhQfla67w7vuXSTyWGV6rjqCTKPpAsms5wVdN7G9uleqZ5Xilbkcv0WOiYPvudKFghNkirYbVjYr0eq3RHmHapVQZW2Bt7wwOhBcv1xrltXkwmVVW9bC2oNnldKVWaGEm7G4wOkWUBXG41TjfU9oy3i61slBqtZhnn8yRFlkseA0yP3iNg5SHCuFwuNynlcg1jDOmWDahDuvVF6ucHCSdXPq8AjOHctEQikUgkEolEIpFIJBJe/g8h8UrsydYNtAAAAABJRU5ErkJggg==" alt="Google Logo">
+                <span>Google</span>
+            </div>
+            <div class="signup-option" title="Sign up with Apple">
+                <img src="data:image/png;base64,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" alt="Apple Logo">
+                <span>Apple</span>
+            </div>
+        </div>
+        <p id="form-bottom-text">By creating an account, you agree to the TVNerd's <a href="#">Conditions of Use</a> and <a href="#">Privacy
+                Policy</a>.</p>
+        <p id="form-bottom-text">Already have an account? <a  href="{{ url_for('login') }}">Sign-In</a></p>
+
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'none' ? 'flex' : 'none';
+        }
+    </script>
+
+</body>
+
+</html>
