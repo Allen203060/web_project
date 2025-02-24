@@ -8,6 +8,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js" defer></script>
 </head>
 <body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/l1.png') }}" alt="Logo">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="/dashboard">Home</a></li>
+                    <li><a href="/tvshows">TV Shows</a></li>
+                    <li><a href="/celeb">Celebrities</a></li>
+                    <li><a href="/awards">Awards</a></li>
+                    <li><a href="">More</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search...">
+            </div>
+            <div id="searchResults" class="search-results" style="display: none;"></div> <!-- Search results section -->
+            <div class="user-options">
+            <ul id="itemList"></ul> 
+            <div class="user-options">
+                <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
+                <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
+            </div>
+        </div>
+    </header>
     <div class="container">
         <div class="header">
             <h1 class="title">

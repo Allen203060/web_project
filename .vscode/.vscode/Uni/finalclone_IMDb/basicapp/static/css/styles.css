@@ -284,6 +284,7 @@ figcaption {
     object-fit: fill;
     display: block;
     margin: 0 auto;
+    margin-left:6vh;
 }
 
 .scroll-container1 .movie-title {
@@ -297,6 +298,7 @@ figcaption {
     background: rgba(0, 0, 0, 0.5);
     text-align: center;
     margin: 5px;
+    margin-left:6vh;
 }
 
 .scroll-container1 .scroll-btn {

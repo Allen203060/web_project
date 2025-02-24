@@ -4,7 +4,10 @@ import hashlib
 import requests
 import json
 import jsonify
+import logging
 
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -70,19 +73,24 @@ def signup():
         password = request.form['password']
         email = request.form['email']
 
+        logging.debug(f"Received form data: username={username}, email={email}")
+
         # Check if the username already exists
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
             flash('Username already exists. Please choose another.', 'danger')
+            logging.debug(f"Username {username} already exists.")
             return render_template('signup.html')
 
         # Hash the password before storing it
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
         # Create a new user in the database
-        new_user = User(username=username, password=hashed_password, email= email)
+        new_user = User(username=username, password=hashed_password, email=email)
         db.session.add(new_user)
         db.session.commit()
+
+        logging.debug(f"New user {username} added to the database.")
 
         flash('Account created successfully! Please log in.', 'success')
         return redirect(url_for('login'))
