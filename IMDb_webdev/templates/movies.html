@@ -134,31 +134,70 @@
             color: #FFDA63; /* Yellow text */
         }
     
-        .search-bar {
-            display: flex;
-            align-items: center;
-            width: 300px; /* Increase width of search bar */
-            margin-bottom: 20px;
-        }
-    
-        .search-bar input {
-            padding: 10px;
-            border: 1px solid #FFDA63; /* Yellow border */
-            border-radius: 5px 0 0 5px;
-            width: 100%; /* Ensure input takes full width of search bar */
-            font-size: 16px;
-            background-color: #111; /* Dark background */
-            color: #FFDA63; /* Yellow text */
-        }
-    
-        .search-bar button {
-            padding: 10px;
-            border: none;
-            background-color: #FFDA63; /* Yellow background */
-            color: #000; /* Black text */
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
+    .search-bar {
+        display: flex;
+        align-items: center;
+        width: 300px; /* Increase width of search bar */
+    }
+
+    .search-bar input {
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+        width: 100%; /* Ensure input takes full width of search bar */
+        background-color: #222; /* Dark gray input background */
+        color: #ffffff;
+    }
+
+    .search-bar button {
+        padding: 10px;
+        border: none;
+        background-color: #ffcc00; /* Yellow button */
+        color: #000000; /* Black text */
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .search-bar button:hover {
+        background-color: #e6b800; /* Darker yellow on hover */
+    }
+
+    #search-results {
+        border: 1px solid #ccc;
+        display: block;
+        width: 250px;
+        position: absolute;
+        background: white;
+        color: #000 !important;
+        max-height: 200px;
+        overflow-y: auto;
+        top: 56px;
+    }
+
+    #search-results div {
+        padding: 10px;
+        cursor: pointer;
+        color: #000 !important;
+    }
+
+    #search-results div:hover {
+        background: #f0f0f0;
+        color: #000 !important;
+    }
+
+    #search-results .search-item {
+        display: flex;
+        align-items: center;
+    }
+
+    .thumbnail {
+        width: 40px;
+        height: 60px;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+
     
         .user-options {
             display: flex;
@@ -231,6 +270,22 @@
                 <input type="text" id="search-input" onkeyup="searchMovies()" placeholder="Search for movies...">
                 <div id="search-results"></div>
             </div>
+    
+            <div class="user-options">
+                {% if session['username'] %}
+                <div class="profile-container">
+                    <button onclick="toggleMenu()">
+                        <p>Hello, {{ session['username'] }}</p>
+                    </button>
+                    <div id="profile-menu" class="profile-menu">
+                        <p>Hello, {{ session['username'] }}</p>
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{{ url_for('login') }}">Sign In</a>
+                {% endif %}
+            </div>
         </div>
     </header>
     <div class="container">
@@ -278,6 +333,42 @@
         </p>
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script>
+    function searchMovies() {
+        let query = document.getElementById('search-input').value;
+        if (!query) return;
+    
+        fetch(`/api/search?q=${query}`)
+            .then(response => response.json())
+            .then(data => {
+                let dropdown = document.getElementById('search-results');
+                dropdown.innerHTML = '';
+                
+                data.forEach(movie => {
+                    let option = document.createElement('div');
+                    option.classList.add('search-item');
+                    option.setAttribute('data-id', movie.id);
+                    option.onclick = function() {
+                        window.location.href = `/movies?id=${movie.id}`;
+                    };
+    
+                    let img = document.createElement('img');
+                    img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+                    img.alt = movie.title;
+                    img.classList.add('thumbnail');
+    
+                    let text = document.createElement('span');
+                    text.textContent = movie.title;
+    
+                    option.appendChild(img);
+                    option.appendChild(text);
+                    dropdown.appendChild(option);
+                });
+    
+                dropdown.style.display = 'block';
+            });
+    }
+</script>    
 
     
 </body>
