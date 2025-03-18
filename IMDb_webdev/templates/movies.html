@@ -228,14 +228,8 @@
                 </ul>
             </nav>
             <div class="search-bar">
-                <input type="text" id="searchInput" placeholder="Search...">
-            </div>
-            <div id="searchResults" class="search-results" style="display: none;"></div> <!-- Search results section -->
-            <div class="user-options">
-            <ul id="itemList"></ul> 
-            <div class="user-options">
-                <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
-                <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
+                <input type="text" id="search-input" onkeyup="searchMovies()" placeholder="Search for movies...">
+                <div id="search-results"></div>
             </div>
         </div>
     </header>
@@ -283,7 +277,8 @@
             {{data['original_language']}}
         </p>
     </div>
-    <script src="script.js"></script>
-    <script src="search.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    
 </body>
 </html>
