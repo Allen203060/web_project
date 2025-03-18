@@ -96,4 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Auto transition
     setInterval(nextMovie, 5000); // Change movie every 5 seconds
+
 });
+
+

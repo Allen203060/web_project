@@ -60,13 +60,13 @@
         #search-results {
             border: 1px solid #ccc;
             display: block;
-            width: 250px;
+            width: 297px;
             position: absolute;
             background: white;
             color: #000 !important;
-            max-height: 200px;
+            max-height: 215px;
             overflow-y: auto;
-            top: 56px;
+            top: 79px;
         }
 
         #search-results div {
@@ -94,6 +94,7 @@
 </head>
 
 <body>
+
     <header>
         <div class="header-container">
             <div class="logo">
@@ -105,7 +106,7 @@
                     <li><a href="/tvshows">TV Shows</a></li>
                     <li><a href="/celeb">Celebrities</a></li>
                     <li><a href="/awards">Awards</a></li>
-                    <li><a href="">More</a>
+                    <li><a href="#">More</a>
                         <ul class="dropdown">
                             <li><a href="#">Events</a></li>
                             <li><a href="#">News</a></li>
@@ -114,36 +115,28 @@
                 </ul>
             </nav>
             <div class="search-bar">
-                <!-- <input type="text" id="searchInput" placeholder="Search..." oninput="search()"> -->
                 <input type="text" id="search-input" onkeyup="searchMovies()" placeholder="Search for movies...">
                 <div id="search-results"></div>
             </div>
-            <ul id="itemList"></ul>
-            <ul class="result-box" id="searchResults"></ul>
+    
             <div class="user-options">
-                <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
-                {% if user_name %}
-                <p>
+                {% if session['username'] %}
                 <div class="profile-container">
-                    <button onclick="toggleMenu()" >
-                       <p>Hello, {{user_name}}</p>
-                        <!-- <img height="24" width="24"
-                            src="https://i.pinimg.com/originals/01/ca/da/01cada77a0a7d326d85b7969fe26a728.jpg"
-                            alt="Profile Icon"> -->
+                    <button onclick="toggleMenu()">
+                        <p>Hello, {{ session['username'] }}</p>
                     </button>
                     <div id="profile-menu" class="profile-menu">
-                        <p>Hello, {{ user_name }}</p>
-                        <a style="color: #000, background-color #ffff" href="{{ url_for('logout') }}">Logout</a>
+                        <p>Hello, {{ session['username'] }}</p>
+                        <a href="{{ url_for('logout') }}">Logout</a>
                     </div>
                 </div>
-                </p>
                 {% else %}
                 <a href="{{ url_for('login') }}">Sign In</a>
                 {% endif %}
-                </a>
             </div>
         </div>
     </header>
+    
     <h1>Latest Movies</h1><br>
     <div class="scroll-container1">
         <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
@@ -258,7 +251,30 @@
     </div>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
+    
+    
+    
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <script>// Store session flag in sessionStorage
+        {% if session.get('username') %}
+        sessionStorage.setItem("active_session", "true");
+        {% endif %}
+        
+        // Ensure session.permanent is properly converted to JavaScript format
+        var isPermanent = {{ session.permanent | tojson }};
+        
+        // Detect tab close and trigger logout ONLY IF session is NOT permanent
+        window.addEventListener("beforeunload", function () {
+        if (!isPermanent && sessionStorage.getItem("active_session") === "true") {
+            navigator.sendBeacon("/logout", ""); // Fire logout request
+            sessionStorage.removeItem("active_session");
+        }
+        });
+        </script>
+
     <script src="search.js"></script>
-</body>
+</body> 
 
 </html>
