@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVNerd Home Page</title>
+    <link rel="stylesheet" href="{% static 'Tvnerd/css/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById('profile-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+        function searchMovies() {
+            let query = document.getElementById('search-input').value;
+            fetch(`/api/search?q=${query}`)
+                .then(response => response.json())
+                .then(data => {
+                    let dropdown = document.getElementById('search-results');
+                    dropdown.innerHTML = '';
+                    data.forEach(movie => {
+                        let option = document.createElement('div');
+                        option.classList.add('search-item');
+                        option.setAttribute('data-id', movie.id);
+                        option.onclick = function() {
+                            window.location.href = `/movies?id=${movie.id}`;
+                        };
+                        let img = document.createElement('img');
+                        img.src = `https://image.tmdb.org/t/p/w500/${movie.poster_path}`;
+                        img.alt = movie.title;
+                        img.classList.add('thumbnail');
+                        let text = document.createElement('span');
+                        text.textContent = movie.title;
+                        option.appendChild(img);
+                        option.appendChild(text);
+                        dropdown.appendChild(option);
+                    });
+                });
+        }
+    </script>
+    <style>
+        .profile-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-menu {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            background: white;
+            color: #000;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #search-results {
+            border: 1px solid #ccc;
+            display: block;
+            width: 297px;
+            position: absolute;
+            background: white;
+            color: #000 !important;
+            max-height: 215px;
+            overflow-y: auto;
+            top: 79px;
+        }
+
+        #search-results div {
+            padding: 10px;
+            cursor: pointer;
+            color: #000 !important;
+        }
+
+        #search-results div:hover {
+            background: #f0f0f0;
+            color: #000 !important;
+        }
+        #search-results .search-item {
+            display: flex;
+            align-items: center;
+        }
+        .thumbnail {
+            width: 40px;
+            height: 60px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{% static 'Tvnerd/images/l1.png' %}" alt="Logo Image">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="/dashboard">Home</a></li>
+                    <li><a href="/tvshows">TV Shows</a></li>
+                    <li><a href="/celeb">Celebrities</a></li>
+                    <li><a href="/awards">Awards</a></li>
+                    <li><a href="#">More</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" id="search-input" onkeyup="searchMovies()" placeholder="Search for movies...">
+                <div id="search-results"></div>
+            </div>
+    
+            <div class="user-options">
+                {% if request.session.username %}
+                <div class="profile-container">
+                    <button onclick="toggleMenu()">
+                        <p>Hello, {{ request.session.username }}</p>
+                    </button>
+                    <div id="profile-menu" class="profile-menu">
+                        <p>Hello, {{ request.session.username }}</p>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'login' %}">Sign In</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    
+    <h1>Latest Movies</h1><br>
+    <div class="scroll-container1">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="movie one">
+            <a href="http://127.0.0.1:8000/movies?id=822119">
+            <img src="https://cdn.kinocheck.com/i/w=1200/dgyqcoda86.jpg" alt="Captain America: Brave New World"></a>
+            <div class="movie-title">Captain America: Brave New World</div>
+        </div>
+        <div class="movie">
+            <a href="http://127.0.0.1:8000/movies?id=1140535">
+            <img src="https://th.bing.com/th/id/OIP.rrmbJq6isvQg5aI5dg4ZgQHaEK?rs=1&pid=ImgDetMain" alt="Presence"></a>
+            <div class="movie-title">Presence</div>
+        </div>
+        <div class="movie">
+            <a href="http://127.0.0.1:8000/movies?id=950396">
+            <img src="https://th.bing.com/th/id/OIP.PiDROO-dhQgm49RnPyYN9gHaD4?rs=1&pid=ImgDetMain" alt="The Gorge"></a>
+            <div class="movie-title">The Gorge</div>
+        </div>
+        <div class="movie">
+            <a href="http://127.0.0.1:8000/movies?id=1272149">
+            <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2024/11/bridget-jones-mad-about-the-boy-movie-poster-with-renee-zelweger.jpg"
+                alt="Bridget Jones: Mad About the Boy"></a>
+            <div class="movie-title">Bridget Jones: Mad About the Boy</div>
+        </div>
+        <div class="movie">
+            <a href="http://127.0.0.1:8000/movies?id=974576">
+            <img src="https://th.bing.com/th/id/OIP.Q_of37Jm5nzihqhcj_OAVAHaEa?rs=1&pid=ImgDetMain" alt="Conclave"></a>
+            <div class="movie-title">Conclave</div>
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <h1>Top 10 on IMDB this week</h1>
+    <div class="scroll-container">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="scroll-content">
+            <section>
+                <figure>
+                    <a href="http://127.0.0.1:8000/movies?id=5072">
+                    <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain"
+                        alt="Severance">
+                        <figcaption>1. Severance <br> Watch Options <br> Trailer</figcaption></a>
+                    </figure>
+            </section>
+            <section>
+                <figure>
+                    <a href="http://127.0.0.1:8000/movies?id=27205">
+                    <img src="https://th.bing.com/th/id/OIP.12ZxTcxU6kiNoWKx1iuwOwHaK9?rs=1&pid=ImgDetMain"
+                        alt="Inception"></a>
+                    <figcaption>2. Inception <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <a href="http://127.0.0.1:8000/movies?id=301959">   
+                    <img src="https://th.bing.com/th/id/OIP.tpGXc5hZSfy95MrAmw6ZrgHaKq?rs=1&pid=ImgDetMain"
+                        alt="Interstellar"></a>
+                    <figcaption>3. Interstellar <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <a href="http://127.0.0.1:8000/movies?id=155">   
+                    <img src="https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg"
+                        alt="The Dark Knight"></a>
+                    <figcaption>4. The Dark Knight <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <a href="http://127.0.0.1:8000/movies?id=19995">   
+                    <img src="https://th.bing.com/th/id/OIP.znqq0W_WQ3Kz1NTKXWjDKgHaK8?rs=1&pid=ImgDetMain"
+                        alt="Avatar"></a>
+                    <figcaption>5. Avatar <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure><a href="http://127.0.0.1:8000/movies?id=603">   
+                    <img src="https://artworks.thetvdb.com/banners/movies/169/posters/5f274c00c85c1.jpg"
+                        alt="The Matrix"></a>
+                    <figcaption>6. The Matrix <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure><a href="http://127.0.0.1:8000/movies?id=238">   
+                    <img src="https://m.media-amazon.com/images/M/MV5BY2NhNDczZTEtNmE5Yy00MjUxLTllOTYtZjQ2ZTA2MDgyM2U3XkEyXkFqcGdeQXVyMTAxODQ2NDU1._V1_FMjpg_UX1000_.jpg"
+                        alt="The Godfather"></a>
+                    <figcaption>7. The Godfather <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure><a href="http://127.0.0.1:8000/movies?id=680">
+                    <img src="https://images.flickdirect.com/movies/pulp-fiction/pulp-fiction-box-art.jpg"
+                        alt="Pulp Fiction"></a>
+                    <figcaption>8. Pulp Fiction <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure><a href="http://127.0.0.1:8000/movies?id=550">
+                    <img src="https://th.bing.com/th/id/OIP.d_BZ6gOSBmClndzU575rOwHaLH?rs=1&pid=ImgDetMain"
+                        alt="Fight Club"></a>
+                    <figcaption>9. Fight Club <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure><a href="http://127.0.0.1:8000/movies?id=13">
+                    <img src="https://image.tmdb.org/t/p/original/8aBHdTp6MZ7RRE45maIYrEPo6IJ.jpg" alt="Forrest Gump"></a>
+                    <figcaption>10. Forrest Gump <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <script src="{% static 'Tvnerd/js/script.js' %}"></script>
+
+    
+    
+    
+    
+    <script src="{% static 'Tvnerd/js/script.js' %}"></script>
+
+    {% if request.session.username %}
+    <script>
+        // Store session flag in sessionStorage
+        sessionStorage.setItem("active_session", "true");
+    
+        // Whether session is permanent or not (set by backend)
+        var isPermanent = {{ is_permanent|yesno:"true,false" }};
+    
+        // Detect tab close and trigger logout ONLY IF session is NOT permanent
+        window.addEventListener("beforeunload", function () {
+            if (!isPermanent && sessionStorage.getItem("active_session") === "true") {
+                navigator.sendBeacon("{% url 'logout' %}", ""); // Fire logout request
+                sessionStorage.removeItem("active_session");
+            }
+        });
+    </script>
+    {% endif %}
+    
+
+    <!-- <script src="search.js"></script> -->
+</body> 
+
+</html>

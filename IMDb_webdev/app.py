@@ -136,5 +136,18 @@ def api_search():
     response = requests.get(url, headers=headers)
     return jsonify(response.json().get('results', [])) if response.status_code == 200 else jsonify([])
 
+
+@app.route('/awards') 
+def more():
+    return render_template('awards.html')
+
+@app.route('/celeb') 
+def celeb():
+    return render_template('celeb.html')
+@app.route('/tvshows') 
+def tvshow():
+    return render_template('tvshow.html')
+
+    
 if __name__ == '__main__':
     app.run(debug=True)
