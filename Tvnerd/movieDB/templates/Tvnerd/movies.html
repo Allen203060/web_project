@@ -319,7 +319,20 @@
                 </div>
             </div>
     </div>
+    <div>
+        {% if request.session.username %}
+        <form action="{% url 'add_to_watchlist' %}" method="post" style="margin-top: 15px;">
+            {% csrf_token %}
+            <input type="hidden" name="movie_id" value="{{ data.id }}">
+            <input type="hidden" name="title" value="{{ data.title }}">
+            <input type="hidden" name="poster_path" value="{{ data.poster_path }}">
+            <button type="submit" style="background-color: #FFDA63; color: #000; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer;">
+                ➕ Add to Watchlist
+            </button>
+        </form>
         
+{% endif %}
+    </div>  
         <div class="additional-info">
             <h2>Cast & Crew</h2>
             <p>Adam Scott, Britt Lower, Zach Cherry, and more.</p>
@@ -389,4 +402,13 @@
 
     
 </body>
+
+{% if messages %}
+<div style="background-color: #FFDA63; color: #000; padding: 10px 20px; text-align: center; font-weight: bold;">
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+
 </html>

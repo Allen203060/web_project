@@ -4,6 +4,9 @@ from django.http import JsonResponse
 from .models import User
 import hashlib, requests, json
 from datetime import datetime, timedelta
+from .models import Watchlist  
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return redirect('dashboard')
@@ -109,6 +112,68 @@ def api_search(request):
     }
     response = requests.get(url, headers=headers)
     return JsonResponse(response.json().get('results', []), safe=False) if response.status_code == 200 else JsonResponse([])
+
+from .models import Watchlist
+
+# def add_to_watchlist(request):
+#     if 'username' not in request.session or request.method != 'POST':
+#         return redirect('login')
+
+#     user = User.objects.get(username=request.session['username'])
+#     movie_id = request.POST['movie_id']
+
+#     # Avoid duplicates
+#     if not Watchlist.objects.filter(user=user, movie_id=movie_id).exists():
+#         Watchlist.objects.create(
+#             user=user,
+#             movie_id=movie_id,
+#             title=request.POST['title'],
+#             poster_path=request.POST['poster_path']
+#         )
+
+#     return redirect(f"/movies/?id={movie_id}")
+
+
+
+def watchlist_view(request):
+    if 'username' not in request.session:
+        return redirect('login')
+
+    user = User.objects.get(username=request.session['username'])
+    watchlist = Watchlist.objects.filter(user=user)
+
+    return render(request, 'Tvnerd/watchlist.html', {'watchlist': watchlist})
+
+def add_to_watchlist(request):
+    if request.method == 'POST' and 'user_id' in request.session:
+        user_id = request.session['user_id']
+        movie_id = request.POST.get('movie_id')
+        title = request.POST.get('title')
+        poster_path = request.POST.get('poster_path')
+
+        # Prevent duplicates
+        if not Watchlist.objects.filter(user_id=user_id, movie_id=movie_id).exists():
+            Watchlist.objects.create(
+                user_id=user_id,
+                movie_id=movie_id,
+                title=title,
+                poster_path=poster_path
+            )
+            messages.success(request, f'"{title}" added to your watchlist.')
+        else:
+            messages.info(request, f'"{title}" is already in your watchlist.')
+
+    return redirect(f"/movies/?id={movie_id}")
+
+def remove_from_watchlist(request, movie_id):
+    if 'user_id' not in request.session:
+        return redirect('login')
+
+    user_id = request.session['user_id']
+    Watchlist.objects.filter(user_id=user_id, movie_id=movie_id).delete()
+    messages.success(request, 'Movie removed from watchlist.')
+    return redirect('watchlist')
+
 
 def more(request):
     return render(request, 'Tvnerd/awards.html')

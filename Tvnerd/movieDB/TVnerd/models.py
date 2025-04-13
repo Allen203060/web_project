@@ -7,3 +7,13 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+    
+
+class Watchlist(models.Model):
+    user = models.ForeignKey('User', on_delete=models.CASCADE)
+    movie_id = models.CharField(max_length=20)
+    title = models.CharField(max_length=255)
+    poster_path = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.title} (User {self.user_id})"
