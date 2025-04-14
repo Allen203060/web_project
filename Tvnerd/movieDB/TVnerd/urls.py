@@ -11,5 +11,7 @@ urlpatterns = [
     path('api/search/', views.api_search, name='api_search'),
     path('awards/', views.more, name='awards'),
     path('celeb/', views.celeb, name='celeb'),
-    path('tvshows/', views.tvshow, name='tvshows'),
+    path('tvshows/', views.tvshow, name='tvshows'),    
 ]
+
+   

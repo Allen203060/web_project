@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import User
+from .models import User, Movie, Comment
 import hashlib, requests, json
 from datetime import datetime, timedelta
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return redirect('dashboard')
@@ -78,10 +79,10 @@ def dashboard_view(request):
     data = response.json() if response.status_code == 200 else {}
 
     return render(request, 'Tvnerd/index.html', {
-    'data': data,
-    'user_name': request.session.get('username'),
-    'is_permanent': request.session.get_expiry_age() > 0  
-})
+        'data': data,
+        'user_name': request.session.get('username'),
+        'is_permanent': request.session.get_expiry_age() > 0  
+    })
 
 def get_movie_details_by_id(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}"
@@ -91,14 +92,6 @@ def get_movie_details_by_id(movie_id):
     }
     response = requests.get(url, headers=headers)
     return response.json() if response.status_code == 200 else {}
-
-def movies_view(request):
-    movie_id = request.GET.get('id')
-    if not movie_id:
-        return redirect('dashboard')
-
-    data = get_movie_details_by_id(movie_id)
-    return render(request, 'Tvnerd/movies.html', {'data': data})
 
 def api_search(request):
     query = request.GET.get('q', '')
@@ -118,3 +111,45 @@ def celeb(request):
 
 def tvshow(request):
     return render(request, 'Tvnerd/tvshow.html')
+
+def movies_view(request):
+    movie_id = request.GET.get('id')
+    if not movie_id:
+        return redirect('movies')  # Redirect if no ID, adjust as needed
+
+    # Fetch movie data from TMDB API
+    api_key = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4'  # Replace with your TMDB API key
+    url = f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={api_key}&language=en-US'
+    response = requests.get(url)
+    data = response.json()
+
+    # Get or create movie in database
+    movie, created = Movie.objects.get_or_create(
+        tmdb_id=movie_id,
+        defaults={
+            'title': data.get('title', ''),
+            'poster_path': data.get('poster_path', ''),
+            'overview': data.get('overview', '')
+        }
+    )
+
+    # Fetch comments
+    comments = movie.comments.all().order_by('-created_at')
+
+    # Handle comment submission
+    if request.method == 'POST' and request.session.get('username'):
+        content = request.POST.get('content')
+        if content:
+            # Fetch the user from your custom User model
+            user = User.objects.get(username=request.session['username'])
+            Comment.objects.create(
+                user=user,
+                movie=movie,
+                content=content
+            )
+            return redirect(f'/movies/?id={movie_id}')
+
+    return render(request, 'Tvnerd/movies.html', {
+        'data': data,
+        'comments': comments,
+    })

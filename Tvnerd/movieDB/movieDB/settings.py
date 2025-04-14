@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'TVnerd',
+    'grappelli',
 
 ]
 
@@ -125,3 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TEMPLATES[0]['DIRS'] = [BASE_DIR / 'templates']
 STATICFILES_DIRS = [BASE_DIR / 'static']
+TEMPLATES[0]['OPTIONS']['context_processors'] += [
+    'django.template.context_processors.request',
+]
