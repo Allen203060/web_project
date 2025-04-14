@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie News - TVnerd</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body.dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+body.light {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #1f1f1f;
+  border-bottom: 1px solid #333;
+}
+
+.navbar h1 {
+  font-size: 1.8rem;
+  color: #ffcc00;
+}
+
+.navbar nav a {
+  color: #ffcc00;
+  margin-left: 1rem;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.navbar nav a:hover {
+  color: #fff;
+}
+
+.news-container {
+  padding: 2rem;
+}
+
+.news-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.news-card {
+  background-color: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: zoomFadeIn 0.8s ease forwards;
+}
+
+.news-card:hover {
+  transform: scale(1.03) translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 204, 0, 0.3);
+}
+
+.news-card img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover img {
+  transform: scale(1.05);
+}
+
+.news-content {
+  padding: 1rem;
+}
+
+.news-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.news-content h2:hover {
+  color: #ffcc00;
+}
+
+.news-content p {
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.news-content a {
+  color: #ffcc00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.news-content a:hover {
+  text-decoration: underline;
+}
+
+.fade-in {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #1a1a1a;
+  border-top: 1px solid #333;
+  font-size: 0.9rem;
+  color: #888;
+  animation: fadeInUp 1.2s ease forwards;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+  </style>
+</head>
+<body class="dark">
+  <header class="navbar">
+    <h1>TVnerd News</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Movies</a>
+      <a href="#">TV Shows</a>
+      <a href="#">News</a>
+    </nav>
+  </header>
+
+  <main class="news-container">
+    <section class="news-grid">
+        <article class="news-card fade-in">
+            <img src="https://i.pinimg.com/736x/03/82/3c/03823cb08a50fb3d565a983b4b0567ce.jpg" alt="Tron Ares Poster" />
+            <div class="news-content">
+              <h2>Tron: Ares Trailer Drops with 2025 Release Date</h2>
+              <p>Disney releases the electrifying first trailer for *Tron: Ares*, teasing a bold new chapter in the Grid. Set to hit theaters in 2025.</p>
+              <a href="#">Watch trailer</a>
+            </div>
+          </article>
+          
+
+          <article class="news-card fade-in">
+            <img src="https://i.pinimg.com/736x/1b/9b/76/1b9b763dae9007906e8dbe8d8880033f.jpg" alt="Snow White 2025 Poster" />
+            <div class="news-content">
+              <h2>Disney’s Snow White Faces Backlash Ahead of Release</h2>
+              <p>Controversy surrounds the live-action remake as fans criticize changes to characters and story. Early buzz points to a rough road ahead.</p>
+              <a href="#">Read more</a>
+            </div>
+          </article>
+          
+
+          <article class="news-card fade-in">
+            <img src="https://i.pinimg.com/736x/73/1b/2d/731b2df240fda573330c074400288b07.jpg" alt="A Minecraft Movie 2025" />
+            <div class="news-content">
+              <h2>'A Minecraft Movie' Dominates Box Office in Second Weekend</h2>
+              <p>The Warner Bros. adaptation of the popular video game has earned $80.6 million domestically and over $550 million globally, becoming the highest-grossing Hollywood release of 2025.</p>
+              <a href="#">Read more</a>
+            </div>
+          </article>
+
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/99/c5/a2/99c5a22fa80507d574f9e3c41dc8f029.jpg" alt="Joker 2" />
+        <div class="news-content">
+          <h2>Joker 2: First Look at Lady Gaga as Harley Quinn</h2>
+          <p>DC fans are buzzing after the first images of Lady Gaga in the highly anticipated sequel dropped online.</p>
+          <a href="#">Read more</a>
+        </div>
+      </article>
+
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/27/14/64/271464ca9a15ef2c9577f97c2bb1dd8f.jpg" alt="Doctor Who Robot Revolution" />
+        <div class="news-content">
+          <h2>Doctor Who – "The Robot Revolution" Kicks Off the New Era</h2>
+          <p>The latest season of Doctor Who introduces a brand new companion, Belinda Chandra, and a thrilling first episode, "The Robot Revolution." Set in a future where robotic AI is threatening humanity, the Doctor and Chandra work to save the world. The new season promises exciting twists and diverse representation.</p>
+          <a href="#">Read more</a>
+        </div>
+      </article>
+      
+
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/1c/71/34/1c713456da884b80b34b7440af1f369f.jpg" alt="Marvel Thunderbolts Poster" />
+        <div class="news-content">
+          <h2>Marvel’s Thunderbolts Set to Hit Theaters This Month</h2>
+          <p>The highly anticipated anti-hero team-up featuring Yelena, Bucky, and Red Guardian is finally arriving. Marvel fans are counting the days!</p>
+          <a href="#">Read more</a>
+        </div>
+      </article>
+
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/9f/eb/65/9feb65665c9695280d267d8897298759.jpg" alt="Frieren: Beyond Journey's End" />
+        <div class="news-content">
+          <h2>'Frieren: Beyond Journey's End' Leads 2025 Crunchyroll Anime Awards Nominations</h2>
+          <p>The fantasy series 'Frieren: Beyond Journey's End' has garnered 29 nominations at the 2025 Crunchyroll Anime Awards, surpassing 'Solo Leveling' and other popular titles. The awards ceremony is scheduled for May 25, 2025, in Tokyo.</p>
+          <a href="# ">Read more</a>
+        </div>
+      </article>
+
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/c0/3d/68/c03d6862fe6fd5d12e56b8a0e386308e.jpg" alt="Solo Leveling Fight Scene" />
+        <div class="news-content">
+          <h2>'Solo Leveling' Fight Scene Breaks the Internet</h2>
+          <p>The latest episode of 'Solo Leveling' has set social media ablaze with its jaw-dropping battle between Sung Jin-Woo and the Ant King. The stunning animation, brutal choreography, and emotional weight of the fight have fans declaring it one of the best anime battles in years. Clips of the episode have gone viral across TikTok, X, and YouTube, drawing in even non-anime viewers.</p>
+          <a href="# ">Read more</a> 
+        </div>
+      </article>
+
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/0c/e4/d6/0ce4d6c347af7b15057e9e0116301fac.jpg" alt="Demon Slayer: Infinity Castle Movie Poster" />
+        <div class="news-content">
+          <h2>'Demon Slayer: Infinity Castle' Trilogy Begins This Summer</h2>
+          <p>The first installment of the 'Demon Slayer: Infinity Castle' movie trilogy is set to premiere in Japan on July 18, 2025, with a North American release following on September 12, 2025. This trilogy adapts the climactic Infinity Castle arc from Koyoharu Gotoge's original manga series, bringing the epic saga to the big screen.</p>
+          <a href="# ">Read more</a>
+        </div>
+      </article>
+      
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/c2/cf/36/c2cf36dc5f1335b419639aa38ecaf5b3.jpg" alt="Jujutsu Kaisen: Hidden Inventory Movie Poster" />
+        <div class="news-content">
+          <h2>'Jujutsu Kaisen' Returns to Theaters with 'Hidden Inventory' Movie</h2>
+          <p>Fans of 'Jujutsu Kaisen' can look forward to the upcoming compilation film, 'Hidden Inventory / Premature Death', set to premiere in Japanese theaters on May 30, 2025. The movie revisits the second season's arc, delving into the past of Satoru Gojo and Suguru Geto during their time at Jujutsu High. While an international release date has yet to be announced, the film's debut is highly anticipated by the global fanbase.</p>
+          <a href="# ">Read more</a>
+        </div>
+      </article>
+      
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/ef/c1/da/efc1dae8d49e8e7613fd98ec4d6781ae.jpg" alt="Scream 7 Poster" />
+        <div class="news-content">
+          <h2>'Scream 7' Faces Turbulent Production Amid Cast and Crew Changes</h2>
+          <p>The upcoming 'Scream 7' has experienced significant upheaval during its production. Actress Jenna Ortega revealed her departure was due to the exit of directors Matt Bettinelli-Olpin and Tyler Gillett, stating the project "was all kind of falling apart." Director Christopher Landon also stepped down after receiving death threats following the controversial firing of Melissa Barrera. Despite these challenges, franchise creator Kevin Williamson has taken the helm as director, with original cast members Neve Campbell and Courteney Cox set to return. The film is scheduled for release on February 27, 2026.</p>
+          <a href="# ">Read more</a>
+        </div>
+      </article>
+      
+      <article class="news-card fade-in">
+        <img src="https://i.pinimg.com/736x/4c/02/25/4c022503b3e32cfdb1a7c8f7a77f405e.jpg" alt="The Odyssey 2026 Poster" />
+        <div class="news-content">
+          <h2>Christopher Nolan's 'The Odyssey' Promises Epic Retelling of Greek Classic</h2>
+          <p>Director Christopher Nolan is set to bring Homer's epic poem to the big screen with 'The Odyssey,' scheduled for release on July 17, 2026. The film boasts a star-studded cast including Matt Damon as Odysseus, Anne Hathaway, Tom Holland, Zendaya, and Robert Pattinson. Utilizing new IMAX technology, the movie aims to deliver a visually stunning experience as it chronicles Odysseus's perilous journey home after the Trojan War.</p>
+          <a href="# ">Read more</a>
+        </div>
+      </article>
+      
+      
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 TVnerd. All rights reserved.</p>
+  </footer>
+</body>
+</html>
