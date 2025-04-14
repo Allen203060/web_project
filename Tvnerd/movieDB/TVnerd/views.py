@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import JsonResponse
-from .models import User
+from .models import User, Movie, Comment
 import hashlib, requests, json
 from datetime import datetime, timedelta
-from .models import Watchlist  
-from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from .models import Watchlist
 
 def home(request):
     return redirect('dashboard')
@@ -81,10 +80,10 @@ def dashboard_view(request):
     data = response.json() if response.status_code == 200 else {}
 
     return render(request, 'Tvnerd/index.html', {
-    'data': data,
-    'user_name': request.session.get('username'),
-    'is_permanent': request.session.get_expiry_age() > 0  
-})
+        'data': data,
+        'user_name': request.session.get('username'),
+        'is_permanent': request.session.get_expiry_age() > 0  
+    })
 
 def get_movie_details_by_id(movie_id):
     url = f"https://api.themoviedb.org/3/movie/{movie_id}"
@@ -94,14 +93,6 @@ def get_movie_details_by_id(movie_id):
     }
     response = requests.get(url, headers=headers)
     return response.json() if response.status_code == 200 else {}
-
-def movies_view(request):
-    movie_id = request.GET.get('id')
-    if not movie_id:
-        return redirect('dashboard')
-
-    data = get_movie_details_by_id(movie_id)
-    return render(request, 'Tvnerd/movies.html', {'data': data})
 
 def api_search(request):
     query = request.GET.get('q', '')
@@ -113,6 +104,63 @@ def api_search(request):
     response = requests.get(url, headers=headers)
     return JsonResponse(response.json().get('results', []), safe=False) if response.status_code == 200 else JsonResponse([])
 
+
+
+def movies_view(request):
+    movie_id = request.GET.get('id')
+    if not movie_id:
+        return redirect('movies')  # Redirect if no ID, adjust as needed
+
+    # Fetch movie details
+    url = f'https://api.themoviedb.org/3/movie/{movie_id}?language=en-US'
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+    movie_response = requests.get(url, headers=headers)
+    data = movie_response.json() if movie_response.status_code == 200 else {}
+
+    # Fetch credits
+    credits_url = f'https://api.themoviedb.org/3/movie/{movie_id}/credits?language=en-US'
+    credits_response = requests.get(credits_url, headers=headers)
+    credits_data = credits_response.json() if credits_response.status_code == 200 else {'cast': [], 'crew': []}
+    data['credits'] = credits_data
+
+    # Fetch reviews
+    reviews_url = f'https://api.themoviedb.org/3/movie/{movie_id}/reviews?language=en-US'
+    reviews_response = requests.get(reviews_url, headers=headers)
+    reviews_data = reviews_response.json() if reviews_response.status_code == 200 else {'results': []}
+    data['reviews'] = reviews_data
+
+    # Get or create movie in database
+    movie, created = Movie.objects.get_or_create(
+        tmdb_id=movie_id,
+        defaults={
+            'title': data.get('title', ''),
+            'poster_path': data.get('poster_path', ''),
+            'overview': data.get('overview', '')
+        }
+    )
+
+    # Fetch comments
+    comments = movie.comments.all().order_by('-created_at')
+
+    # Handle comment submission
+    if request.method == 'POST' and request.session.get('username'):
+        content = request.POST.get('content')
+        if content:
+            user = User.objects.get(username=request.session['username'])
+            Comment.objects.create(
+                user=user,
+                movie=movie,
+                content=content
+            )
+            return redirect(f'/movies/?id={movie_id}')
+
+    return render(request, 'Tvnerd/movies.html', {
+        'data': data,
+        'comments': comments,
+    })
 
 
 def watchlist_view(request):
