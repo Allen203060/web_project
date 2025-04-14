@@ -4,12 +4,12 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movies</title>
+    <title>{{ data.title|default:"Movie Details" }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #000; /* Black background */
-            color: #FFDA63; /* Yellow text */
+            background-color: #000;
+            color: #FFDA63;
             margin: 0;
             padding: 0;
         }
@@ -20,30 +20,38 @@
         }
         .header {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 20px;
-            border-bottom: 2px solid #FFDA63; /* Yellow border */
+            border-bottom: 2px solid #FFDA63;
         }
         .poster {
             width: 150px;
             height: 225px;
             margin-right: 20px;
-            object-fit: cover; /* Ensure the image fits well */
+            object-fit: cover;
+        }
+        .backdrop {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            margin-bottom: 20px;
         }
         .details {
             flex: 1;
         }
         .title {
             font-size: 2em;
-            margin: 0;
-            color: #FFDA63; /* Yellow text */
+            margin: 0 0 10px 0;
+            color: #FFDA63;
         }
         .info {
             font-size: 0.9em;
             color: #aaa;
+            margin-bottom: 10px;
         }
         .description {
             margin-top: 20px;
+            color: #FFDA63;
         }
         .ratings {
             margin-top: 10px;
@@ -54,7 +62,7 @@
         }
         .additional-info {
             margin-top: 20px;
-            color: #FFDA63; /* Yellow text */
+            color: #FFDA63;
         }
         .reviews {
             margin-top: 20px;
@@ -62,9 +70,9 @@
         .review {
             margin-bottom: 10px;
             padding: 10px;
-            background-color: #111; /* Dark background */
+            background-color: #111;
             border-radius: 4px;
-            border: 1px solid #FFDA63; /* Yellow border */
+            border: 1px solid #FFDA63;
         }
         .comments {
             margin-top: 20px;
@@ -119,7 +127,7 @@
             margin-right: 10px;
         }
         header {
-            background-color: #000; /* Black background */
+            background-color: #000;
             padding: 20px;
         }
         .header-container {
@@ -128,10 +136,10 @@
             align-items: center;
         }
         .logo img {
-            max-height: 80px; /* Increase logo size */
+            max-height: 80px;
         }
         .logo img:hover {
-            transform: none; /* Remove hover effect */
+            transform: none;
         }
         .menu ul {
             list-style: none;
@@ -144,7 +152,7 @@
             position: relative;
         }
         .menu ul li a {
-            color: #FFDA63; /* Yellow text */
+            color: #FFDA63;
             text-decoration: none;
             padding: 10px 15px;
             display: block;
@@ -154,7 +162,7 @@
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #111; /* Dark background */
+            background-color: #111;
             list-style: none;
             padding: 0;
             margin: 0;
@@ -167,33 +175,33 @@
         }
         .menu ul li ul.dropdown li a {
             padding: 10px;
-            color: #FFDA63; /* Yellow text */
+            color: #FFDA63;
         }
         .search-bar {
             display: flex;
             align-items: center;
-            width: 300px; /* Increase width of search bar */
+            width: 300px;
         }
         .search-bar input {
             padding: 10px;
-            border: 1px solid #FFDA63; /* Visible yellow border */
+            border: 1px solid #FFDA63;
             border-radius: 5px 0 0 5px;
-            width: 100%; /* Ensure input takes full width of search bar */
-            background-color: #222; /* Dark gray input background */
-            color: #FFDA63; /* Yellow text */
-            outline: none; /* Remove default outline */
+            width: 100%;
+            background-color: #222;
+            color: #FFDA63;
+            outline: none;
         }
         .search-bar button {
             padding: 10px;
             border: none;
-            background-color: #ffcc00; /* Yellow button */
-            color: #000000; /* Black text */
+            background-color: #ffcc00;
+            color: #000;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         .search-bar button:hover {
-            background-color: #e6b800; /* Darker yellow on hover */
+            background-color: #e6b800;
         }
         #search-results {
             border: 1px solid #ccc;
@@ -230,7 +238,7 @@
             gap: 20px;
         }
         .user-options a {
-            color: #ffffff; /* Yellow text */
+            color: #FFDA63;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -243,33 +251,48 @@
             display: none;
             position: absolute;
             right: 0;
-            background-color: #111;
-            border: 1px solid #FFDA63;
-            border-radius: 4px;
-            min-width: 150px;
+            background-color: #fff;
+            border: 1px solid #000;
+            min-width: 100px;
             z-index: 1;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        #profile-menu p {
+            margin: 0;
+            padding: 10px;
+            color: #000;
         }
         #profile-menu a {
-            color: #FFDA63;
-            padding: 10px;
             display: block;
+            padding: 10px;
+            color: #000;
             text-decoration: none;
         }
         #profile-menu a:hover {
-            background-color: #222;
+            background-color: #f0f0f0;
         }
-        .profile-container:hover #profile-menu {
+        .profile-container button {
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100px;
+            text-align: center;
+        }
+        .profile-container button:hover + #profile-menu {
             display: block;
         }
         #searchResults {
             position: absolute;
-            background-color: hwb(0 7% 93%); /* Dark background */
-            border: 1px solid #FFDA63; /* Yellow border */
+            background-color: hwb(0 7% 93%);
+            border: 1px solid #FFDA63;
             max-height: 200px;
             overflow-y: auto;
-            width: 100%; /* Match the width of the search bar */
+            width: 100%;
             z-index: 1000;
-            display: none; /* Initially hidden */
+            display: none;
             list-style: none;
             padding: 0;
             margin: 0;
@@ -277,16 +300,16 @@
         #searchResults li {
             cursor: pointer;
             padding: 10px;
-            border-bottom: 1px solid #FFDA63; /* Yellow border */
-            background-color: #111; /* Dark background */
-            color: #FFDA63; /* Yellow text */
+            border-bottom: 1px solid #FFDA63;
+            background-color: #111;
+            color: #FFDA63;
         }
         #searchResults li:hover {
             background-color: #333;
         }
         .footer {
             padding: 20px;
-            color: #FFDA63; /* Yellow text */
+            color: #FFDA63;
             text-align: center;
         }
     </style>
@@ -318,10 +341,8 @@
             <div class="user-options">
                 {% if request.session.username %}
                 <div class="profile-container">
-                    <button onclick="toggleMenu()">
-                        <p>Hello, {{ request.session.username }}</p>
-                    </button>
-                    <div id="profile-menu" class="profile-menu">
+                    <button onclick="toggleMenu()">Hello, {{ request.session.username }}</button>
+                    <div id="profile-menu">
                         <p>Hello, {{ request.session.username }}</p>
                         <a href="{% url 'logout' %}">Logout</a>
                     </div>
@@ -333,46 +354,56 @@
         </div>
     </header>
     <div class="container">
+        <!-- Backdrop Image -->
+        {% if data.backdrop_path %}
+        <img src="http://image.tmdb.org/t/p/w500/{{ data.backdrop_path }}" alt="Backdrop" class="backdrop" onerror="this.style.display='none';">
+        {% endif %}
+
         <div class="header">
-            <img src="http://image.tmdb.org/t/p/w500/{{ data.poster_path }}" alt="Movie Poster" class="poster">
+            <!-- Poster Image with Fallback -->
+            <img src="http://image.tmdb.org/t/p/w500/{{ data.poster_path|default:'/path/to/default.jpg' }}" alt="Movie Poster" class="poster" onerror="this.src='{% static 'Tvnerd/images/default.jpg' %}';">
             <div class="details">
-                <h1 class="title">{{ data.title }}</h1>
-                <p class="info">Creator: Dan Erickson | Stars: Adam Scott, Britt Lower, Zach Cherry</p>
+                <h1 class="title">{{ data.title|default:"No Title" }}</h1>
+                <p class="info">Release Date: {{ data.release_date|default:"N/A" }}</p>
                 <p class="info">
-                    Production:
-                    {% for company in data.production_companies %}
-                        {{ company.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
+                    Genres: {% for genre in data.genres|default:"[]" %}{% if not forloop.first %}, {% endif %}{{ genre.name|default:"Unknown" }}{% endfor %}
                 </p>
                 <p class="info">
-                    Genre:
-                    {% for genre in data.genres %}
-                        {{ genre.name }}{% if not forloop.last %}, {% endif %}
-                    {% endfor %}
-                    | IMDb rating: 8.7/10 (261K ratings)
+                    Rating: {{ data.vote_average|default:"0" }}/10 ({{ data.vote_count|default:"0" }} votes)
                 </p>
-                <p class="info">Next episode: February 21, 2025 | Streaming on: Apple TV+</p>
-                <p class="description">{{ data.overview }}</p>
+                <p class="info">
+                    Runtime: {{ data.runtime|default:"N/A" }} minutes
+                </p>
+                <p class="info">
+                    Languages: {% for lang in data.spoken_languages|default:"[]" %}{% if not forloop.first %}, {% endif %}{{ lang.name|default:"Unknown" }}{% endfor %}
+                </p>
+                <p class="description">Storyline: {{ data.overview|default:"No storyline available" }}</p>
                 <div class="ratings">
-                    <span class="rating">1.2K user reviews</span>
-                    <span class="rating">77 critic reviews</span>
+                    <span class="rating">{{ data.vote_count|default:"0" }} user ratings</span>
+                    <span class="rating">N/A critic reviews</span>
                 </div>
             </div>
         </div>
 
         <div class="additional-info">
             <h2>Cast & Crew</h2>
-            <p>Adam Scott, Britt Lower, Zach Cherry, and more.</p>
+            <p>
+                Cast: {% for cast in data.credits.cast|default:"[]"|slice:":5" %}{% if not forloop.first %}, {% endif %}{{ cast.name|default:"Unknown" }}{% endfor %}{% if data.credits.cast|length > 5 %} and more...{% endif %}
+            </p>
+            <p>Directed by: {% for crew in data.credits.crew|default:"[]" %}{% if crew.job == "Director" %}{{ crew.name|default:"Unknown" }}{% endif %}{% endfor %}</p>
         </div>
 
         <div class="reviews">
             <h2>User Reviews</h2>
-            <div class="review">
-                <p><strong>User1:</strong> Amazing show! The plot twists kept me on the edge of my seat.</p>
-            </div>
-            <div class="review">
-                <p><strong>User2:</strong> Incredible performances by the cast. A must-watch!</p>
-            </div>
+            {% if data.reviews.results|default:"[]" %}
+                {% for review in data.reviews.results|slice:":2" %}
+                    <div class="review">
+                        <p><strong>{{ review.author|default:"Anonymous" }}:</strong> {{ review.content|safe }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="review">No reviews available. Check back later!</p>
+            {% endif %}
         </div>
 
         <!-- Comments Section -->
@@ -394,7 +425,7 @@
                         <span class="username">{{ comment.user.username }}</span>
                         <span class="date">({{ comment.created_at|date:"F d, Y" }})</span>
                     </p>
-                    <p>{{ comment.content }}</p>
+                    <p>{{ comment.content }}</p> <!-- Escaped by default for safety -->
                 </div>
                 {% endfor %}
             {% else %}
@@ -404,16 +435,11 @@
 
         <div class="media">
             <h2>Media</h2>
-            <!-- <img src="video-thumbnail.jpg" alt="Video Thumbnail">
-            <img src="photo1.jpg" alt="Photo 1">
-            <img src="photo2.jpg" alt="Photo 2"> -->
         </div>
 
         <div class="footer">
             <p>Options: Add to Watchlist | 20 videos | 99+ photos</p>
         </div>
-
-        <p>{{ data.original_language }}</p>
     </div>
 
     <script src="{% static 'Tvnerd/js/script.js' %}"></script>
@@ -455,7 +481,6 @@
                 menu.style.display = "block";
             }
         }
-        // Close the dropdown if clicked outside
         document.addEventListener("click", function(event) {
             var menu = document.getElementById("profile-menu");
             var button = document.querySelector(".profile-container button");
