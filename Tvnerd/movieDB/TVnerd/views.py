@@ -113,26 +113,6 @@ def api_search(request):
     response = requests.get(url, headers=headers)
     return JsonResponse(response.json().get('results', []), safe=False) if response.status_code == 200 else JsonResponse([])
 
-from .models import Watchlist
-
-# def add_to_watchlist(request):
-#     if 'username' not in request.session or request.method != 'POST':
-#         return redirect('login')
-
-#     user = User.objects.get(username=request.session['username'])
-#     movie_id = request.POST['movie_id']
-
-#     # Avoid duplicates
-#     if not Watchlist.objects.filter(user=user, movie_id=movie_id).exists():
-#         Watchlist.objects.create(
-#             user=user,
-#             movie_id=movie_id,
-#             title=request.POST['title'],
-#             poster_path=request.POST['poster_path']
-#         )
-
-#     return redirect(f"/movies/?id={movie_id}")
-
 
 
 def watchlist_view(request):
@@ -174,6 +154,11 @@ def remove_from_watchlist(request, movie_id):
     messages.success(request, 'Movie removed from watchlist.')
     return redirect('watchlist')
 
+def news(request):
+    return render(request, 'Tvnerd/news.html')
+
+def nominees(request):
+    return render(request, 'Tvnerd/nominees.html')
 
 def more(request):
     return render(request, 'Tvnerd/awards.html')
