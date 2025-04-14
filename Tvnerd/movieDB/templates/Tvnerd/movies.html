@@ -28,6 +28,7 @@
             width: 150px;
             height: 225px;
             margin-right: 20px;
+            object-fit: cover; /* Ensure the image fits well */
         }
         .details {
             flex: 1;
@@ -175,11 +176,12 @@
         }
         .search-bar input {
             padding: 10px;
-            border: none;
+            border: 1px solid #FFDA63; /* Visible yellow border */
             border-radius: 5px 0 0 5px;
             width: 100%; /* Ensure input takes full width of search bar */
             background-color: #222; /* Dark gray input background */
-            color: #ffffff;
+            color: #FFDA63; /* Yellow text */
+            outline: none; /* Remove default outline */
         }
         .search-bar button {
             padding: 10px;
@@ -234,10 +236,35 @@
             align-items: center;
             gap: 5px;
         }
+        .profile-container {
+            position: relative;
+        }
+        #profile-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #111;
+            border: 1px solid #FFDA63;
+            border-radius: 4px;
+            min-width: 150px;
+            z-index: 1;
+        }
+        #profile-menu a {
+            color: #FFDA63;
+            padding: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        #profile-menu a:hover {
+            background-color: #222;
+        }
+        .profile-container:hover #profile-menu {
+            display: block;
+        }
         #searchResults {
             position: absolute;
             background-color: hwb(0 7% 93%); /* Dark background */
-            border: 1px solid #fFDA63; /* Yellow border */
+            border: 1px solid #FFDA63; /* Yellow border */
             max-height: 200px;
             overflow-y: auto;
             width: 100%; /* Match the width of the search bar */
@@ -252,14 +279,14 @@
             padding: 10px;
             border-bottom: 1px solid #FFDA63; /* Yellow border */
             background-color: #111; /* Dark background */
-            color: #Ffff; /* Yellow text */
+            color: #FFDA63; /* Yellow text */
         }
         #searchResults li:hover {
             background-color: #333;
         }
         .footer {
             padding: 20px;
-            color: #ffff; /* Yellow text */
+            color: #FFDA63; /* Yellow text */
             text-align: center;
         }
     </style>
@@ -419,6 +446,23 @@
                     dropdown.style.display = 'block';
                 });
         }
+
+        function toggleMenu() {
+            var menu = document.getElementById("profile-menu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+        // Close the dropdown if clicked outside
+        document.addEventListener("click", function(event) {
+            var menu = document.getElementById("profile-menu");
+            var button = document.querySelector(".profile-container button");
+            if (!button.contains(event.target) && !menu.contains(event.target)) {
+                menu.style.display = "none";
+            }
+        });
     </script>
 </body>
 </html>
