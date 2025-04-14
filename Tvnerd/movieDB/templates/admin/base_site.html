@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+
+{% load static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'Tvnerd/css/custom-admin.css' %}">
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}"><img src="{% static 'Tvnerd/images/l1.png' %}" alt="logo" height="40"></a></h1>
+{% endblock %}
