@@ -82,6 +82,14 @@
             cursor: pointer;
             margin-top: 20px;
             transition: background 0.3s ease;
+            
+            
+        }
+
+        .hero a{
+            color:black;
+            font-weight: bold;
+            text-decoration: none;
         }
         
         .hero button:hover {
@@ -148,7 +156,10 @@
         <section class="hero">
             <h1>The Oscars 2025</h1>
             <p>Explore the latest updates on nominees and winners.</p>
-            <button>View Full List</button>
+            <button>    
+                <a href="/video">View Full List</a>
+            </button>
+
         </section>
         
         <section class="featured">
@@ -174,10 +185,10 @@
         <p>&copy; 2025 TV NERD. All rights reserved.</p>
     </footer>
     
-    <script>
+    <!-- <script>
         document.querySelector('.hero button').addEventListener('click', function() {
             alert('Full nominee list will be available soon!');
         });
-    </script>
+    </script> -->
 </body>
 </html>
