@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TVnerd | Top 5 Must-Watch Movies with Trailers</title>
+    <style>
+       /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0D0D0D;
+    color: #FFD700;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Header */
+.app-header {
+    background-color: #000000;
+    padding: 2rem 3rem;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #FFD700, #FFEC8B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}
+
+/* Main Container */
+.container {
+    max-width: 1300px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+}
+
+/* Section Title */
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #FFD700;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Movie Grid */
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Movie Card */
+.movie-card {
+    background-color: #1A1A1A;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.movie-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0px 15px 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Movie Image */
+.movie-card img {
+    width: 100%;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Movie Info */
+.movie-info {
+    padding: 1.5rem;
+    color: #FFD700;
+}
+
+.movie-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.movie-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.movie-rank {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background-color: rgba(255, 215, 0, 0.9);
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Video Modal */
+.video-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.video-container {
+    width: 85%;
+    max-width: 1200px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.video-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-color: #000;
+    border-radius: 10px;
+}
+
+.video-info {
+    color: #FFD700;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    top: -35px;
+    right: 0;
+    color: #FFD700;
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    color: #FFD700;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.play-button:hover {
+    background-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Modal Fade In Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Video Controls */
+.video-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 2rem;
+}
+
+.control-btn {
+    background-color: #1A1A1A;
+    color: #FFD700;
+    border: 1px solid #FFD700;
+    padding: 0.7rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.control-btn:hover {
+    background-color: #FFD700;
+    color: #000;
+    transform: scale(1.1);
+}
+
+/* Hover Effects */
+.movie-card:hover img {
+    opacity: 0.7;
+}
+
+    </style>
+</head>
+<body>
+    <header class="app-header">
+        <div class="logo">TVnerd</div>
+        
+    </header>
+
+    <main class="container">
+        <h1 class="section-title">🎥 Top 10 Must-Watch Movies with Trailers</h1>
+        <p style="text-align:center; font-size: 1rem; margin-bottom: 2rem; color: #FFEC8B;">
+            A curated list of cinematic masterpieces you just can’t miss. Click any card to watch the trailer!
+        </p>
+        <div class="movies-grid" id="moviesGrid"></div>
+    </main>
+    
+
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-container">
+            <button class="close-btn" id="closeModal">×</button>
+            <div class="video-player" id="videoPlayer">
+                <div class="play-button" id="playButton">▶</div>
+                <img id="videoThumbnail" src="" alt="Movie Thumbnail" style="width:100%; height:100%; object-fit:cover;">
+                <iframe id="videoFrame" width="100%" height="100%" frameborder="0" allowfullscreen style="display:none;"></iframe>
+            </div>
+            <div class="video-info">
+                <h2 id="videoTitle"></h2>
+                <p id="videoDetails"></p>
+            </div>
+            <div class="video-controls">
+                <button class="control-btn" id="prevBtn">Previous</button>
+                <button class="control-btn" id="nextBtn">Next</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const movies = [
+            {
+                rank: 1,
+                title: "The Dark Knight",
+                year: "2008",
+                rating: "9.0",
+                poster: "https://i.pinimg.com/736x/28/c6/ea/28c6ea971e260f467aa919769b1c8e66.jpg",
+                trailer: "https://www.youtube.com/embed/EXeTwQWrcwY",
+                description: "When the Joker wreaks havoc in Gotham, Batman faces his greatest test yet."
+            },
+            {
+                rank: 2,
+                title: "The Godfather",
+                year: "1972",
+                rating: "9.2",
+                poster: "https://picfiles.alphacoders.com/137/thumb-1920-137115.jpg",
+                trailer: "https://www.youtube.com/embed/sY1S34973zA",
+                description: "A mafia patriarch passes the torch to his reluctant son in this crime classic."
+            },
+            {
+                rank: 3,
+                title: "Inception",
+                year: "2010",
+                rating: "8.8",
+                poster: "https://m.media-amazon.com/images/I/81p+xe8cbnL._AC_SY679_.jpg",
+                trailer: "https://www.youtube.com/embed/YoHD9XEInc0",
+                description: "Dreams within dreams – a mind-bending sci-fi journey from Nolan."
+            },
+            {
+                rank: 4,
+                title: "Pulp Fiction",
+                year: "1994",
+                rating: "8.9",
+                poster: "https://m.media-amazon.com/images/I/71c05lTE03L._AC_SY679_.jpg",
+                trailer: "https://www.youtube.com/embed/s7EdQ4FqbhY",
+                description: "Interwoven stories of violence and redemption in Tarantino's masterpiece."
+            },
+            {
+                rank: 5,
+                title: "The Shawshank Redemption",
+                year: "1994",
+                rating: "9.3",
+                poster: "https://m.media-amazon.com/images/I/51NiGlapXlL._AC_SY679_.jpg",
+                trailer: "https://www.youtube.com/embed/6hB3S9bIaco",
+                description: "Hope is a powerful thing inside prison walls in this emotional drama."
+            },
+            {
+                rank: 6,
+                title: "Fight Club",
+                year: "1999",
+                rating: "8.8",
+                poster: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_.jpg",
+                trailer: "https://www.youtube.com/embed/SUXWAEX2jlg",
+                description: "An insomniac office worker meets a devil-may-care soap salesman."
+            },
+            {
+                rank: 7,
+                title: "Forrest Gump",
+                year: "1994",
+                rating: "8.8",
+                poster: "https://i.pinimg.com/736x/8e/d7/a9/8ed7a9baeae932abec095d109d306fb3.jpg",
+                trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
+                description: "Life is like a box of chocolates – a journey through decades of history."
+            },
+            {
+                rank: 8,
+                title: "Interstellar",
+                year: "2014",
+                rating: "8.6",
+                poster: "https://i.pinimg.com/736x/f0/0e/f4/f00ef4ef28062a3ffe32c80cfa039c86.jpg",
+                trailer: "https://www.youtube.com/embed/zSWdZVtXT7E",
+                description: "A space voyage to save humanity, driven by time and love."
+            },
+            {
+                rank: 9,
+                title: "Gladiator",
+                year: "2000",
+                rating: "8.5",
+                poster: "https://i.pinimg.com/736x/57/ab/d4/57abd415a5771a0d0d0371a5ec8a8ee5.jpg",
+                trailer: "https://www.youtube.com/embed/owK1qxDselE",
+                description: "A general becomes a gladiator and seeks revenge in ancient Rome."
+            },
+            {
+                rank: 10,
+                title: "The Matrix",
+                year: "1999",
+                rating: "8.7",
+                poster: "https://m.media-amazon.com/images/I/51vpnbwFHrL._AC_.jpg",
+                trailer: "https://www.youtube.com/embed/vKQi3bBA1y8",
+                description: "Reality is an illusion – take the red pill and discover the truth."
+            }
+        ];
+    
+        const moviesGrid = document.getElementById("moviesGrid");
+        const videoModal = document.getElementById("videoModal");
+        const closeModal = document.getElementById("closeModal");
+        const videoFrame = document.getElementById("videoFrame");
+        const videoThumbnail = document.getElementById("videoThumbnail");
+        const videoTitle = document.getElementById("videoTitle");
+        const videoDetails = document.getElementById("videoDetails");
+        const playButton = document.getElementById("playButton");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+    
+        let currentMovieIndex = 0;
+    
+        function renderMovies() {
+            moviesGrid.innerHTML = "";
+            movies.forEach((movie, index) => {
+                const movieCard = document.createElement("div");
+                movieCard.className = "movie-card";
+                movieCard.innerHTML = `
+                    <div class="movie-rank">#${movie.rank}</div>
+                    <img src="${movie.poster}" alt="${movie.title}">
+                    <div class="movie-info">
+                        <h3 class="movie-title">${movie.title}</h3>
+                        <div class="movie-details">
+                            <span>${movie.year}</span>
+                            <span>★ ${movie.rating}</span>
+                        </div>
+                    </div>
+                `;
+                movieCard.addEventListener("click", () => openVideoModal(index));
+                moviesGrid.appendChild(movieCard);
+            });
+        }
+    
+        function openVideoModal(index) {
+            currentMovieIndex = index;
+            const movie = movies[index];
+            videoThumbnail.src = movie.poster;
+            videoTitle.textContent = movie.title;
+            videoDetails.textContent = `${movie.year} | Rating: ${movie.rating} | ${movie.description}`;
+            videoModal.style.display = "flex";
+            videoModal.classList.add("fade-in");
+            videoFrame.style.display = "none";  // Hide video frame initially
+            videoThumbnail.style.display = "block";  // Show the thumbnail
+            playButton.style.display = "flex";  // Show play button
+        }
+    
+        playButton.addEventListener("click", () => {
+            const movie = movies[currentMovieIndex];
+            videoFrame.src = `${movie.trailer}?autoplay=1`;
+            videoFrame.style.display = "block";  // Show the video frame
+            videoThumbnail.style.display = "none";  // Hide the thumbnail
+            playButton.style.display = "none";  // Hide the play button
+        });
+    
+        closeModal.addEventListener("click", () => {
+            videoModal.style.display = "none";
+            videoFrame.src = "";
+        });
+    
+        prevBtn.addEventListener("click", () => {
+            currentMovieIndex = (currentMovieIndex - 1 + movies.length) % movies.length;
+            openVideoModal(currentMovieIndex);
+        });
+    
+        nextBtn.addEventListener("click", () => {
+            currentMovieIndex = (currentMovieIndex + 1) % movies.length;
+            openVideoModal(currentMovieIndex);
+        });
+    
+        window.addEventListener("click", (event) => {
+            if (event.target === videoModal) {
+                videoModal.style.display = "none";
+                videoFrame.src = "";
+            }
+        });
+    
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                videoModal.style.display = "none";
+                videoFrame.src = "";
+            }
+        });
+    
+        renderMovies();
+    </script>
+    
+    
+</body>
+</html>

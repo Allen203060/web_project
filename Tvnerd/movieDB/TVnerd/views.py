@@ -208,6 +208,9 @@ def news(request):
 def nominees(request):
     return render(request, 'Tvnerd/nominees.html')
 
+def video(request):
+    return render(request, 'Tvnerd/video.html')
+
 def more(request):
     return render(request, 'Tvnerd/awards.html')
 
