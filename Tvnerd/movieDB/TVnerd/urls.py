@@ -17,6 +17,8 @@ urlpatterns = [
     path('watchlist/remove/<str:movie_id>/', views.remove_from_watchlist, name='remove_from_watchlist'),
     path('nominees/', views.nominees, name='nominees'),
     path('news/', views.news, name='news'),
+    path('video/', views.video, name='video'),
+
 ]
 
    
