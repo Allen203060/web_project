@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV Shows</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='images/l1.png') }}" alt="Logo">
+            </div>
+            <nav class="menu">
+                <ul>
+                    <li><a href="/dashboard">Home</a></li>
+                    <li><a href="/tvshows">TV Shows</a></li>
+                    <li><a href="/celeb">Celebrities</a></li>
+                    <li><a href="/awards">Awards</a></li>
+                    <li><a href="">More</a>
+                        <ul class="dropdown">
+                            <li><a href="#">Events</a></li>
+                            <li><a href="#">News</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search...">
+            </div>
+            <div id="searchResults" class="search-results" style="display: none;"></div> <!-- Search results section -->
+            <div class="user-options">
+            <ul id="itemList"></ul> 
+            <div class="user-options">
+                <a href="#" class="watchlist"><i class="fas fa-bookmark"></i> Watchlist</a>
+                <a href="#" class="sign-in"><i class="fas fa-user"></i> Sign In</a>
+            </div>
+        </div>
+    </header>
+
+    <h1>Latest Movies</h1><br>
+    <div class="scroll-container1">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="movie one">
+            <a href="http://127.0.0.1:5000/movies?id=1272149">
+            <img src="https://metadata-static.plex.tv/2/gracenote/25bf6e91fbf6dd8f3e13254b1437d93b.jpg" alt="Ginny & Georgia">
+            <div class="movie-title">Ginny & Georgia</div>
+        </div>
+        <div class="movie">
+            <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2025/01/the-recruit-season-2-noah-centineo.jpg" alt="The Recruuit">
+            <div class="movie-title">The Recruit</div>
+        </div>
+        <div class="movie">
+            <img src="https://dnm.nflximg.net/api/v6/BvVbc2Wxr2w6QuoANoSpJKEIWjQ/AAAAQe2OOEAhr5nAPNUI0wORP637W0k7hvcpDX40J6mup3ke1qqQ7Hqdy_i9qTdJQmX7Uv0S5CEC4hgT_-zPzEb8PRExMVImVKrJ8EeSzdMw73IFF4HdSfq_L9o78Lm9IhYboXqZJdP3WlYa3Q9E-wYlhoFUTHw.jpg?r=2c3" alt="Queen's Gambit">
+            <div class="movie-title">Queen's Gambit</div>
+        </div>
+        <div class="movie">
+            <img src="https://occ-0-3111-116.1.nflxso.net/dnm/api/v6/E8vDc_W8CLv7-yMQu8KMEC7Rrr8/AAAABeP6vPqv_ekOril3j5rEFEO9pfrQaTkEX_Z_Yv7OZptLftIsEd5uBZ0NLYDCBZb3YOB9yP26orC-aEadi6q7Li79OaxX.jpg?r=a72" alt="Stranger Things">
+            <div class="movie-title">Stranger Things</div>
+        </div>
+        <div class="movie">
+            <img src="https://www.hollywoodreporter.com/wp-content/uploads/2024/11/Keira-Knightley-Black-Doves-Publicity-H-2024.jpg?w=1296&h=730&crop=1" alt="Black Doves">
+            <div class="movie-title">Black Doves</div>
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <h1>Top 10 TV Shows</h1>
+    <div class="scroll-container">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="scroll-content">
+            <section>
+                <figure>
+                    <img src="https://streamcoimg-a.akamaihd.net/000/503/25/50325-PosterArt-64515b814c5cb70ad482c62df4831636.jpeg" alt="Killing Eve">
+                    <figcaption>1. Killing Eve <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://th.bing.com/th/id/OIP.AwQ2vKHqZl1geGpJkEQ-VwHaLH?rs=1&pid=ImgDetMain" alt="Grey's Anatomy">
+                    <figcaption>2. Grey's Anatomy<br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://artworks.thetvdb.com/banners/v4/series/270915/posters/64f31e0e12f9b.jpg" alt="Peaky Blinders">
+                    <figcaption>3. Peaky Blinders <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://picfiles.alphacoders.com/201/thumb-1920-201785.jpg" alt="Suits">
+                    <figcaption>4. Suits <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/sharedimages/2024/10/the-diplomat-official-poster.jpg?q=70&fit=crop&w=480&dpr=1" alt="The Diplomat">
+                    <figcaption>5. The Diplomat <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/gilmore-girls-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Gilmore Girls">
+                    <figcaption>6. Gilmore Girls <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/breaking-bad-tv-poster-1.jpg?q=49&fit=crop&w=480&dpr=2" alt="Breaking Bad">
+                    <figcaption>7. Breaking Bad <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/bridgerton-season-3-poster-showing-penelope-featherington-looking-into-a-mirror.jpg?q=49&fit=crop&w=480&dpr=2" alt="Bridgerton">
+                    <figcaption>8. Bridgerton <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/sharedimages/2024/04/dead-to-me-netflix-tv-poster.jpg?q=49&fit=crop&w=480&dpr=2" alt="Dead to Me">
+                    <figcaption>9. Dead to Me <br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+            <section>
+                <figure>
+                    <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/sharedimages/2025/01/03164600_poster_w780.jpg?q=70&fit=crop&w=480&dpr=1" alt="Squid Game">
+                    <figcaption>10. Squid Game<br> Watch Options <br> Trailer</figcaption>
+                </figure>
+            </section>
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/search.js') }}"></script> -->
+</body>
+</html>
