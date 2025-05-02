@@ -61,38 +61,57 @@ def dashboard_view(request):
     if 'username' not in request.session:
         return redirect('login')
 
-    last_login = request.session.get('login_time')
-    if last_login:
-        last_login = datetime.fromisoformat(last_login)
-        if datetime.utcnow() - last_login > timedelta(minutes=30):
-            request.session.flush()
-            messages.warning(request, 'Session expired.')
-            return redirect('login')
+    # ... session checks ...
 
-    request.session['login_time'] = datetime.utcnow().isoformat()
+    # Fetch "Now Playing" (latest) movies from TMDb
+    now_playing_url = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1"
 
-    url = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1"
+    trending_url = "https://api.themoviedb.org/3/trending/movie/week?language=en-US"
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
     }
-    response = requests.get(url, headers=headers)
-    data = response.json() if response.status_code == 200 else {}
+    now_playing_response = requests.get(now_playing_url, headers=headers)
+    now_playing = now_playing_response.json().get('results', []) if now_playing_response.status_code == 200 else []
+
+    trending_response = requests.get(trending_url, headers=headers)
+    top_movies = trending_response.json().get('results', [])[:10] if trending_response.status_code == 200 else []
 
     return render(request, 'Tvnerd/index.html', {
-        'data': data,
+        'latest_movies': now_playing,
+        'top_movies': top_movies,
         'user_name': request.session.get('username'),
-        'is_permanent': request.session.get_expiry_age() > 0  
+        'is_permanent': request.session.get_expiry_age() > 0
     })
 
-def get_movie_details_by_id(movie_id):
-    url = f"https://api.themoviedb.org/3/movie/{movie_id}"
+def tvshow(request):
+    # Fetch latest TV shows
+    latest_url = "https://api.themoviedb.org/3/tv/latest?language=en-US"
+    popular_url = "https://api.themoviedb.org/3/tv/popular?language=en-US"
+    
     headers = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"   
     }
-    response = requests.get(url, headers=headers)
-    return response.json() if response.status_code == 200 else {}
+
+    try:
+        # Fetch latest TV shows
+        latest_response = requests.get(latest_url, headers=headers)
+        latest_shows = latest_response.json().get('results', [])[:8] if latest_response.status_code == 200 else []
+        
+        # Fetch popular TV shows
+        popular_response = requests.get(popular_url, headers=headers)
+        popular_shows = popular_response.json().get('results', [])[:10] if popular_response.status_code == 200 else []
+
+    except requests.exceptions.RequestException as e:
+        latest_shows = []
+        popular_shows = []
+
+    return render(request, 'Tvnerd/tvshow.html', {
+        'latest_tv_shows': latest_shows,
+        'popular_tv_shows': popular_shows
+    })
+
 
 def api_search(request):
     query = request.GET.get('q', '')
@@ -162,6 +181,47 @@ def movies_view(request):
         'comments': comments,
     })
 
+def tvshow_detail(request):
+    tv_id = request.GET.get('id')
+    if not tv_id:
+        return redirect('tvshows')
+    
+    # Fetch TV show details
+    url = f'https://api.themoviedb.org/3/tv/{tv_id}?language=en-US'
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+    
+    response = requests.get(url, headers=headers)
+    data = response.json() if response.status_code == 200 else {}
+    
+    # Fetch credits
+    credits_url = f'https://api.themoviedb.org/3/tv/{tv_id}/credits?language=en-US'
+    credits_response = requests.get(credits_url, headers=headers)
+    data['credits'] = credits_response.json() if credits_response.status_code == 200 else {'cast': [], 'crew': []}
+    
+    # Fetch reviews
+    reviews_url = f'https://api.themoviedb.org/3/tv/{tv_id}/reviews?language=en-US'
+    reviews_response = requests.get(reviews_url, headers=headers)
+    data['reviews'] = reviews_response.json() if reviews_response.status_code == 200 else {'results': []}
+    
+    return render(request, 'Tvnerd/shows.html', {
+        'data': data,
+        # Add comment handling similar to movies_view if needed
+    })
+
+
+def api_search_tv(request):
+    query = request.GET.get('q', '')
+    url = f"https://api.themoviedb.org/3/search/tv?query={query}&language=en-US&page=1"
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+    response = requests.get(url, headers=headers)
+    return JsonResponse(response.json().get('results', []), safe=False) if response.status_code == 200 else JsonResponse([], safe=False)
+
 
 def watchlist_view(request):
     if 'username' not in request.session:
@@ -217,5 +277,3 @@ def more(request):
 def celeb(request):
     return render(request, 'Tvnerd/celeb.html')
 
-def tvshow(request):
-    return render(request, 'Tvnerd/tvshow.html')

@@ -232,86 +232,103 @@ figcaption {
     font-size: 1.5em;
 }
 
+/* .scroll-container1 {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+    margin: 10px auto;
+    background-color: #222;
+    width: 90%;
+    overflow: hidden;
+} */
+
+.scroll-content {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 95px;
+    width: 100%;
+    scrollbar-width: none; /* Firefox */
+}
+.scroll-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
 .movie {
+    flex: 0 0 calc(90vw - 100px);
+    position: relative;
+    margin: 0;
+    scroll-snap-align: center;
     text-align: center;
-    margin-bottom: 20px;
+    max-width: 700px;
 }
 
 .movie img {
     width: 100%;
-    height: auto;
-}
-
-.movie-title {
-    margin-top: 5px;
-    font-size: 1.1em;
-    color: #ffffff; /* White text for contrast */
-}
-
-.scroll-container1 {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 95px;
-    padding: 15px;
-    margin: 10px auto;
-    background-color: #222; /* Dark gray for container */
-    width: 90%;
-    scrollbar-width: none;
-}
-
-.scroll-container1::-webkit-scrollbar {
-    display: none;
-}
-
-.scroll-container1 .movie {
-    flex: 0 0 calc(90% - 15px);
-    position: relative;
-    margin: 35px;
-    scroll-snap-align: center;
-    text-align: center;
-}
-
-.scroll-container1 .movie img {
-    width: 100%;
     height: 90vh;
     object-fit: fill;
     display: block;
-    margin: 0 auto;
+    border-radius: 12px;
 }
 
-.scroll-container1 .movie-title {
+.movie-title {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 10px;
-    font-size: 1.1em;
-    color: #ffffff;
-    background: rgba(0, 0, 0, 0.5);
-    text-align: center;
-    margin: 5px;
+    padding: 12px 10px 16px 10px;
+    font-size: 1.2em;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: left;
+    border-radius: 0 0 12px 12px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
 }
 
-.scroll-container1 .scroll-btn {
+.scroll-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background-color: rgba(0, 0, 0, 0.5);
     border: none;
-    color: #ffffff;
-    padding: 0.5em;
+    color: #fff;
+    padding: 0.7em;
     cursor: pointer;
     border-radius: 50%;
-    z-index: 1;
+    z-index: 2;
+    font-size: 1.5em;
+    transition: background 0.2s;
+}
+.scroll-btn.left {
+    left: 10px;
+}
+.scroll-btn.right {
+    right: 10px;
+}
+.scroll-btn:hover {
+    background: rgba(0,0,0,0.8);
 }
 
-.scroll-container1 .scroll-btn.left {
-    left: 50px;
+@media (max-width: 600px) {
+    .scroll-content {
+        gap: 20px;
+    }
+    .movie {
+        min-width: 160px;
+        max-width: 90vw;
+    }
+    .movie img {
+        height: 40vh;
+    }
+    .movie-title {
+        font-size: 1em;
+        padding: 6px 4px 8px 4px;
+    }
+    .scroll-btn {
+        font-size: 1em;
+        padding: 0.5em;
+    }
 }
+

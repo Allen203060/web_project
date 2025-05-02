@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ data.name|default:"TV Show Details" }} | TVNerd</title>
+    <style>
+        :root {
+            --imdb-gold: #F5C518;
+            --imdb-black: #000000;
+            --imdb-buff: #F2DB83;
+            --imdb-gray: #222;
+            --imdb-light: #fff;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: var(--imdb-black);
+            color: var(--imdb-light);
+            margin: 0;
+            padding: 0;
+        }
+        .banner {
+            background-image: url('https://image.tmdb.org/t/p/original{{ data.backdrop_path|default:data.poster_path }}');
+            background-size: cover;
+            background-position: center;
+            height: 320px;
+            position: relative;
+        }
+        .banner-overlay {
+            background: rgba(0,0,0,0.7);
+            position: absolute;
+            top:0; left:0; width:100%; height:100%;
+        }
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            color: var(--imdb-gold);
+            padding: 40px;
+            text-shadow: 0 2px 8px #000;
+        }
+        .banner-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--imdb-gold);
+        }
+        .banner-content p {
+            font-size: 1.2em;
+            color: var(--imdb-buff);
+            margin-top: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: -120px auto 40px auto;
+            background: var(--imdb-gray);
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+            padding: 32px;
+            position: relative;
+        }
+        .poster {
+            float: left;
+            margin-right: 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            width: 200px;
+            background: #111;
+        }
+        .details {
+            overflow: hidden;
+        }
+        h1, h2 {
+            color: var(--imdb-gold);
+        }
+        h2 {
+            margin-bottom: 8px;
+            margin-top: 32px;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        .review, .comment {
+            margin-bottom: 16px;
+            padding: 12px;
+            background: var(--imdb-black);
+            border-radius: 6px;
+            border-left: 4px solid var(--imdb-gold);
+        }
+        .review strong, .comment strong {
+            color: var(--imdb-gold);
+        }
+        .clear { clear: both; }
+        strong {
+            color: var(--imdb-gold);
+        }
+        a, a:visited {
+            color: var(--imdb-gold);
+        }
+        .no-data {
+            color: #bbb;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!-- Banner Section -->
+    <div class="banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1>{{ data.name|default:"N/A" }}</h1>
+            {% if data.tagline %}
+                <p>{{ data.tagline }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="details">
+            {% if data.poster_path %}
+                <img class="poster" src="https://image.tmdb.org/t/p/w300{{ data.poster_path }}" alt="{{ data.name }} poster">
+            {% endif %}
+            <p><strong>First Air Date:</strong> {{ data.first_air_date|default:"N/A" }}</p>
+            <p>
+                <strong>Genres:</strong>
+                {% for genre in data.genres|default:"[]" %}
+                    {% if not forloop.first %}, {% endif %}{{ genre.name|default:"Unknown" }}
+                {% endfor %}
+            </p>
+            <p>
+                <strong>Rating:</strong> <span style="color:var(--imdb-gold);">{{ data.vote_average|default:"0" }}/10</span> ({{ data.vote_count|default:"0" }} votes)
+            </p>
+            <p><strong>Seasons:</strong> {{ data.number_of_seasons|default:"N/A" }}</p>
+            <p><strong>Episodes:</strong> {{ data.number_of_episodes|default:"N/A" }}</p>
+            <p>
+                <strong>Languages:</strong>
+                {% for lang in data.spoken_languages|default:"[]" %}
+                    {% if not forloop.first %}, {% endif %}{{ lang.name|default:"Unknown" }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="clear"></div>
+        <div>
+            <h2>Storyline</h2>
+            <p>{{ data.overview|default:"No storyline available" }}</p>
+        </div>
+        <div>
+            <h2>Cast</h2>
+            <p>
+                {% for cast in data.credits.cast|default:"[]"|slice:":5" %}
+                    {% if not forloop.first %}, {% endif %}{{ cast.name|default:"Unknown" }}
+                {% endfor %}
+                {% if data.credits.cast|length > 5 %} and more...{% endif %}
+            </p>
+        </div>
+        <div>
+            <h2>Created by</h2>
+            <p>
+                {% for creator in data.created_by|default:"[]" %}
+                    {% if not forloop.first %}, {% endif %}{{ creator.name|default:"Unknown" }}
+                {% endfor %}
+            </p>
+        </div>
+        <div>
+            <h2>Reviews</h2>
+            {% if data.reviews.results %}
+                {% for review in data.reviews.results %}
+                    <div class="review">
+                        <strong>{{ review.author|default:"Anonymous" }}:</strong>
+                        <p>{{ review.content|safe }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">No reviews available. Check back later!</p>
+            {% endif %}
+        </div>
+        <div>
+            <h2>Comments</h2>
+            {% if request.session.username %}
+                <!-- Comment form can go here if implemented -->
+            {% else %}
+                <p class="no-data">Sign in to leave a comment.</p>
+            {% endif %}
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <strong>{{ comment.user.username }}</strong> ({{ comment.created_at|date:"F d, Y" }})
+                        <p>{{ comment.content }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-data">No comments yet. Be the first to comment!</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
