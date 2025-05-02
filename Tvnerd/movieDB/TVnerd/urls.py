@@ -18,6 +18,9 @@ urlpatterns = [
     path('nominees/', views.nominees, name='nominees'),
     path('news/', views.news, name='news'),
     path('video/', views.video, name='video'),
+    path('tvshows/show/', views.tvshow_detail, name='tvshow_detail'),
+    path('api/search/tv/', views.api_search_tv, name='api_search_tv'),
+
 
 ]
 

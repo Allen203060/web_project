@@ -362,7 +362,7 @@
 
         <div class="header">
             <!-- Poster Image with Fallback -->
-            <img src="http://image.tmdb.org/t/p/w500/{{ data.poster_path|default:'/path/to/default.jpg' }}" alt="Movie Poster" class="poster" onerror="this.src='{% static 'Tvnerd/images/default.jpg' %}';">
+            <img src="http://image.tmdb.org/t/p/w500/{{ data.poster_path|default:'/path/to/default.jpg' }}" alt="Movie Poster" class="poster"onerror="this.style.display='none';">
             <div class="details">
                 <h1 class="title">{{ data.title|default:"No Title" }}</h1>
                 <p class="info">Release Date: {{ data.release_date|default:"N/A" }}</p>

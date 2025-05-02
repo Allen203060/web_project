@@ -140,118 +140,58 @@
         </div>
     </header>
     
-    <h1>Latest Movies</h1><br>
+    <h2>Latest Movies</h2>
     <div class="scroll-container1">
         <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
-        <div class="movie one">
-            <a href="http://127.0.0.1:8000/movies?id=822119">
-            <img src="https://cdn.kinocheck.com/i/w=1200/dgyqcoda86.jpg" alt="Captain America: Brave New World"></a>
-            <div class="movie-title">Captain America: Brave New World</div>
-        </div>
-        <div class="movie">
-            <a href="http://127.0.0.1:8000/movies?id=1140535">
-            <img src="https://th.bing.com/th/id/OIP.rrmbJq6isvQg5aI5dg4ZgQHaEK?rs=1&pid=ImgDetMain" alt="Presence"></a>
-            <div class="movie-title">Presence</div>
-        </div>
-        <div class="movie">
-            <a href="http://127.0.0.1:8000/movies?id=950396">
-            <img src="https://th.bing.com/th/id/OIP.PiDROO-dhQgm49RnPyYN9gHaD4?rs=1&pid=ImgDetMain" alt="The Gorge"></a>
-            <div class="movie-title">The Gorge</div>
-        </div>
-        <div class="movie">
-            <a href="http://127.0.0.1:8000/movies?id=1272149">
-            <img src="https://static1.moviewebimages.com/wordpress/wp-content/uploads/2024/11/bridget-jones-mad-about-the-boy-movie-poster-with-renee-zelweger.jpg"
-                alt="Bridget Jones: Mad About the Boy"></a>
-            <div class="movie-title">Bridget Jones: Mad About the Boy</div>
-        </div>
-        <div class="movie">
-            <a href="http://127.0.0.1:8000/movies?id=974576">
-            <img src="https://th.bing.com/th/id/OIP.Q_of37Jm5nzihqhcj_OAVAHaEa?rs=1&pid=ImgDetMain" alt="Conclave"></a>
-            <div class="movie-title">Conclave</div>
+        <div class="scroll-content">
+            {% for movie in latest_movies %}
+            <section class="movie">
+                <figure>
+                    <a href="/movies?id={{ movie.id }}">
+                        <img src="https://image.tmdb.org/t/p/w1280{{ movie.backdrop_path }}" alt="{{ movie.title }}">
+                        <figcaption class="movie-title">
+                            <strong>{{ forloop.counter }}. {{ movie.title }}</strong>
+                            <p>Release Date: 
+                            {{ movie.release_date|default:"N/A" }}</p>
+                            Rating: {{ movie.vote_average|default:"N/A" }}
+                        </figcaption>
+                    </a>
+                </figure>
+            </section>
+            {% empty %}
+            <p>No latest movies found.</p>
+            {% endfor %}
         </div>
         <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
     </div>
-    <h1>Top 10 on IMDB this week</h1>
+    
+
+
+        <h1>Top 10 on IMDB this week</h1>
     <div class="scroll-container">
         <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
         <div class="scroll-content">
+            {% for movie in top_movies %}
             <section>
                 <figure>
-                    <a href="http://127.0.0.1:8000/movies?id=5072">
-                    <img src="https://th.bing.com/th/id/OIP.eu5c5GJLPusTtFOvdenOHQAAAA?rs=1&pid=ImgDetMain"
-                        alt="Severance">
-                        <figcaption>1. Severance <br> Watch Options <br> Trailer</figcaption></a>
-                    </figure>
-            </section>
-            <section>
-                <figure>
-                    <a href="http://127.0.0.1:8000/movies?id=27205">
-                    <img src="https://th.bing.com/th/id/OIP.12ZxTcxU6kiNoWKx1iuwOwHaK9?rs=1&pid=ImgDetMain"
-                        alt="Inception"></a>
-                    <figcaption>2. Inception <br> Watch Options <br> Trailer</figcaption>
+                    <a href="/movies?id={{ movie.id }}">
+                        <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}">
+                        <figcaption>
+                            {{ forloop.counter }}. {{ movie.title }}<br>
+                            Watch Options<br>
+                            Trailer
+                        </figcaption>
+                    </a>
                 </figure>
             </section>
-            <section>
-                <figure>
-                    <a href="http://127.0.0.1:8000/movies?id=301959">   
-                    <img src="https://th.bing.com/th/id/OIP.tpGXc5hZSfy95MrAmw6ZrgHaKq?rs=1&pid=ImgDetMain"
-                        alt="Interstellar"></a>
-                    <figcaption>3. Interstellar <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure>
-                    <a href="http://127.0.0.1:8000/movies?id=155">   
-                    <img src="https://images.moviesanywhere.com/bd47f9b7d090170d79b3085804075d41/c6140695-a35f-46e2-adb7-45ed829fc0c0.jpg"
-                        alt="The Dark Knight"></a>
-                    <figcaption>4. The Dark Knight <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure>
-                    <a href="http://127.0.0.1:8000/movies?id=19995">   
-                    <img src="https://th.bing.com/th/id/OIP.znqq0W_WQ3Kz1NTKXWjDKgHaK8?rs=1&pid=ImgDetMain"
-                        alt="Avatar"></a>
-                    <figcaption>5. Avatar <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure><a href="http://127.0.0.1:8000/movies?id=603">   
-                    <img src="https://artworks.thetvdb.com/banners/movies/169/posters/5f274c00c85c1.jpg"
-                        alt="The Matrix"></a>
-                    <figcaption>6. The Matrix <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure><a href="http://127.0.0.1:8000/movies?id=238">   
-                    <img src="https://m.media-amazon.com/images/M/MV5BY2NhNDczZTEtNmE5Yy00MjUxLTllOTYtZjQ2ZTA2MDgyM2U3XkEyXkFqcGdeQXVyMTAxODQ2NDU1._V1_FMjpg_UX1000_.jpg"
-                        alt="The Godfather"></a>
-                    <figcaption>7. The Godfather <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure><a href="http://127.0.0.1:8000/movies?id=680">
-                    <img src="https://images.flickdirect.com/movies/pulp-fiction/pulp-fiction-box-art.jpg"
-                        alt="Pulp Fiction"></a>
-                    <figcaption>8. Pulp Fiction <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure><a href="http://127.0.0.1:8000/movies?id=550">
-                    <img src="https://th.bing.com/th/id/OIP.d_BZ6gOSBmClndzU575rOwHaLH?rs=1&pid=ImgDetMain"
-                        alt="Fight Club"></a>
-                    <figcaption>9. Fight Club <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
-            <section>
-                <figure><a href="http://127.0.0.1:8000/movies?id=13">
-                    <img src="https://image.tmdb.org/t/p/original/8aBHdTp6MZ7RRE45maIYrEPo6IJ.jpg" alt="Forrest Gump"></a>
-                    <figcaption>10. Forrest Gump <br> Watch Options <br> Trailer</figcaption>
-                </figure>
-            </section>
+            {% empty %}
+            <p>No top movies found.</p>
+            {% endfor %}
         </div>
         <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
     </div>
+
+  
     <script src="{% static 'Tvnerd/js/script.js' %}"></script>
 
     
@@ -266,7 +206,8 @@
         sessionStorage.setItem("active_session", "true");
     
         // Whether session is permanent or not (set by backend)
-        var isPermanent = {{ is_permanent|yesno:"true,false" }};
+        var isPermanent = "{{ is_permanent|yesno:'true,false' }}" === "true";
+
     
         // Detect tab close and trigger logout ONLY IF session is NOT permanent
         window.addEventListener("beforeunload", function () {
