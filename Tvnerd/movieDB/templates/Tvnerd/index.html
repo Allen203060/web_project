@@ -141,30 +141,30 @@
     </header>
     
     <h2>Latest Movies</h2>
-<div class="scroll-container">
-    <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
-    <div class="scroll-content">
-        {% for movie in latest_movies %}
-        <section>
-            <figure>
-                <a href="/movies?id={{ movie.id }}">
-                    <img src="https://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}">
-                    <figcaption>
-                        <strong>{{ forloop.counter }}. {{ movie.title }}</strong><br>
-                        {{ movie.release_date|default:"N/A" }}<br>
-                        Rating: {{ movie.vote_average|default:"N/A" }}<br>
-                        Watch Options<br>
-                        Trailer
-                    </figcaption>
-                </a>
-            </figure>
-        </section>
-        {% empty %}
-        <p>No latest movies found.</p>
-        {% endfor %}
+    <div class="scroll-container1">
+        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
+        <div class="scroll-content">
+            {% for movie in latest_movies %}
+            <section class="movie">
+                <figure>
+                    <a href="/movies?id={{ movie.id }}">
+                        <img src="https://image.tmdb.org/t/p/w1280{{ movie.backdrop_path }}" alt="{{ movie.title }}">
+                        <figcaption class="movie-title">
+                            <strong>{{ forloop.counter }}. {{ movie.title }}</strong>
+                            <p>Release Date: 
+                            {{ movie.release_date|default:"N/A" }}</p>
+                            Rating: {{ movie.vote_average|default:"N/A" }}
+                        </figcaption>
+                    </a>
+                </figure>
+            </section>
+            {% empty %}
+            <p>No latest movies found.</p>
+            {% endfor %}
+        </div>
+        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
     </div>
-    <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
-</div>
+    
 
 
         <h1>Top 10 on IMDB this week</h1>
@@ -206,7 +206,8 @@
         sessionStorage.setItem("active_session", "true");
     
         // Whether session is permanent or not (set by backend)
-        var isPermanent = {{ is_permanent|yesno:"true,false" }};
+        var isPermanent = "{{ is_permanent|yesno:'true,false' }}" === "true";
+
     
         // Detect tab close and trigger logout ONLY IF session is NOT permanent
         window.addEventListener("beforeunload", function () {
