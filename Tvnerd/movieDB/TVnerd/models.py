@@ -10,11 +10,21 @@ class User(models.Model):
         return self.username
     
 
+# class Movie(models.Model):
+#     tmdb_id = models.IntegerField(unique=True)  # Links to TMDB movie ID
+#     title = models.CharField(max_length=255)
+#     poster_path = models.CharField(max_length=255, blank=True)
+#     overview = models.TextField(blank=True)
+
+#     def __str__(self):
+#         return self.title
+    
 class Movie(models.Model):
-    tmdb_id = models.IntegerField(unique=True)  # Links to TMDB movie ID
+    tmdb_id = models.IntegerField(unique=True)
     title = models.CharField(max_length=255)
     poster_path = models.CharField(max_length=255, blank=True)
     overview = models.TextField(blank=True)
+    is_featured = models.BooleanField(default=False)  # New field
 
     def __str__(self):
         return self.title
