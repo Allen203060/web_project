@@ -5,6 +5,7 @@ body {
     margin: 0;
     padding: 0;
 }
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -12,6 +13,7 @@ body {
 }
 .header {
     margin-bottom: 20px;
+    background-color: #000000;
 }
 .title {
     font-size: 2rem;

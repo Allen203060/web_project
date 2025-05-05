@@ -47,22 +47,75 @@
         }
     </script>
     <style>
-        .profile-container {
-            position: relative;
-            display: inline-block;
-        }
+.profile-container {
+    position: relative;
+    display: inline-block;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        .profile-menu {
-            display: none;
-            position: absolute;
-            top: 40px;
-            right: 0;
-            background: white;
-            color: #000;
-            border: 1px solid #ccc;
-            padding: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
+.profile-toggle {
+    background-color: transparent;
+    border: none;
+    color: var(--imdb-gold);
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.profile-toggle:hover {
+    background-color: rgba(255, 204, 0, 0.1);
+    border-radius: 8px;
+}
+
+.profile-menu {
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 0;
+    min-width: 160px;
+    background-color: #1f1f1f;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+}
+
+.profile-menu a {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: white;
+    font-size: 0.95em;
+    transition: background 0.3s;
+}
+
+.profile-menu a:hover {
+    background-color: #333;
+}
+
+.menu-header {
+    padding: 10px 16px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 8px;
+    font-size: 1em;
+}
+
+.sign-in-link {
+    color: var(--imdb-gold);
+    font-weight: bold;
+    text-decoration: none;
+    padding: 8px 12px;
+    transition: color 0.3s ease;
+}
+
+.sign-in-link:hover {
+    color: white;
+}
+
 
         #search-results {
             border: 1px solid #ccc;
@@ -130,50 +183,52 @@
             <div class="user-options">
                 {% if request.session.username %}
                 <div class="profile-container">
-                    <button onclick="toggleMenu()">
+                    <button class="profile-toggle" onclick="toggleMenu()">
                         <p>Hello, {{ request.session.username }}</p>
                     </button>
                     <div id="profile-menu" class="profile-menu">
-                        <p>Hello, {{ request.session.username }}</p>
-                        <a href="{% url 'watchlist' %}">Watchlist</a>
-                        <a href="{% url 'logout' %}">Logout</a>
+                        <p class="menu-header">👋 Hello, {{ request.session.username }}</p>
+                        <a href="{% url 'watchlist' %}">📺 Watchlist</a>
+                        <a href="{% url 'logout' %}">🚪 Logout</a>
                     </div>
                 </div>
                 {% else %}
-                <a href="{% url 'login' %}">Sign In</a>
+                <a href="{% url 'login' %}" class="sign-in-link">🔐 Sign In</a>
                 {% endif %}
             </div>
+            
         </div>
     </header>
     <div class="banner">
-    <h1>Latest Movies<h1>
-    <div class="scroll-container1">
-        <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
-        <div class="scroll-content">
-            {% for movie in latest_movies %}
-            <section class="movie">
-                <figure>
-                    <a href="/movies?id={{ movie.id }}">
-                        <img src="https://image.tmdb.org/t/p/w1280{{ movie.backdrop_path }}" alt="{{ movie.title }}">
-                        <figcaption class="movie-title">
-                            <strong>{{ forloop.counter }}. {{ movie.title }}</strong>
-                            <p>Release Date: 
-                            {{ movie.release_date|default:"N/A" }}</p>
-                            Rating: {{ movie.vote_average|default:"N/A" }}
-                        </figcaption>
-                    </a>
-                </figure>
-            </section>
-            {% empty %}
-            <p>No latest movies found.</p>
-            {% endfor %}
+        <h1 style="font-size: 2em; font-weight: 700;">Latest Movies</h1>
+        <div class="scroll-container1">
+            <button class="scroll-btn left" onclick="scrollMovies(-1)"><i class="fas fa-chevron-left"></i></button>
+            <div class="scroll-content" id="movieScroll">
+                {% for movie in latest_movies %}
+                <section class="movie">
+                    <figure>
+                        <a href="/movies?id={{ movie.id }}">
+                            <img src="https://image.tmdb.org/t/p/original{{ movie.backdrop_path|default:movie.poster_path }}" alt="{{ movie.title }}">
+                            <figcaption class="movie-title">
+                                <strong>{{ forloop.counter }}. {{ movie.title }}</strong><br>
+                                <span>Release: {{ movie.release_date|default:"N/A" }}</span><br>
+                                <span>Rating: {{ movie.vote_average|default:"N/A" }}</span>
+                            </figcaption>
+                        </a>
+                    </figure>
+                </section>
+                {% empty %}
+                <p>No latest movies found.</p>
+                {% endfor %}
+            </div>
+            <button class="scroll-btn right" onclick="scrollMovies(1)"><i class="fas fa-chevron-right"></i></button>
         </div>
-        <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
     </div>
+    
     
 
 
-        <h1>Top 10 on IMDB this week</h1>
+        <h1 style="font-size: 2em; font-weight: 700;">Top 10 Movies this Week</h1>
     <div class="scroll-container">
         <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
         <div class="scroll-content">
@@ -218,7 +273,7 @@
     </div>
   
     <!-- Input -->
-    <div id="chat-input" class="flex border-t border-[#e6b800] bg-[#1a1a1a]">
+    <div id="chat-input" class="flex border-t border-[#e6b800] bg-[#1a1a1a] rounded-b-2xl overflow-hidden">
       <input type="text" id="user-input" placeholder="Type a message..." 
              class="flex-1 p-3 bg-transparent text-white placeholder-gray-400 outline-none" />
       <button onclick="sendMessage()" class="bg-[#ffcc00] text-black px-4 font-bold hover:bg-[#e6b800]">➤</button>
@@ -243,6 +298,11 @@
                 sessionStorage.removeItem("active_session");
             }
         });
+    </script>
+    <script>function toggleMenu() {
+        const menu = document.getElementById("profile-menu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
     </script>
     {% endif %}
     <script src="{% static 'Tvnerd/js/script.js' %}"></script>
