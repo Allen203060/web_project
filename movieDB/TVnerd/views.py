@@ -4,11 +4,15 @@ from django.http import JsonResponse
 from .models import User, Movie, Comment
 import hashlib, requests, json
 from datetime import datetime, timedelta
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .models import Watchlist
+from django.http import HttpResponse
+from .models import User
 
 def home(request):
-    return redirect('dashboard')
+    username = request.session.get('username')
+    return render(request, 'Tvnerd/index.html', {'username': username})
 
 def login_view(request):
     if request.method == 'POST':
@@ -36,19 +40,26 @@ def login_view(request):
 def signup_view(request):
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password']
         email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST.get('confirm-password')  \
+
+        if password != confirm_password:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'Tvnerd/signup.html')
 
         if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username already exists. Please choose another.')
+            messages.error(request, 'Username already exists.')
             return render(request, 'Tvnerd/signup.html')
 
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        new_user = User(username=username, password=hashed_password, email=email)
+        new_user = User(username=username, email=email, password=hashed_password)
         new_user.save()
 
-        messages.success(request, 'Account created successfully! Please log in.')
-        return redirect('login')
+        # Log user in manually by setting session
+        request.session['username'] = username
+        messages.success(request, 'Account created and you are now logged in.')
+        return redirect('home')
 
     return render(request, 'Tvnerd/signup.html')
 
@@ -84,26 +95,28 @@ def dashboard_view(request):
         'is_permanent': request.session.get_expiry_age() > 0
     })
 
+import requests
+from django.shortcuts import render
+
 def tvshow(request):
-    # Fetch latest TV shows
-    latest_url = "https://api.themoviedb.org/3/tv/latest?language=en-US"
     popular_url = "https://api.themoviedb.org/3/tv/popular?language=en-US"
-    
+    on_air_url = "https://api.themoviedb.org/3/tv/on_the_air?language=en-US"
+
     headers = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"   
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
     }
 
     try:
-        # Fetch latest TV shows
-        latest_response = requests.get(latest_url, headers=headers)
+        # Fetch "on the air" shows (for latest)
+        latest_response = requests.get(on_air_url, headers=headers)
         latest_shows = latest_response.json().get('results', [])[:8] if latest_response.status_code == 200 else []
-        
-        # Fetch popular TV shows
+
+        # Fetch popular shows
         popular_response = requests.get(popular_url, headers=headers)
         popular_shows = popular_response.json().get('results', [])[:10] if popular_response.status_code == 200 else []
 
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         latest_shows = []
         popular_shows = []
 
@@ -111,6 +124,42 @@ def tvshow(request):
         'latest_tv_shows': latest_shows,
         'popular_tv_shows': popular_shows
     })
+
+
+def popular_celebs(request):
+    
+    url = "https://api.themoviedb.org/3/person/popular?language=en-US&page=1"
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+    print("STATUS CODE:", response.status_code)
+    
+    try:
+        data = response.json()
+        print("DATA SAMPLE:", data.get('results', [])[:2])  # print only 2 entries
+    except Exception as e:
+        print("Error parsing JSON:", e)
+        return HttpResponse("API Error")
+
+    celebrities = data.get('results', [])[:50]
+
+    return render(request, 'Tvnerd/celeb.html', {'celebrities': celebrities})
+
+
+def celeb_detail(request, celeb_id):
+    url = f"https://api.themoviedb.org/3/person/{celeb_id}?language=en-US"
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
+    }
+
+    response = requests.get(url, headers=headers)
+    celeb_data = response.json()
+
+    return render(request, 'Tvnerd/celeb_detail.html', {'celeb': celeb_data})
 
 
 def api_search(request):
@@ -274,6 +323,5 @@ def video(request):
 def more(request):
     return render(request, 'Tvnerd/awards.html')
 
-def celeb(request):
-    return render(request, 'Tvnerd/celeb.html')
+
 

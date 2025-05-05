@@ -47,4 +47,4 @@ class WatchlistAdmin(admin.ModelAdmin):
 admin_site.register(User, UserAdmin)
 admin_site.register(Movie, MovieAdmin)
 admin_site.register(Comment, CommentAdmin)
-admin_site.register(Watchlist, WatchlistAdmin)
+# admin_site.register(Watchlist, WatchlistAdmin)
