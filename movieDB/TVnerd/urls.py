@@ -10,7 +10,6 @@ urlpatterns = [
     path('movies/', views.movies_view, name='movies'),
     path('api/search/', views.api_search, name='api_search'),
     path('awards/', views.more, name='awards'),
-    path('celeb/', views.celeb, name='celeb'),
     path('tvshows/', views.tvshow, name='tvshows'),    
     path('watchlist/', views.watchlist_view, name='watchlist'),
     path('watchlist/add/', views.add_to_watchlist, name='add_to_watchlist'),
@@ -20,6 +19,8 @@ urlpatterns = [
     path('video/', views.video, name='video'),
     path('tvshows/show/', views.tvshow_detail, name='tvshow_detail'),
     path('api/search/tv/', views.api_search_tv, name='api_search_tv'),
+    path('celeb/', views.popular_celebs, name='popular_celebs'),
+    path('celeb/<int:celeb_id>/', views.celeb_detail, name='celeb_detail'),
 
 
 ]

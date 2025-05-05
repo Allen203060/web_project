@@ -114,6 +114,9 @@
     </div>
 
     <div class="container">
+        <a href="{% url 'tvshows' %}" style="display:inline-block; margin-bottom: 20px; padding: 10px 20px; background: var(--imdb-gold); color: var(--imdb-black); text-decoration: none; border-radius: 5px; font-weight: bold;">
+        ← Back to TV Shows
+    </a>
         <div class="details">
             {% if data.poster_path %}
                 <img class="poster" src="https://image.tmdb.org/t/p/w300{{ data.poster_path }}" alt="{{ data.name }} poster">
