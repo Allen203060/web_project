@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="{% static 'Tvnerd/css/styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script>
+        const YOUR_DJANGO_USER_ID = "{{ request.user.id }}";
+      </script>
+      
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
         function toggleMenu() {
             var menu = document.getElementById('profile-menu');
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
@@ -139,8 +145,8 @@
             </div>
         </div>
     </header>
-    
-    <h2>Latest Movies</h2>
+    <div class="banner">
+    <h1>Latest Movies<h1>
     <div class="scroll-container1">
         <button class="scroll-btn left"><i class="fas fa-chevron-left"></i></button>
         <div class="scroll-content">
@@ -189,16 +195,37 @@
             {% endfor %}
         </div>
         <button class="scroll-btn right"><i class="fas fa-chevron-right"></i></button>
+
     </div>
-
+    <!-- Floating Chat Button -->
+<button id="chatbot-btn" class="fixed bottom-4 right-4 bg-[#e6b800] hover:bg-[#ffcc00] text-black font-bold w-14 h-14 rounded-full shadow-lg z-50 text-2xl">
+    💬
+  </button>
   
-    <script src="{% static 'Tvnerd/js/script.js' %}"></script>
 
-    
-    
-    
-    
-    <script src="{% static 'Tvnerd/js/script.js' %}"></script>
+<!-- Chat Popup -->
+<div id="chat-popup" class="hidden fixed bottom-20 right-6 w-80 h-[450px] bg-black border border-[#e6b800] rounded-2xl shadow-2xl z-50 flex flex-col text-white">
+  
+    <!-- Header -->
+    <div id="chat-header" class="bg-[#ffcc00] text-black font-bold text-lg py-3 px-4 flex justify-between items-center rounded-t-2xl">
+      TVnerd AI
+      <span id="close-chat" class="cursor-pointer text-xl font-black hover:text-red-600">&times;</span>
+    </div>
+  
+    <!-- Chat Body -->
+    <div id="chat-body" class="flex-grow p-4 overflow-y-auto space-y-3 text-sm">
+      <!-- Messages appear here -->
+    </div>
+  
+    <!-- Input -->
+    <div id="chat-input" class="flex border-t border-[#e6b800] bg-[#1a1a1a]">
+      <input type="text" id="user-input" placeholder="Type a message..." 
+             class="flex-1 p-3 bg-transparent text-white placeholder-gray-400 outline-none" />
+      <button onclick="sendMessage()" class="bg-[#ffcc00] text-black px-4 font-bold hover:bg-[#e6b800]">➤</button>
+    </div>
+  </div>
+  
+
 
     {% if request.session.username %}
     <script>
@@ -218,7 +245,89 @@
         });
     </script>
     {% endif %}
-    
+    <script src="{% static 'Tvnerd/js/script.js' %}"></script>
+    <script>
+        // Toggle chatbot popup
+        const chatbotBtn = document.getElementById('chatbot-btn');
+        const chatPopup = document.getElementById('chat-popup');
+        const chatBody = document.getElementById('chat-body');
+        const userInput = document.getElementById('user-input');
+      
+        chatbotBtn.addEventListener('click', () => {
+          chatPopup.classList.toggle('hidden');
+        });
+      
+        // ✅ Close button
+        const closeBtn = document.getElementById('close-chat');
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            chatPopup.classList.add('hidden');
+          });
+        }
+      
+        // Auto-scroll function
+        function scrollToBottom() {
+          chatBody.scrollTop = chatBody.scrollHeight;
+        }
+      
+        function appendMessage(sender, text) {
+          const msg = document.createElement('div');
+          msg.className =
+            sender === 'user'
+              ? 'self-end bg-[#e6b800] text-black p-2 rounded-lg max-w-[75%] text-sm ml-auto'
+              : 'self-start bg-[#333] text-white p-2 rounded-lg max-w-[75%] text-sm mr-auto';
+          msg.textContent = text;
+          chatBody.appendChild(msg);
+          scrollToBottom();
+        }
+      
+        async function typeEffect(element, text, speed = 20) {
+          for (let i = 0; i < text.length; i++) {
+            element.textContent += text.charAt(i);
+            scrollToBottom();
+            await new Promise((resolve) => setTimeout(resolve, speed));
+          }
+        }
+      
+        async function sendMessage() {
+          const message = userInput.value.trim();
+          if (!message) return;
+      
+          appendMessage('user', message);
+          userInput.value = '';
+      
+          const botMsg = document.createElement('div');
+          botMsg.className = 'self-start bg-[#333] text-white p-2 rounded-lg max-w-[75%] text-sm mr-auto';
+          botMsg.textContent = 'Thinking...';
+          chatBody.appendChild(botMsg);
+          scrollToBottom();
+      
+          try {
+            const response = await fetch('http://localhost:5000/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message,
+                user_id: YOUR_DJANGO_USER_ID  // Inject this from your Django template
+            })
+            });
+
+      
+            const data = await response.json();
+            botMsg.textContent = '';
+            await typeEffect(botMsg, data.response || "Sorry, I didn't understand that.");
+          } catch (error) {
+            botMsg.textContent = 'Error connecting to chatbot.';
+          }
+      
+          scrollToBottom();
+        }
+      
+        userInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter') sendMessage();
+        });
+      </script>
+      
 
     <!-- <script src="search.js"></script> -->
 </body> 

@@ -39,7 +39,7 @@ class Comment(models.Model):
 
 class Watchlist(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE)
-    movie_id = models.CharField(max_length=20)
+    movie_id = models.CharField(max_length=200)
     title = models.CharField(max_length=255)
     poster_path = models.CharField(max_length=255, null=True)
 

@@ -84,26 +84,28 @@ def dashboard_view(request):
         'is_permanent': request.session.get_expiry_age() > 0
     })
 
+import requests
+from django.shortcuts import render
+
 def tvshow(request):
-    # Fetch latest TV shows
-    latest_url = "https://api.themoviedb.org/3/tv/latest?language=en-US"
     popular_url = "https://api.themoviedb.org/3/tv/popular?language=en-US"
-    
+    on_air_url = "https://api.themoviedb.org/3/tv/on_the_air?language=en-US"
+
     headers = {
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"   
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2JkNmRiZjI3ODRhZGU2ZDg3MjRhZTllMGFiYzRiYSIsIm5iZiI6MTczOTcwNTI0NS42NDcsInN1YiI6IjY3YjFjYjlkOGRjZTI5ZTNmYmUwZDM5ZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QhC92XWnGlz7Ep5hshSkYhsF9S_DbqKYoZPWv8HYwe4"
     }
 
     try:
-        # Fetch latest TV shows
-        latest_response = requests.get(latest_url, headers=headers)
+        # Fetch "on the air" shows (for latest)
+        latest_response = requests.get(on_air_url, headers=headers)
         latest_shows = latest_response.json().get('results', [])[:8] if latest_response.status_code == 200 else []
-        
-        # Fetch popular TV shows
+
+        # Fetch popular shows
         popular_response = requests.get(popular_url, headers=headers)
         popular_shows = popular_response.json().get('results', [])[:10] if popular_response.status_code == 200 else []
 
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         latest_shows = []
         popular_shows = []
 
