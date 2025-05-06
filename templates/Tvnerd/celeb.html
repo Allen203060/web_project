@@ -1,0 +1,94 @@
+{% extends "Tvnerd/base.html" %}
+{% block content %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV NERD - Most Popular Celebs</title>
+    <link rel="stylesheet" href="{% static 'Tvnerd/css/celeb.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.js" defer></script>
+</head>
+<body>
+    
+    
+    <div class="container">
+        <div class="header">
+
+            <h2 class="subtitle">Most Popular Celebs</h2>
+
+        </div>
+
+        <div class="controls">
+            <div class="names-count">{{ celebrities|length }} Names</div>
+            <div class="sort-and-view">
+                <div class="sort">
+                    <span>Sort by</span>
+                    <select class="sort-select">
+                        <option>STARmeter</option>
+                    </select>
+                </div>
+                <div class="view-buttons">
+                    <button class="view-button active" data-view="list">List</button>
+                    <button class="view-button" data-view="grid">Square Grid</button>
+                    <button class="view-button" data-view="detailed-grid">Detailed Grid</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="celeb-list">
+            {% for celeb in celebrities %}
+                <div class="celeb-item">
+                    <div class="celeb-image">
+                        <img src="https://image.tmdb.org/t/p/w185{{ celeb.profile_path }}" alt="{{ celeb.name }}">
+                    </div>
+                    <div class="celeb-details">
+                        <div class="celeb-rank">{{ forloop.counter }}</div>
+                        <a href="{% url 'celeb_detail' celeb.id %}">
+                            <h3 class="celeb-name">{{ celeb.name }}</h3>
+                        </a>
+                        <p class="celeb-roles">{{ celeb.known_for_department|default:"N/A" }}</p>
+                        <p class="celeb-project">
+                            {% if celeb.known_for and celeb.known_for.0 %}
+                                {% with project=celeb.known_for.0 %}
+                                    {% if project.title %}
+                                        {{ project.title }}
+                                    {% elif project.name %}
+                                        {{ project.name }}
+                                    {% else %}
+                                        Unknown Project
+                                    {% endif %}
+                                {% endwith %}
+                            {% else %}
+                                Unknown Project
+                            {% endif %}
+                        </p>
+                                              
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".view-button").forEach(button => {
+                button.addEventListener("click", function () {
+                    document.querySelectorAll(".view-button").forEach(btn => btn.classList.remove("active"));
+                    this.classList.add("active");
+
+                    const celebList = document.querySelector(".celeb-list");
+                    celebList.className = "celeb-list " + this.dataset.view + "-view";
+                });
+            });
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>
