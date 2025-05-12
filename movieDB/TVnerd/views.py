@@ -12,7 +12,7 @@ from .models import User
 
 def home(request):
     username = request.session.get('username')
-    return render(request, 'Tvnerd/index.html', {'username': username})
+    return render(request, 'Tvnerd/login.html', {'username': username})
 
 def login_view(request):
     if request.method == 'POST':
@@ -59,7 +59,7 @@ def signup_view(request):
         # Log user in manually by setting session
         request.session['username'] = username
         messages.success(request, 'Account created and you are now logged in.')
-        return redirect('home')
+        return redirect('login')
 
     return render(request, 'Tvnerd/signup.html')
 
