@@ -1,0 +1,121 @@
+/* -------------------------------
+   TVNerd Admin Custom Styling
+   File location: static/css/custom-admin.css
+--------------------------------- */
+
+/* Reset default background and font color */
+body {
+    background-color: #000 !important;
+    color: #FFDA63 !important;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* Header bar */
+#header {
+    background: #111 !important;
+    border-bottom: 2px solid #FFDA63;
+}
+#branding h1 {
+    color: #FFDA63 !important;
+}
+#branding h1 a {
+    color: #FFDA63 !important;
+    text-decoration: none;
+}
+#branding h1 a:hover {
+    color: #fff !important;
+}
+
+/* User tools and breadcrumbs */
+#user-tools {
+    background: #111;
+    color: #FFDA63;
+}
+#user-tools a {
+    color: #FFDA63;
+}
+#user-tools a:hover {
+    color: #fff;
+}
+.breadcrumbs {
+    background: #111;
+    color: #FFDA63;
+    border-bottom: 1px solid #333;
+}
+
+/* Module headers */
+.module caption,
+.module h2 {
+    background-color: #111;
+    color: #FFDA63;
+    font-weight: bold;
+    border-bottom: 1px solid #FFDA63;
+}
+
+/* Tables */
+table {
+    background-color: #000;
+    color: #eee;
+}
+table th {
+    background-color: #222;
+    color: #FFDA63;
+    border: 1px solid #333;
+}
+table td {
+    background-color: #111;
+    color: #eee;
+    border: 1px solid #333;
+}
+
+/* Forms */
+fieldset.module {
+    background-color: #111;
+    border: 1px solid #333;
+    color: #FFDA63;
+}
+input, select, textarea {
+    background-color: #222 !important;
+    color: #FFDA63 !important;
+    border: 1px solid #555 !important;
+}
+input:focus, select:focus, textarea:focus {
+    border-color: #FFDA63 !important;
+}
+
+/* Submit buttons */
+input[type=submit], .button {
+    background-color: #FFDA63 !important;
+    color: #000 !important;
+    border-radius: 4px;
+    font-weight: bold;
+    padding: 5px 12px;
+    border: none;
+}
+input[type=submit]:hover, .button:hover {
+    background-color: #ffe85c !important;
+}
+
+/* Login screen */
+.login #container {
+    background-color: #111;
+    border: 1px solid #333;
+    color: #FFDA63;
+}
+.login label {
+    color: #FFDA63;
+}
+.login input {
+    background-color: #222;
+    color: #FFDA63;
+    border: 1px solid #444;
+}
+
+/* Footer */
+#footer {
+    background: #111;
+    color: #FFDA63;
+    border-top: 1px solid #333;
+    text-align: center;
+    padding: 10px;
+}

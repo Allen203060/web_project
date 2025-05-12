@@ -1,0 +1,165 @@
+body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.header {
+    margin-bottom: 20px;
+    background-color: #000000;
+}
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.yellow {
+    color: #ffcc00;
+}
+.charts {
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+.subtitle {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #ffffff;
+}
+.description {
+    color: #ffffff;
+}
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.names-count {
+    font-size: 0.875rem;
+}
+.sort-and-view {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.sort {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.sort-select {
+    border: 1px solid #374151;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #000000;
+    color: #ffffff;
+}
+.view-buttons {
+    display: flex;
+    gap: 10px;
+}
+.view-button {
+    background-color: #000000;
+    border: 1px solid #374151;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #ffffff;
+}
+.view-button:hover, .view-button.active {
+    background-color: #ffcc00;
+    color: #000000;
+}
+.celeb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.celeb-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #374151;
+}
+.celeb-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.celeb-details {
+    flex: 1;
+    color: #ffffff;
+}
+.celeb-rank {
+    font-size: 0.875rem;
+    color: #ffffff;
+}
+.celeb-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #ffffff;
+}
+.celeb-roles {
+    color: #ffffff;
+    font-size: 0.875rem;
+}
+.celeb-project {
+    color: #ffffff;
+    font-size: 0.875rem;
+}
+.grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+.grid-view .celeb-item {
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid #374151;
+    padding: 10px;
+    border-radius: 10px;
+}
+.grid-view .celeb-details,
+.grid-view .celeb-name,
+.grid-view .celeb-roles,
+.grid-view .celeb-project,
+.grid-view .celeb-rank {
+    color: #ffffff;
+}
+.detailed-grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+.detailed-grid-view .celeb-item {
+    flex-direction: column;
+    text-align: center;
+    border: 1px solid #374151;
+    padding: 10px;
+    border-radius: 10px;
+}
+.detailed-grid-view .celeb-image img {
+    width: 120px;
+    height: 120px;
+}
+.detailed-grid-view .celeb-details,
+.detailed-grid-view .celeb-name,
+.detailed-grid-view .celeb-roles,
+.detailed-grid-view .celeb-project,
+.detailed-grid-view .celeb-rank {
+    color: #ffffff;
+}
